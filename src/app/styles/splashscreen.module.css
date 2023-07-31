@@ -1,0 +1,14 @@
+.splashscreen {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #100e0c;
+
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}

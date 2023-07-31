@@ -1,20 +1,491 @@
 .home {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    width: 100%;
-    height: 100vh;
-    align-items: flex-start;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 100%;
+  align-items: flex-start;
 
-    padding-top: 9rem;
-    padding-left: 9rem;
-    padding-bottom: 1.5rem;
-    padding-right: 1.5rem;
+  padding-bottom: 1.5rem;
+  padding-right: 1.5rem;
 
-    gap: 1.5rem;
+  gap: 1.5rem;
 
-    overflow: hidden;
+  overflow: hidden;
 
-    z-index: 4;
+  z-index: 5;
+}
+.home .rowone {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+
+  width: 100%;
+  height: 66.5%;
+
+  gap: 2rem;
+
+  overflow: hidden;
+}
+.home .rowtwo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  height: 33.5%;
+
+  gap: 2rem;
+
+  overflow: hidden;
+}
+.aboutme {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 100%;
+  align-items: flex-start;
+
+  padding: 1.5rem;
+  gap: 1rem;
+
+  background-color: var(--color-risdblue);
+
+  border-radius: 2rem;
+}
+.aboutme .header {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 4rem;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+.header h3 {
+  font-size: 4.25em;
+  font-weight: 700;
+  color: var(--color-seasalt);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.header .decoration {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 4;
+}
+.decoration .square {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: fit-content;
+  height: 3.25rem;
+  align-items: center;
+  justify-content: center;
+
+  right: 4rem;
+
+  padding: 0 12px;
+
+  background-color: var(--color-risdblue);
+
+  z-index: 5;
+}
+.square div {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 3rem;
+  height: 3rem;
+
+  border: 2px solid var(--color-seasalt);
+  border-radius: 1rem;
+}
+.decoration .lineswrapper {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+}
+.lineswrapper div {
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-seasalt);
+  border-radius: 1px;
+}
+.aboutme .content {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 100%;
+
+  align-items: flex-start;
+  gap: 5rem;
+}
+.content p {
+  font-size: 1.75em;
+  font-style: normal;
+  font-weight: 300;
+  text-align: left;
+  color: var(--color-seasalt);
+}
+.whatiliketodo {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 100%;
+  align-items: flex-start;
+
+  padding-top: 1.5rem;
+
+  gap: 1.5rem;
+}
+.whatiliketodo .navbar {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 4rem;
+  align-items: center;
+
+  padding: 8px 0;
+
+  gap: 3rem;
+}
+.navbar .controls {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: fit-content;
+  height: 100%;
+  gap: 12px;
+}
+.controls .gridview {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 3rem;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px;
+
+  border-radius: 1rem;
+
+  background-color: var(--color-giantsorange);
+}
+.gridview svg {
+  font-size: 1.5em;
+  color: var(--color-seasalt);
+}
+.controls .listview {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 3rem;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px;
+
+  border-radius: 1rem;
+
+  background-color: var(--color-risdblue);
+}
+.listview svg {
+  font-size: 1.5em;
+  color: var(--color-seasalt);
+}
+.controls .changetheme {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 3rem;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px;
+
+  border-radius: 1rem;
+
+  background-color: var(--neutral-alt);
+}
+.changetheme svg {
+  font-size: 1.5em;
+  color: var(--neutral-absolute);
+}
+.navbar .addressbar {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: 4px;
+  padding: 4px 12px;
+
+  border-radius: 16px;
+
+  background-color: var(--menubars-bg);
+}
+.addressbar .ssl {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 1.5rem;
+  height: 1.5rem;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  transition: background-color 0.3s ease-out;
+}
+.addressbar .ssl:hover {
+  background-color: var(--button-hover);
+}
+.ssl svg {
+  font-size: 1em;
+  color: var(--menu-button);
+}
+.addressbar p {
+  font-size: 1em;
+  font-weight: 300;
+  text-transform: lowercase;
+  text-align: left;
+  color: var(--menu-button);
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.navbar .navigation {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: fit-content;
+  height: 100%;
+
+  gap: 1rem;
+}
+.navigation .navbutton {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 3rem;
+  height: 3rem;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px;
+  border-radius: 16px;
+}
+.navbutton svg {
+  font-size: 1.5em;
+  color: var(--neutral-alt);
+}
+.navbutton:hover {
+  background-color: var(--menubars-bg);
+}
+.whatiliketodo .areas {
+  display: grid;
+  position: relative;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  width: 100%;
+  height: 100%;
+  gap: 2rem;
+}
+.areas .area {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 2rem;
+
+  border: 2px solid var(--logo-bg);
+  border-radius: 32px;
+
+  transition: background-color 0.3s ease-out;
+}
+.area .areaicon svg {
+  font-size: 3em;
+  color: var(--logo-bg);
+}
+.area .areatext p {
+  font-size: 1.5em;
+  font-weight: 400;
+  text-transform: capitalize;
+  text-align: center;
+  color: var(--logo-bg);
+}
+.area:hover {
+  background-color: var(--neutral-900);
+}
+.areas[data-isview="list"] {
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  gap: unset;
+  align-content: space-between;
+}
+.areas[data-isview="list"] .area {
+  flex-direction: row;
+  border-radius: 18px;
+  height: fit-content;
+  padding: 12px;
+}
+.areas[data-isview="list"] .area .areaicon svg {
+  font-size: 1.5em;
+}
+.areaicon {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: fit-content;
+  height: fit-content;
+  align-items: center;
+  justify-content: center;
+}
+.rowtwo .bentoswrapper {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 100%;
+  align-items: flex-start;
+
+  gap: 8px;
+  overflow: hidden;
+}
+.bentoswrapper .brow {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 100%;
+
+  gap: 8px;
+  overflow: hidden;
+}
+.brow .bentotext {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: fit-content;
+  height: 100%;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 2rem;
+  padding: 1rem;
+
+  background-color: var(--neutral-900);
+}
+.bentotext p {
+  font-size: 2em;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--neutral-alt);
+  white-space: nowrap;
+}
+.brow .bentoimage {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: fit-content;
+  height: 100%;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 2rem;
+  border: 2px solid var(--color-secondary);
+
+  background-color: var(--neutral-900);
+
+  overflow: hidden;
+}
+.bentoimage img {
+  width: 140%;
+  height: auto;
+  object-position: center;
+}
+.brow .bentospace {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 100%;
+
+  border-radius: 2rem;
+
+  background-color: var(--neutral-900);
+}
+.rowtwo .banner {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 100%;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 1.5rem;
+  border-radius: 2rem;
+
+  background-color: var(--color-giantsorange);
+}
+.banner p {
+  font-size: 2.5em;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 150%;
+  color: var(--neutral-absolute);
 }

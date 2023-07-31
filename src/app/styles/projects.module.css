@@ -1,0 +1,302 @@
+.projects {
+  display: grid;
+  position: relative;
+  grid-template-columns: 0.36fr 0.64fr;
+  grid-template-rows: 1fr;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 1.5rem;
+  padding-right: 1.5rem;
+  grid-gap: 1.5rem;
+  gap: 1.5rem;
+
+  overflow: hidden;
+  z-index: 5;
+}
+.projects .filesystem {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.35fr 0.65fr;
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+}
+.filesystem .navigator {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 100%;
+
+  align-items: flex-start;
+  gap: 1rem;
+
+  overflow: hidden;
+}
+.navigator .title {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 2rem;
+
+  align-items: flex-start;
+  gap: 1rem;
+
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.navigator .title a {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 2rem;
+  height: 2rem;
+
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+
+  border-radius: 12px;
+}
+.navigator .title a svg {
+  font-size: 1.5em;
+  color: var(--neutral-alt);
+}
+.navigator .title a:hover {
+  background-color: var(--neutral-900);
+}
+.navigator .title h3 {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+  color: var(--neutral-alt);
+  background-color: var(--neutral-900);
+
+  border-radius: 12px;
+  padding-bottom: 2px;
+
+  font-size: 1em;
+  text-align: center;
+  text-transform: uppercase;
+
+  width: 100%;
+  height: 100%;
+
+  align-items: center;
+  justify-content: center;
+}
+.navigator .title .selectors {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: fit-content;
+    height: 100%;
+
+    gap: 8px;
+}
+.navigator .title .selectors button {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 2rem;
+    height: 2rem;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+}
+.navigator .title .selectors button:hover {
+    background-color: var(--neutral-900);
+}
+.navigator .title .selectors button svg {
+    font-size: 2.5em;
+    color: var(--neutral-alt);
+}
+.navigator .grid {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: 100%;
+
+    gap: 8px;
+    overflow: hidden;
+}
+.grid .header {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    width: 100%;
+    height: 2rem;
+
+    background-color: var(--neutral-900);
+    border-radius: 12px;
+
+    align-items: center;
+    padding-bottom: 2px
+}
+.grid .header div {
+    flex: 1 0 0;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    font-size: 1em;
+    font-weight: 500;
+    color: var(--neutral-alt);
+    text-align: center;
+    text-transform: capitalize;
+}
+.grid .row {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    width: 100%;
+    height: 2rem;
+
+    border-radius: 12px;
+
+    align-items: center;
+    padding-bottom: 4px;
+}
+.grid .row div {
+    flex: 1 0 0;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    font-size: 1em;
+    font-weight: 300;
+    color: var(--neutral-alt);
+    text-align: center;
+    text-transform: lowercase;
+}
+.grid .row[data-isactive="true"] {
+    outline: 2px solid var(--menu-button);
+    outline-offset: -3px;
+}
+.filesystem .details {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: 100%;
+
+    align-items: flex-start;
+    gap: 1rem;
+
+    overflow: hidden;
+}
+.projects .preview {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+
+  align-items: flex-start;
+  overflow: hidden;
+}
+.preview .device {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: fit-content;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  z-index: 6;
+}
+.device button {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 2rem;
+  height: 2rem;
+  padding: 5px;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border-radius: 12px;
+  overflow: hidden;
+
+  transition: background-color 0.3s ease-out;
+}
+.device button:hover {
+  background-color: var(--navlink-active-bg);
+}
+.device button:hover svg {
+  color: var(--neutral-absolute);
+}
+.device button svg {
+  font-size: 1.5em;
+  color: var(--neutral-alt);
+}
+.device[data-isview="mobile"] button:nth-child(1) {
+  background-color: var(--navlink-active-bg);
+}
+.device[data-isview="mobile"] button:nth-child(1) svg {
+  color: var(--neutral-absolute);
+}
+.device[data-isview="desktop"] button:nth-child(2) {
+  background-color: var(--navlink-active-bg);
+}
+.device[data-isview="desktop"] button:nth-child(2) svg {
+  color: var(--neutral-absolute);
+}
+.preview .container {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 100%;
+
+  align-items: center;
+  justify-content: center;
+
+  top: 0;
+  left: 0;
+
+  border-radius: 2rem;
+  background-color: var(--neutral-900);
+
+  overflow: hidden;
+}
+.container img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+
+  transition: scale 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.container[data-isview="mobile"] {
+  padding: 2rem;
+}
+.container[data-isview="mobile"] img {
+  position: relative;
+  border-radius: 3rem;
+  width: auto;
+  border: 3px solid var(--neutral-alt);
+}
+.container img:hover {
+  scale: 1.06;
+}

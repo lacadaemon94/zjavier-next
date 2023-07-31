@@ -1,12 +1,15 @@
 // Root Layout
 import { SessionProvider } from "./utils/SessionProvider";
-import { Topbar } from "./components/Topbar/Topbar";
 
 // Global Styles
 import "./styles/globals.css";
 
 // Global Assets
 import { Outfit } from "next/font/google";
+
+// Global Elements
+import { Topbar } from "./components/Topbar/Topbar";
+import { Leftbar } from "./components/LeftBar/LeftBar";
 
 const outfit = Outfit({
   subsets: ["latin-ext"],
@@ -65,7 +68,10 @@ export default function RootLayout({
       <body className={outfit.className}>
         <SessionProvider>
           <Topbar></Topbar>
-          {children}
+          <div className='hwrapper'>
+            <Leftbar />
+            {children}
+          </div>
         </SessionProvider>
       </body>
     </html>
