@@ -45,17 +45,26 @@ type ProjectData = {
 type Props = {
   data: ProjectData[];
   activeProject: number;
-  setActiveProject: React.Dispatch<React.SetStateAction<number>>
+  setActiveProject: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export const FileSystem = ({ data, activeProject, setActiveProject }: Props) => {
-  const isLightTheme = useContext(SessionContext).isLightTheme ? 'light' : 'dark';
+export const FileSystem = ({
+  data,
+  activeProject,
+  setActiveProject,
+}: Props) => {
+  const isLightTheme = useContext(SessionContext).isLightTheme
+    ? "light"
+    : "dark";
 
   return (
     <div className={styles.filesystem}>
       <div className={styles.navigator}>
         <div className={styles.title}>
-          <ExternalLink linkUrl={data[activeProject].link} ariaLabel={`${data[activeProject].name} - External Link`}>
+          <ExternalLink
+            linkUrl={data[activeProject].link}
+            ariaLabel={`${data[activeProject].name} - External Link`}
+          >
             <LinkIcon />
           </ExternalLink>
           <h3>PROJECTS FILE SYSTEM</h3>
@@ -93,7 +102,11 @@ export const FileSystem = ({ data, activeProject, setActiveProject }: Props) => 
             <div>main framework</div>
           </div>
           {data.map((project, index) => (
-            <div className={styles.row} key={index} data-isactive={index === activeProject}>
+            <div
+              className={styles.row}
+              key={index}
+              data-isactive={index === activeProject}
+            >
               <div className={styles.item}>{project.name}</div>
               <div className={styles.item}>{project.type}</div>
               <div className={styles.item}>{project.framework}</div>
@@ -104,54 +117,68 @@ export const FileSystem = ({ data, activeProject, setActiveProject }: Props) => 
       <div className={styles.details}>
         <div className={styles.title}>
           <h2>{data[activeProject].name}</h2>
+          <div className={styles.decoration}>
+            <div className={styles.square}>
+              <div></div>
+            </div>
+            <div className={styles.lineswrapper}>
+              <div className={styles.line}></div>
+              <div className={styles.line}></div>
+              <div className={styles.line}></div>
+              <div className={styles.line}></div>
+            </div>
+          </div>
         </div>
         <div className={styles.content}>
           <div className={styles.statusandlogo}>
             <div className={styles.status}>
-              <div className={styles.design}>
-                <h5>Design Phase</h5>
-                <div className={styles.value}>
-                  <p>{data[activeProject].details.designPhase}</p>
-                  <div className={styles.progress}>
-                    {renderSquares(
-                      data[activeProject].details.designPhase,
-                      styles.filledsquare,
-                      styles.emptysquare
-                    )}
+              <h4>Details</h4>
+              <div className={styles.wrapper}>
+                <div className={styles.percentage}>
+                  <h5>Design Phase</h5>
+                  <div className={styles.value}>
+                    <p>{data[activeProject].details.designPhase}</p>
+                    <div className={styles.progress}>
+                      {renderSquares(
+                        data[activeProject].details.designPhase,
+                        styles.filledsquare,
+                        styles.emptysquare
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className={styles.coding}>
-                <h5>Coding Phase</h5>
-                <div className={styles.value}>
-                  <p>{data[activeProject].details.codingPhase}</p>
-                  <div className={styles.progress}>
-                    {renderSquares(
-                      data[activeProject].details.designPhase,
-                      styles.filledsquare,
-                      styles.emptysquare
-                    )}
+                <div className={styles.percentage}>
+                  <h5>Coding Phase</h5>
+                  <div className={styles.value}>
+                    <p>{data[activeProject].details.codingPhase}</p>
+                    <div className={styles.progress}>
+                      {renderSquares(
+                        data[activeProject].details.designPhase,
+                        styles.filledsquare,
+                        styles.emptysquare
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div
-                className={styles.released}
-                data-isreleased={data[activeProject].details.released}
-              >
-                <h5>Released</h5>
-                <div className={styles.yesorno}>
-                  <p>Yes</p>
-                  <p>No</p>
+                <div
+                  className={styles.released}
+                  data-isreleased={data[activeProject].details.released}
+                >
+                  <h5>Released</h5>
+                  <div className={styles.yesorno}>
+                    <p>Yes</p>
+                    <p>No</p>
+                  </div>
                 </div>
               </div>
             </div>
             <div className={styles.logo}>
-                <Image
-                    src={data[activeProject].logos[isLightTheme]}
-                    alt={`${data[activeProject].name} - Logo`}
-                    width={512}
-                    height={512}
-                />
+              <Image
+                src={data[activeProject].logos[isLightTheme]}
+                alt={`${data[activeProject].name} - Logo`}
+                width={512}
+                height={512}
+              />
             </div>
           </div>
           <div className={styles.description}>

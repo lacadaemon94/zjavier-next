@@ -60,9 +60,9 @@
         "details": {
           "designPhase": "100%",
           "codingPhase": "100%",
-          "released": true
+          "released": false
         },
-        "description": "Exitsv is an exploration of a jewelry brand with the goal to achieve a high quality frontend ecommerce experience with eye-catching animations, colors and typography that transmit in a unique and identifiable way what the brand is about.",
+        "description": "Exitsv is an exploration of a jewelry brand with the goal to achieve a high quality frontend ecommerce experience with eye-catching animations, colors and typography that transmit in a unique way what the brand is about.",
         "images": {
           "desktop": {
             "dark": "/assets/images/exitsv/desktop_both.webp",
@@ -88,7 +88,7 @@
           "codingPhase": "95%",
           "released": true
         },
-        "description": "El Jardin de Los Volcanes is both an ecommerce and dashboard project in one, with the goal to allow vistors and clients with a streamlined way of finding more about the business and locale as well as to process reservations, as well as to allow the business managers to have a quick glance at the business performance through a simple dashboard and to manage daily tasks, such as managing reservations, income & expenses and communication with the clients.",
+        "description": "El Jardin de Los Volcanes is both an ecommerce and dashboard project in one, intending to allow visitors and clients a streamlined way of finding more about the business and locale as well as to process reservations, as well as to allow the business managers to have a quick look at the business performance through a simple dashboard and to manage daily tasks, such as reservations, income & expenses and communication with the clients.",
         "images": {
           "desktop": {
             "dark": "/assets/images/eljardindelosvolcanes/desktop_both.webp",
@@ -114,7 +114,7 @@
           "codingPhase": "100%",
           "released": true
         },
-        "description": "Itersv is a project that aims to help latinamerican startups to take the digital leap and provide their users and clients with the best possible solutions in terms of UI and UX, specially with User Experience, focusing on adapting the solutions the startups provide into a practical, easy-to-use and happy digital experience, covering the entire journey from lookout to engagement to loyalty.",
+        "description": "Itersv is a project that aims to help latinamerican startups to take the digital leap and provide their users and clients with the best possible solutions in terms of UI and UX, specially with User Experience, focusing on adapting the solutions the startups provide into a practical, easy-to-use and happy digital experiences, covering the entire journey from lookout to engagement to loyalty.",
         "images": {
           "desktop": {
             "dark": "/assets/images/itersv/desktop_dark.webp",
