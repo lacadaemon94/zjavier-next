@@ -54,6 +54,8 @@ async function headers() {
     ];
 }
 
+const { withContentlayer } = require('next-contentlayer')
+
 const nextConfig = {
     async headers() {
         return headers();
@@ -67,4 +69,4 @@ const nextConfig = {
     },
 }
 
-module.exports = nextConfig
+module.exports = withContentlayer(nextConfig)
