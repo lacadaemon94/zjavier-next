@@ -11,7 +11,7 @@ const corsHeaders = [
     },
     {
         key: "Access-Control-Allow-Headers",
-        value: "Content-Type, Authorization, x-muvit-origin",
+        value: "Content-Type, Authorization, x-zjavier-origin",
       },
       {
         key: "Access-Control-Allow-Credentials",
