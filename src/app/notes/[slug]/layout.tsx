@@ -50,9 +50,5 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <main>
-        {children}
-    </main>
-  );
+  return <main>{children}</main>;
 }
