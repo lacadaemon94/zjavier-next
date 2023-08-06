@@ -7,7 +7,10 @@ const Post = defineDocumentType(() => ({
   // Location of Post source files, global `**` pattern to match any number of levels
   filePathPattern: `posts/**/*.mdx`,
   fields: {
-    // ...
+    title: {
+      type: "string",
+      required: true,
+    },
   },
 }));
 

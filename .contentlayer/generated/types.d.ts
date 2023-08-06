@@ -13,6 +13,7 @@ export type Post = {
   _id: string
   _raw: Local.RawDocumentData
   type: 'Post'
+  title: string
   /** MDX file body */
   body: MDX
 
