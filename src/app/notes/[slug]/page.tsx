@@ -9,13 +9,13 @@ import styles from "../../styles/posts.module.css";
 
 export async function generateStaticParams() {
   return allPosts.map((post) => ({
-    slug: post._raw.sourceFileName.replace(/\.mdx$/, ""),
+    slug: post.slug,
   }));
 }
 
 export default function Page({ params }: { params: { slug: string } }) {
   // Find the post for the current page.
-  const post = allPosts.find((post) => post._raw.sourceFileName.replace(/\.mdx$/, "") === params.slug);
+  const post = allPosts.find((post) => post.slug === params.slug);
 
   // 404 if the post does not exist.
   if (!post) notFound();

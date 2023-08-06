@@ -13,18 +13,27 @@ const Post = defineDocumentType(() => ({
       required: true,
     },
   },
+  computedFields: {
+    slug: {
+      type: "string",
+      resolve: (post) =>
+        post._raw.sourceFileName
+          // hello-world.mdx => hello-world
+          .replace(/\.mdx$/, ""),
+    },
+  },
 }));
 
 /** @type {import('rehype-pretty-code').Options} */
 const options = {
-  theme: 'dracula-soft'
-}
+  theme: "dracula-soft",
+};
 
 export default makeSource({
   // Location of source files for all defined documentTypes
   contentDirPath: "content",
   documentTypes: [Post],
   mdx: {
-    rehypePlugins: [[rehypePrettyCode, options]]
-  }
+    rehypePlugins: [[rehypePrettyCode, options]],
+  },
 });
