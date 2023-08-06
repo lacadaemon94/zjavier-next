@@ -11,7 +11,10 @@ type Props = {
 const NavButton = ({icon, href, ariaLabel }: Props) => {
   const pathname = usePathname();
   const isActive = (): boolean => {
-    return pathname === href;
+    if (href === "/") {
+      return pathname === href;
+    }
+    return pathname.startsWith(href);
   };
 
   return (

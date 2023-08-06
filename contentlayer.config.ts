@@ -1,5 +1,6 @@
 // contentlayer.config.ts
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
+import rehypePrettyCode from "rehype-pretty-code";
 
 const Post = defineDocumentType(() => ({
   name: "Post",
@@ -14,8 +15,16 @@ const Post = defineDocumentType(() => ({
   },
 }));
 
+/** @type {import('rehype-pretty-code').Options} */
+const options = {
+  theme: 'dracula-soft'
+}
+
 export default makeSource({
   // Location of source files for all defined documentTypes
   contentDirPath: "content",
   documentTypes: [Post],
+  mdx: {
+    rehypePlugins: [[rehypePrettyCode, options]]
+  }
 });
