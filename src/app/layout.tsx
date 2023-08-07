@@ -17,7 +17,10 @@ const outfit = Outfit({
 });
 
 export const metadata = {
-  title: "Javier Flores | Full Stack Developer",
+  title: {
+    template: 'Javier Flores | %s',
+    default: "Full Stack Developer",
+  },
   description:
     "Full Stack Developer from El Salvador, +3 Years of experience as a Full Stack Developer; I really like the entire journey of taking an idea and transforming it into a compelling digital brand.",
   applicationName: "ZJAVIER",

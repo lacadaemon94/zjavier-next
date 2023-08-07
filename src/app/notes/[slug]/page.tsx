@@ -1,6 +1,7 @@
 // Notes Posts - app/notes/[slug]/page.tsx
 import React from "react";
 import { allPosts } from "contentlayer/generated";
+import { Metadata, ResolvingMetadata } from "next";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import { notFound } from "next/navigation";
 
@@ -11,6 +12,21 @@ export async function generateStaticParams() {
   return allPosts.map((post) => ({
     slug: post.slug,
   }));
+}
+
+type Props = {
+  params: { slug: string };
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // read route params
+  const post = allPosts.find((post) => post.slug === params.slug);
+
+  if (!post) notFound();
+
+  return {
+    title: post.slug,
+  };
 }
 
 export default function Page({ params }: { params: { slug: string } }) {
