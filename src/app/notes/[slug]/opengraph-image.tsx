@@ -7,11 +7,11 @@ export const contentType = "image/png";
 
 // Font
 const museoModerno = async () => {
-    const res = await fetch(`http://localhost:3000/MuseoModerno-Bold.ttf`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/MuseoModerno-Bold.ttf`);
     return res.arrayBuffer();
   };
 const museoModernoThin = async () => {
-    const res = await fetch(`http://localhost:3000/MuseoModerno-Thin.ttf`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/MuseoModerno-Thin.ttf`);
     return res.arrayBuffer();
   };
 

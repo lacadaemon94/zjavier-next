@@ -1,6 +1,47 @@
 // contentlayer.config.ts
-import { defineDocumentType, makeSource } from "contentlayer/source-files";
+import {
+  defineDocumentType,
+  makeSource,
+  defineNestedType,
+} from "contentlayer/source-files";
 import rehypePrettyCode from "rehype-pretty-code";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import { formatDate } from "./src/app/utils/formatDate";
+import GithubSlugger from 'github-slugger'
+
+const Series = defineNestedType(() => ({
+  name: "Series",
+  fields: {
+    title: {
+      type: "string",
+      required: true,
+    },
+    order: {
+      type: "number",
+      required: true,
+    },
+  },
+}));
+
+const allTagNames = ["Next.js", "MDX", "Next Conf", "React Conf"];
+const allTagSlugs = ["next", "mdx", "next-conf", "react-conf"];
+
+const Tag = defineNestedType(() => ({
+  name: "Tag",
+  fields: {
+    title: {
+      type: "enum",
+      required: true,
+      options: allTagNames,
+    },
+    slug: {
+      type: "enum",
+      required: true,
+      options: allTagSlugs,
+    },
+  },
+}));
 
 const Post = defineDocumentType(() => ({
   name: "Post",
@@ -12,6 +53,17 @@ const Post = defineDocumentType(() => ({
       type: "string",
       required: true,
     },
+    publishedAt: { type: "string", required: true },
+    description: { type: "string", required: true },
+    status: { type: "enum", options: ["draft", "published"], required: true },
+    series: {
+      type: "nested",
+      of: Series,
+    },
+    tags: {
+      type: "list",
+      of: Tag,
+    },
   },
   computedFields: {
     slug: {
@@ -20,6 +72,37 @@ const Post = defineDocumentType(() => ({
         post._raw.sourceFileName
           // hello-world.mdx => hello-world
           .replace(/\.mdx$/, ""),
+    },
+    shortDate: {
+      type: "string",
+      resolve: (doc) => {
+        return formatDate(doc.publishedAt);
+      },
+    },
+    headings: {
+      type: "json",
+      resolve: async (doc) => {
+        // use same package as rehypeSlug so toc and sluggified headings match
+        // https://github.com/rehypejs/rehype-slug/blob/main/package.json#L36
+        const slugger = new GithubSlugger()
+
+        // https://stackoverflow.com/a/70802303
+        const regXHeader = /\n\n(?<flag>#{1,6})\s+(?<content>.+)/g
+
+        const headings = Array.from(doc.body.raw.matchAll(regXHeader)).map(
+          ({ groups }) => {
+            const flag = groups?.flag
+            const content = groups?.content
+            return {
+              heading: flag?.length,
+              text: content,
+              slug: content ? slugger.slug(content) : undefined,
+            }
+          },
+        )
+
+        return headings
+      },
     },
   },
 }));
@@ -34,6 +117,22 @@ export default makeSource({
   contentDirPath: "content",
   documentTypes: [Post],
   mdx: {
-    rehypePlugins: [[rehypePrettyCode, options]],
+    esbuildOptions(options) {
+      options.target = "esnext"
+      return options
+    },
+    rehypePlugins: [
+      [rehypeSlug],
+      [rehypePrettyCode, options],
+      [
+        rehypeAutolinkHeadings,
+        {
+          behavior: "wrap",
+          // properties: {
+          //   className: [HEADING_LINK_ANCHOR],
+          // },
+        },
+      ],
+    ],
   },
 });
