@@ -5,6 +5,10 @@ import { Metadata, ResolvingMetadata } from "next";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import { notFound } from "next/navigation";
 
+// MDX Components
+import { BlurImage } from "@/app/components/mdxComponents/BlurImage";
+import { AsideImage } from "@/app/components/mdxComponents/AsideImage";
+
 // Styles
 import styles from "../../styles/posts.module.css";
 
@@ -12,6 +16,11 @@ export async function generateStaticParams() {
   return allPosts.map((post) => ({
     slug: post.slug,
   }));
+}
+
+const mdxComponents = {
+  BlurImage,
+  AsideImage
 }
 
 type Props = {
@@ -42,7 +51,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   return (
     <div>
       {/* Some code ... */}
-      <MDXContent />
+      <MDXContent components={mdxComponents} />
     </div>
   );
 }

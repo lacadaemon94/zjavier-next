@@ -1,0 +1,23 @@
+.sideimage {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: fit-content;
+    max-width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+.sideimage .blurimage {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 22.5rem;
+    height: 12.5rem;
+}
+.blurimage img {
+    position: relative;
+    overflow: hidden;
+    object-fit: cover;
+}

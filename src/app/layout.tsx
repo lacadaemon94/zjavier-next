@@ -71,7 +71,7 @@ export default function RootLayout({
       <body className={outfit.className}>
         <SessionProvider>
           <Topbar></Topbar>
-          <div className='hwrapper'>
+          <div className='hwrapper' id="content">
             <Leftbar />
             {children}
           </div>

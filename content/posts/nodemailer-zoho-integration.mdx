@@ -1,0 +1,811 @@
+---
+title: "Cost-free Contact Form Solutions: Nodemailer & Zoho Mail Integration."
+description: "In today's digital age, having a contact form on your website is essential."
+publishedAt: "2023-08-08"
+status: "published"
+series:
+  order: 1
+  title: "Cost-free Contact Form"
+tags:
+  - Next.js
+  - Nodemailer
+  - Zoho Mail
+---
+
+In today's digital age, having a contact form on your website is essential. It provides a straightforward way for visitors to get in touch with you.
+
+However, setting up a contact form can sometimes involve costs, especially when integrating with email services.
+
+In this article, we'll explore a cost-free solution using Nodemailer and Zoho Mail to handle contact form submissions in a Next.js application.
+
+# Problem
+
+- Many businesses and individual developers seek cost-effective solutions for integrating contact forms into their websites without incurring additional costs.
+- Traditional email service providers often come with monthly fees or limitations on the number of emails sent, making them less ideal for small projects or startups.
+- Setting up a reliable and secure mail server can be complex and requires maintenance, which might be overkill for a simple contact form.
+
+# Solutions
+
+Nodemailer and Zoho Mail Integration offers a seamless solution to the challenges of cost-effective contact form implementations by transforming the traditional email sending process into a streamlined, secure, and cost-free system.
+
+I have been using it from day one and I really love the simplicity of the implementation, something as simple as setting up an API route and Contact Form component to ping it.
+
+# Choose your journey
+
+Follow along the step-by-step walkthrough or jump straight to the complete code at the bottom of the post with the Index.
+
+# What you need
+
+You will need a Zoho Mail Business Account for your domain, you can set up one for free here --> [Zoho Mail](https://www.zoho.com/mail/)
+
+# Install Nodemailer
+
+```bash title="Terminal"
+npm install nodemailer
+```
+
+If you want to learn more about how Nodemailer works you can go to their repo here: [Nodemailer](https://github.com/nodemailer/nodemailer)
+
+# Setting up Zoho Mail Credentials
+
+You will need to setup your Zoho Mail's Account Credentials to be used by Nodemailer with SMTP. To do this we will use .env variables to avoid making them accessible to the public.
+
+But first we need to configure an App Password, to be used by our API.
+
+## Setup App Password
+
+<AsideImage
+  src="/assets/images/notes/note_one-snip_one.png"
+  alt="Zoho Mail My Account Button"
+  caption="Zoho Mail Profile UI"
+/>
+
+- In your Zoho Mail Account, Click or Tap in your avatar to access the Menu and then Click or Tap in 'My Account' to access your account options & settings.
+
+<AsideImage
+  src="/assets/images/notes/note_one-snip_two.png"
+  alt="Zoho Mail My Account UI"
+  caption="Zoho Mail My Account UI"
+/>
+
+- Then in the Menu or Left Panel Click or Tap in Security --> App Passwords
+
+<AsideImage
+  src="/assets/images/notes/note_one-snip_three.png"
+  alt="Zoho Mail My Account App Password"
+  caption="App Password Modal"
+/>
+
+- Finally Click on Generate New Password, type in your desired app name and copy your generated key, we'll use it right away.
+
+## Configure .env variables
+
+If you haven't created your .env.local file you can create it now, it must placed at the very root of your project, below an example of this project's structure:
+
+```bash {19}
+├── public
+├── src
+│   ├── app
+│   │   ├── api
+│   │   │   ├── contact
+│   │   │   │   ├── route.ts
+│   │   ├── utils
+│   │   │   ├── mailConfig.ts
+│   │   ├── ui
+│   │   │   ├── Form.tsx
+│   ├── layout.tsx
+│   ├── page.tsx
+│   ├── assets
+│   │   ├── styles
+│   │   │   ├── contact.module.css
+│   │   │   ├── globals.css
+│   │   ├── icons
+│   │   │   ├── Icon.tsx
+├── .env.local
+├── package.json
+├── package.json
+├── package.json
+├── package-lock.json
+└── .gitignore
+```
+
+Then you can add the corresponding variables to the file, to make them accessible
+
+```shell showLineNumbers {1-2}
+NEXT_PUBLIC_ZOHO_USER=javier.flores@zjavier.com
+NEXT_PUBLIC_ZOHO_PASSWORD=CcsiSdxPmZUb
+```
+
+# Creating an API endpoint
+
+First let's separate the logic of the API Endpoint with the nodemailer transport configuration by creating its own module, for better code maintainability.
+
+## Create mailConfig.ts Module
+
+Let's first destructure the Environment Variables for better code readability.
+
+```ts showLineNumbers
+const { NEXT_PUBLIC_ZOHO_USER, NEXT_PUBLIC_ZOHO_PASSWORD } = process.env;
+```
+
+Then let's proceed to configure the nodemailer transporter.
+
+```ts showLineNumbers title="/src/app/utils/mailConfig.ts" {7-8}
+import nodemailer from "nodemailer";
+
+const { NEXT_PUBLIC_ZOHO_USER, NEXT_PUBLIC_ZOHO_PASSWORD } = process.env;
+
+export const transporter = nodemailer.createTransport({
+  host: "smtppro.zoho.in",
+  port: 465,
+  auth: {
+    user: NEXT_PUBLIC_ZOHO_USER,
+    pass: NEXT_PUBLIC_ZOHO_PASSWORD,
+  },
+});
+```
+
+Pay attention to the host and port properties, for Zoho Mail SMTP the domain is `smtppro.zoho.com` by default, however in some cases the TLD might change depending on your location or in which region you registered your Business Mail Account.
+
+For the port, since we are using SMTP with SSL it will be `465`, you can check the Zoho Mail Guide for [SMTP Server Configuration - Zoho Mail](https://www.zoho.com/mail/help/zoho-smtp.html?zredirect=f&zsrc=langdropdown&lb=es-xl)
+
+## Setup API Handler
+
+Now let's proceed to create our API Endpoint Handler, first let's import the required dependencies in Next.js 13.
+
+```ts showLineNumbers
+import { NextRequest, NextResponse } from "next/server";
+import { transporter } from "./mailConfig";
+```
+
+- `NextRequest`, `NextResponse` These are types imported from `next/server` which are used to type the request and response objects in Next.js API routes.
+- transporter: This is an import from the mailConfig module, which presumably contains the configuration for sending emails using nodemailer.
+
+## Type Safety Body Request
+
+`ContactRequestBody` This type defines the expected shape of the request body. It's a TypeScript type that ensures the request body contains the expected fields with the correct data types.
+
+```ts showLineNumbers
+type ContactRequestBody = {
+  fname: string;
+  lname: string;
+  email: string;
+  phone: string;
+  service: string;
+  message: string;
+};
+```
+
+## API Handler Function
+
+```ts showLineNumbers
+export async function POST({ json }: NextRequest) {
+  ...
+}
+```
+
+`POST` This is an asynchronous function that handles POST requests to this API route. It's named POST to indicate the HTTP method it handles.
+
+## Extracting Data From Request
+
+```ts
+const { fname, lname, email, phone, service, message }: ContactRequestBody =
+  await json();
+```
+
+This line extracts data from the request body. It uses the json method from the `NextRequest` object to parse the incoming `JSON` data and then destructures the expected fields, ensuring they match the `ContactRequestBody` type.
+
+## Email Options Configuration
+
+```ts showLineNumbers {1-2}
+const mailOptions = {
+  from: NEXT_PUBLIC_ZOHO_USER,
+  to: NEXT_PUBLIC_ZOHO_RECIPIENT_EMAIL,
+  subject: `New message from ${fname} ${lname}`,
+  text: `
+      Name: ${fname}
+      Last Name: ${lname}
+      Email: ${email}
+      Phone: ${phone}
+      Service: ${service}
+      Message: ${message}
+    `,
+};
+```
+
+`mailOptions` This constant defines the configuration for the email to be sent. It specifies the sender, recipient, subject, and content of the email.
+
+Pay attention to the from and to fields, since you're using these solution to handle contact forms through your website they would be sent to the very same email address (likely) that you are using to process them through the SMTP request.
+
+## Sending the Email
+
+```ts showLineNumbers
+try {
+  await transporter.sendMail(mailOptions);
+  ...
+} catch (error) {
+  ...
+}
+```
+
+This part of code attempts to send the email using the transporter from `mailConfig{:.fn}` If the email is sent successfully, a success response is returned. If there's an error, it logs the error and returns an error response.
+
+## Response Handling
+
+```ts showLineNumbers
+return NextResponse.json({ status: "success", message: "Message sent successfully" });
+...
+return NextResponse.json({ status: "error", message: (error as Error).message });
+```
+
+These lines handle the API response. If the email is sent successfully, a `JSON` response with a success status is returned. If there's an error, a `JSON` response with an error status and the error message is returned.
+
+The complete API Contact Route:
+
+```ts showLineNumbers title="/src/app/api/contact/route.ts" {4-11, 19, 21-33, 35-41}
+import { NextRequest, NextResponse } from "next/server";
+import { transporter } from "./mailConfig";
+
+type ContactRequestBody = {
+  fname: string;
+  lname: string;
+  email: string;
+  phone: string;
+  service: string;
+  message: string;
+};
+
+const { NEXT_PUBLIC_ZOHO_USER, NEXT_PUBLIC_ZOHO_RECIPIENT_EMAIL } = process.env;
+
+export async function POST({ json }: NextRequest) {
+  const { fname, lname, email, phone, service, message }: ContactRequestBody =
+    await json();
+
+  const mailOptions = {
+    from: NEXT_PUBLIC_ZOHO_USER,
+    to: NEXT_PUBLIC_ZOHO_RECIPIENT_EMAIL,
+    subject: `New message from ${fname} ${lname}`,
+    text: `
+      Name: ${fname}
+      Last Name: ${lname}
+      Email: ${email}
+      Phone: ${phone}
+      Service: ${service}
+      Message: ${message}
+    `,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    return NextResponse.json({
+      status: "success",
+      message: "Message sent successfully",
+    });
+  } catch (error) {
+    console.error(error); // If you need or have concerns of scalability consider using a dedicated logging service for production,
+    return NextResponse.json({
+      status: "error",
+      message: (error as Error).message,
+    });
+  }
+}
+```
+
+In summary we have:
+
+- Added Type Safety to the Request Body
+- Extracted the Data from the Request, ensuring that they match the `ContactRequestBody` type.
+- Configured the Email Options accordingly
+- Setup `transporter` request with a `try` and `catch` method
+- Setup Response Handling, ensuring that each response throws its corresponding `JSON` response and status code.
+
+# Creating the Contact Form
+
+With the API in place, let's move on to the frontend. First let's break down what we need or what a basic contact form would need.
+
+- A Form Component to render our JSX and trigger Event Handlers and State Changes, we'll call it `Form.tsx`
+- Event Handlers for Submit and Change Events, we'll call it `formHandlers.ts`
+- State Management with `useReducer` to help manage the form's states in a more organized way.
+- Form Validation Logic, we'll create a separate `isValid` function to handle the validation logic, we'll call it `formValidation.ts`
+
+## The Updated Project's Structure
+
+```bash showLineNumbers {9-11} /Form.tsx/
+├── public
+├── src
+│   ├── app
+│   │   ├── api
+│   │   │   ├── contact
+│   │   │   │   ├── route.ts
+│   │   ├── utils
+│   │   │   ├── mailConfig.ts
+│   │   │   ├── formHandlers.ts
+│   │   │   ├── formReducer.ts
+│   │   │   ├── formValidation.ts
+│   │   ├── ui
+│   │   │   ├── Form.tsx
+│   ├── layout.tsx
+│   ├── page.tsx
+│   ├── assets
+│   │   ├── styles
+│   │   │   ├── contact.module.css
+│   │   │   ├── globals.css
+│   │   ├── icons
+│   │   │   ├── Icon.tsx
+├── .env.local
+├── package.json
+├── package.json
+├── package.json
+├── package-lock.json
+└── .gitignore
+```
+
+- We have added `formHandlers{:.fn}` , `formReducer{:.fn}` and `formValidation{:.fn}`
+
+## The Form Component
+
+- We need `useReducer` hook to manage states.
+- `ToastContainer` to render toastify notifications based on events or states
+- (Optional) You can install `framer-motion` to add some cool animations and transitions.
+- The `formReducer` `initialState` and `useHandlers` functions and custom hooks to properly manage our form's events, changes and its states (i.e 'default', 'sending', 'sent')
+
+So in summary this would be our imports:
+
+```ts showLineNumbers
+import React, { useReducer } from "react";
+import { ToastContainer } from "react-toastify";
+import { motion } from "framer-motion";
+
+// Custom Hooks and Functions
+import { formReducer, initialState } from "@/app/utils/formReducer";
+import { useHandlers } from "@/app/utils/formHandlers";
+```
+
+Then we need to create our component, this will include:
+
+- State Management
+- Event Handlers
+- JSX Body & Render
+
+We will end up with something like this:
+
+```tsx showLineNumbers title="/src/app/ui/Form.tsx" {14-15, 29}
+import React, { useReducer } from "react";
+import { ToastContainer } from "react-toastify";
+import { motion } from "framer-motion";
+
+// Styles
+import styles from "../../styles/contact.module.css";
+import "react-toastify/dist/ReactToastify.css";
+
+// Custom Functions & Hooks
+import { formReducer, initialState } from "@/app/utils/formReducer";
+import { useHandlers } from "@/app/utils/formHandlers";
+
+type Props = {
+  onSubmitSuccess?: () => void;
+};
+
+const Form: React.FC<Props> = ({ onSubmitSuccess }) => {
+  const [state, dispatch] = useReducer(formReducer, initialState);
+  const { handleChange, handleSubmit } = useHandlers(initialState);
+
+  return (
+    <motion.div
+      className={styles.formcontainer}
+      initial={{ opacity: 0, x: 40 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ type: "spring", duration: 1.5 }}
+    >
+      <form
+        className={styles.form}
+        onSubmit={(e) => handleSubmit(e, dispatch, state)}
+      >
+        {/* ... Rest of the form JSX ... */}
+      </form>
+      <ToastContainer />
+    </motion.div>
+  );
+};
+
+export default Form;
+```
+
+## State Management
+
+We need to create the `formReducer` to help us manage our form's states correlating with the different actions that can be taken in our form.
+
+For this we will need:
+
+- A `FormState` type to define the structure of our form, its states and any additional properties you want to manage or keep control of, this can be adapted to your needs and form's structure.
+- A `FormAction` type to define the possible actions that can be taken in our form, meaning that can be dispatched to our reducer.
+- The Logic of our Form Reducer, this will determine how the form's states should change in response to different actions.
+
+So let's begin with the types.
+
+```ts showLineNumbers {4-9, 11, 12, 18-19}
+// This type defines the structure of the form's state.
+export type FormState = {
+  values: {
+    fname: string;
+    lname: string;
+    email: string;
+    phone: string;
+    service: string;
+    message: string;
+  };
+  status: "send" | "sending..." | "sent"; // Represents the form's submission status.
+  messageLength: number; // Represents the length of the message.
+};
+
+// **FormAction Type**
+// This type defines the possible actions that can be dispatched to the reducer.
+export type FormAction =
+  | { type: "SET_VALUE"; name: string; value: string } // Action to set a specific form value. This will be used by our API when we request a transport.
+  | { type: "SET_STATUS"; status: FormState["status"] }; // Action to set the form's submission status.
+```
+
+Now we can proceed with the Logic of our form reducer, this will help us both manage our value's based on Event Changes and our form's State based on Submit events.
+
+First, let's take a look at our Change Events Logic:
+
+```ts showLineNumbers {6, 9, 12}
+export const formReducer = (
+  state: FormState,
+  action: FormAction
+): FormState => {
+  switch (action.type) {
+    case "SET_VALUE":
+      // Update a specific form value.
+      return {
+        ...state,
+        values: {
+          ...state.values,
+          [action.name]: action.value,
+        },
+      };
+      {...}
+  }
+}
+```
+
+In here we are telling the formReducer to update a specific value by setting an action name and value, we will use this to keep track of the values we want to send through the transporter, such as the first name, last name, etc.
+
+Now we need to tell the formReducer to also update and 'store' the form's states, based on the Submit Event.
+
+```ts showLineNumbers {6,7}
+{
+  {
+case "SET_STATUS":
+      // Update the form's submission status.
+      return {
+        ...state,
+        status: action.status,
+      };
+    default:
+      // Return the current state if the action type is not recognized.
+      return state;
+  }
+};
+```
+
+We spread the state and assign the status based on the action performed on form (i.e Submit). This is to keep track of the initial state, submitting state and submitted states, which we will call `send` `sending` & `sent` correspondingly.
+
+So our `formReducer{:.fn}` will end up looking like this:
+
+```ts showLineNumbers title="/src/app/utils/formReducer.ts"
+type FormState = {
+  values: {
+    fname: string;
+    lname: string;
+    email: string;
+    phone: string;
+    service: string;
+    message: string;
+  };
+  status: "send" | "sending..." | "sent";
+  messageLength: number;
+};
+
+type FormAction =
+  | { type: "SET_VALUE"; name: string; value: string }
+  | { type: "SET_STATUS"; status: FormState["status"] };
+
+export const formReducer = (
+  state: FormState,
+  action: FormAction
+): FormState => {
+  switch (action.type) {
+    case "SET_VALUE":
+      return {
+        ...state,
+        values: {
+          ...state.values,
+          [action.name]: action.value,
+        },
+      };
+    case "SET_STATUS":
+      return {
+        ...state,
+        status: action.status,
+      };
+    default:
+      return state;
+  }
+};
+
+export const initialState: FormState = {
+  values: {
+    fname: "",
+    lname: "",
+    email: "",
+    phone: "",
+    service: "",
+    message: "",
+  },
+  status: "send",
+  messageLength: 0,
+};
+```
+
+## Form Validation
+
+Great! Now that we have managed to setup the basic structure for the Form component by setting up the states of the form, we now need to add some form validation.
+
+This is to ensure in a very basic level that the info sent through the transporter matches what we expect, so in this case we'll add:
+
+- Simple First & Last Name Validation
+- Email Validation with Regex, to verify that the email follows the format `mail@domain.com`
+- Message validation, we want to make sure that not only do they send us their contact info but also at least some idea of what they want or what they're looking for.
+
+This are some very basic form validations, you can add any other validations based on your requirements.
+
+Alright, now that we have an idea of what we want, let's put it into code.
+
+First we will need to import `react-toast` so that our validations are capable of returning the corresponding toast based on the validation's result.
+
+```ts
+import { toast } from "react-toastify";
+```
+
+Then we need to define the structure of the form's values that we want to validate:
+
+```ts showLineNumbers
+type FormValues = {
+  fname: string;
+  lname: string;
+  email: string;
+  phone: string;
+  service: string;
+  message: string;
+};
+```
+
+Now we can proceed to write our logic, we will call our validation function `isValid{:.fn}` and it will take the form values and return a `boolean` indicating whether the values are valid or not.
+
+```ts showLineNumbers {5,13,20,28}
+export const isValid = (values: FormValues): boolean => {
+  // **First Name & Last Name Validation**
+  // Ensure that the first name and last name have more than one character.
+  if (values.fname.length < 2 || values.lname.length < 2) {
+    toast.error("Name & Last Name must contain more than 1 character");
+    return false;
+  }
+
+  // **Email Validation**
+  // Use a regular expression to validate the email format.
+  const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+  if (!emailRegex.test(values.email)) {
+    toast.error("Please enter a valid e-mail address");
+    return false;
+  }
+
+  // **Message Validation**
+  // Ensure that the message has more than 10 characters.
+  if (values.message.length < 10) {
+    toast.error("your message must contain at least 10 characters");
+    return false;
+  }
+
+  // **Additional Validations**
+  // You can add more validation rules here as needed...
+
+  // If all validations pass, return true.
+  return true;
+};
+```
+
+For each conditional we have setup a `toast.error` notification to let any user now what is the error and give them an idea of how to correct it.
+
+And finally we have established that if all conditionals are true, meaning they passed, then we return a `true` boolean, indicating that the data that is to be submitted is valid, based on our needs.
+
+## Form Handlers
+
+Perfect! Finally we need to be able to couple all of this logic based on the Event Types, we care about 2 types of Events, Submits and Change events.
+
+We also want to reciprocate as much as possible to the user any changes in the form's states, primarily regarding the status of the Submit, whether if the data submitted is valid, is being sent and/or has been sent.
+
+So we will also make use of `react-toastify` for this.
+
+we will also need to specify our Event Handlers Logic which is the structure of the `FormState` and `FormActions` so that the data we pass to our `formReducer{:.fn}` & `formValidation{:.fn}` functions matches their own.
+
+And finally we will also need the `isValid{:.fn}` utility function to validate our form prior to the transport request.
+
+So our imports will look like this:
+
+```ts showLineNumbers
+// Importing utilities for notifications.
+import { toast } from "react-toastify";
+
+// Importing types from the form reducer.
+import { FormState, FormAction } from "./formReducer";
+
+// Importing the validation utility.
+import { isValid } from "./formValidation";
+```
+
+We also want to make sure that our Handlers Return the right data, with the appropriate structure based on the type of event.
+
+```ts showLineNumbers /React.ChangeEvent/ /HTMLInputElement/ /HTMLTextAreaElement/ /React.FormEvent/ /HTMLFormElement/ /React.Dispatch/ /FormAction/ /FormState/
+type HandlersReturn = {
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  handleSubmit: (
+    e: React.FormEvent<HTMLFormElement>,
+    dispatch: React.Dispatch<FormAction>,
+    state: FormState
+  ) => Promise<void>;
+};
+```
+
+To do this we use strong typing for the `useHandlers` custom hook, this way we ensure that the hook always returns an object with 2 functions `handleChange{:.fn}` & `handleSubmit{:.fn}` and that said functions always have the expected parameters and return types.
+
+To better understand the elements of each function, here's a breakdown:
+
+- `React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>`: This is a union type from React's type definitions. It represents a change event coming from either an `<input>` or a `<textarea>` element. This is used in the `handleChange{:.fn}` to type the event parameter.
+- `React.FormEvent<HTMLFormElement>`: This type represents a form event in React, specifically used in this case for the `handleSubmit{:.fn}` as well to type the event parameter.
+- `React.Dispatch<FormAction>`: This is a type representing a dispatch function from React's `useReducer` hook. It's used to dispatch actions to the reducer. In the `handleSubmit{:.fn}` this dispatch function is passed as a parameter.
+- `FormAction` and `FormState`: These are types that we've defined in our `formReducer{:.fn}` function. They represent the shape of the actions and states that can be dispatched to the reducer.
+
+Great! Now we just need to write the logic of both of our handlers. Let's start with by defining our customer hook `useHandlers` and our `handleChange{:.fn}` function:
+
+```ts showLineNumbers /(initialState: FormState): HandlersReturn/ /e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>/ {3, 5}
+export const useHandlers = (initialState: FormState): HandlersReturn => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    // ... any other logic specific to handleChange
+    return { type: "SET_VALUE", name, value };
+  };
+  {...}
+}
+```
+
+First as we mentioned we defined our custom hook `useHandlers` to the which we pass the following parameters:
+
+- `(initialState: FormState){:ts}` is our way of telling the hook to accept an `initialState` parameter of type `FormState` which we discussed earlier.
+- `HandlersReturn` in here we specify our hook to return an object of this type, which we also discussed and defined earlier. This is to ensure that the hook returns the `handleChange{:.fn}` and/or `handleSubmit{:.fn}` functions with the correct signatures.
+
+Secondly, we have our `handleChange{:.fn}` definition. Let's first take a look at the parameters:
+
+- `(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>){:ts}` This parameter represents the event object when an input or text area element value changes. This is to ensure that the function can handle change events from both inputs and textareas elements.
+
+Then let's look at the function's body:
+
+- We first destructure the event target `const { name, value } = e.target;{:js}` by extracting both the name and value from the event.
+- Lastly we return an action object `return { type: "SET_VALUE", name, value };{:ts}` an action object with a type of `"SET_VALUE"`. This represents the instruction to update a specific form value in the state. We use the `name` and `value` props to specify which form field and what value to set.
+
+Alright, now we now only need to define our `handleSubmit{:.fn}` function:
+
+```ts showLineNumbers
+{
+{...}
+const handleSubmit = async (
+  e: React.FormEvent<HTMLFormElement>,
+  dispatch: React.Dispatch<FormAction>,
+  state: FormState
+) => {
+  e.preventDefault();
+
+  if (!isValid(state.values)) return;
+
+  dispatch({ type: "SET_STATUS", status: "enviando..." });
+
+  try {
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(state.values),
+    });
+
+    if (response.ok) {
+      toast.success("Mensaje Enviado!");
+      dispatch({ type: "SET_STATUS", status: "enviado" });
+    } else {
+      const data = await response.json();
+      toast.error("Error al enviar", data);
+      dispatch({ type: "SET_STATUS", status: "enviar" });
+    }
+  } catch (error) {
+    console.error("Error while sending form", error);
+    toast.error("Error while sending form");
+  }
+};
+
+return { handleChange, handleSubmit };
+}
+```
+
+Let's break it down, first our parameters:
+
+- `e: React.FormEvent<HTMLFormElement>{:ts}` this tells of our function the type of event object when the form is submitted (i.e. the send button is clicked).
+- ` dispatch: React.Dispatch<FormAction>{:ts}` this is the dispatch function to update the form's state.
+- `state: FormState{:ts}` the current state of the form.
+
+Now let's look at the body of our function:
+
+- We first use `e.preventDefault();{:js}` to prevent the page reload on form submit.
+- We then proceed to validate the current form values that we care about `if (!isValid(state.values)) return;{:js}` If the values are not `valid` then the function exits eaarly and ideally showing a notification or giving some feedback on what needs to be addressed.
+- If all values are ok, then we proceed to dispatch a new form status `dispatch({ type: "SET_STATUS", status: "sending..." });{:ts}` this will be used not only to keep track of the state of the form within our logic but also to provide feedback to the user through the UI, indicating the user that the form is being processed.
+
+Ok, we have the basics, now we need to use our API:
+
+```tsx showLineNumbers /"/api/contact"/ {2-6}
+const response = await fetch("/api/contact", {
+   method: "POST",
+   headers: {
+     "Content-Type": "application/json",
+   },
+   body: JSON.stringify(state.values),
+});
+```
+
+An `async` API call is made to our `api/contact` endpoint using the fetch function. The values are sent as a `JSON` string in the request body.
+
+We then need to handle any responses from our API:
+
+```tsx showLineNumbers
+if (response.ok) {
+   toast.success("Mensaje Enviado!");
+   dispatch({ type: "SET_STATUS", status: "sent" });
+} else {
+   const data = await response.json();
+   toast.error("Error al enviar", data);
+   dispatch({ type: "SET_STATUS", status: "send" });
+}
+```
+
+- If the response is successful (meaning `response.ok` is true), a success message is displayed using the `toast` function, and finally the form's state is updated to `sent`, which should also be reflected in our UI.
+- If the response is not successful, then an error message is displayed and the form's state is reset to `send`.
+
+We also need to be able to handle errors, both for debugging purposes as well as for UI feedback.
+
+```tsx showLineNumbers
+catch (error) {
+   console.error("Error while sending form", error);
+   toast.error("Error while sending form");
+}
+```
+
+If there's an error during the API call or any other part of the `try` block, it's caught in this catch block. The error is logged to the console, and a generic error message is displayed to the user.
+
+And finally we simply returns an object containing the `handleChange{:.fn}` & `handleSubmit{:.fn}` functions.
+
+So, in summary we:
+
+- Perform a validation, update the form's state, make an API call, and handle the API response.
+
+# To sum up
+
+Integrating Zoho Mail with Nodemailer provides a cost-effective solution for handling contact form submissions, and with Next.js 13 it feels like a breeze.
+
+With this setup you can ensure tht you receive messages from anyone using your forms without incurring additional costs.
+
+Whether you're a freelancer, a small business owner, or just someone looking to setup a personal website, this solution is definitely worth considering.
+
+If you like this type of content let me know in my --> [X/Twitter Account](https://twitter.com/zjavier94)
+
+# Full code

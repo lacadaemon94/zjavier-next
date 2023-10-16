@@ -10,6 +10,9 @@
 
     justify-content: flex-end;
 }
+.navbar[data-isnote="true"] {
+    display: none;
+}
 .navbar .wrapper {
     display: flex;
     position: relative;
