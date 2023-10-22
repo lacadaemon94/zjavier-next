@@ -4,6 +4,7 @@ import { allPosts } from "contentlayer/generated";
 import { Metadata, ResolvingMetadata } from "next";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import { notFound } from "next/navigation";
+import { format } from "date-fns";
 
 // MDX Components
 import { BlurImage } from "@/app/components/mdxComponents/BlurImage";
@@ -11,6 +12,7 @@ import { AsideImage } from "@/app/components/mdxComponents/AsideImage";
 
 // Styles
 import styles from "../../styles/posts.module.css";
+import { PostIndex } from "@/app/components/mdxComponents/PostIndex";
 
 export async function generateStaticParams() {
   return allPosts.map((post) => ({
@@ -20,8 +22,8 @@ export async function generateStaticParams() {
 
 const mdxComponents = {
   BlurImage,
-  AsideImage
-}
+  AsideImage,
+};
 
 type Props = {
   params: { slug: string };
@@ -49,9 +51,16 @@ export default function Page({ params }: { params: { slug: string } }) {
   const MDXContent = useMDXComponent(post.body.code);
 
   return (
-    <div>
+    <article className={styles.post}>
       {/* Some code ... */}
+      <header className={styles.header}>
+        <h1>{post.title}</h1>
+        <div className={styles.header_details}>
+          <p>{format(new Date(post.publishedAt), "MMMM do, yyyy")}</p>
+        </div>
+      </header>
+      <PostIndex headings={post.headings} />
       <MDXContent components={mdxComponents} />
-    </div>
+    </article>
   );
 }

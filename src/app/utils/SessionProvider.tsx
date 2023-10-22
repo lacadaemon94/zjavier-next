@@ -16,7 +16,6 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
 
   const isNote = useSelectedLayoutSegments().length > 1;
-  console.log(isNote);
 
   useEffect(() => {
     const timer = setTimeout(() => {

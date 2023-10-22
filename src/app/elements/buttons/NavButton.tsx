@@ -6,9 +6,10 @@ type Props = {
   href: string;
   icon?: JSX.Element;
   ariaLabel: string;
+  className?: string;
 };
 
-const NavButton = ({icon, href, ariaLabel }: Props) => {
+const NavButton = ({icon, href, ariaLabel, className }: Props) => {
   const pathname = usePathname();
   const isActive = (): boolean => {
     if (href === "/") {
@@ -22,6 +23,7 @@ const NavButton = ({icon, href, ariaLabel }: Props) => {
       href={href}
       aria-label={ariaLabel}
       data-isactive={isActive() ? "true" : "false"}
+      className={className}
     >
       {icon}
     </Link>

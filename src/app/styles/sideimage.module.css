@@ -7,17 +7,21 @@
     max-width: 100%;
     height: auto;
     overflow: hidden;
+    
+    grid-column: 1;
 }
 .sideimage .blurimage {
     display: flex;
     position: relative;
     flex-direction: column;
     flex-wrap: nowrap;
-    width: 22.5rem;
+    width: 17.5rem;
     height: 12.5rem;
 }
 .blurimage img {
     position: relative;
     overflow: hidden;
     object-fit: cover;
+    border-radius: 1rem;
+    border: 1px solid var(--neutral-800);
 }

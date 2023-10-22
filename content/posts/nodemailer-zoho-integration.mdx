@@ -18,11 +18,15 @@ However, setting up a contact form can sometimes involve costs, especially when 
 
 In this article, we'll explore a cost-free solution using Nodemailer and Zoho Mail to handle contact form submissions in a Next.js application.
 
+---
+
 # Problem
 
 - Many businesses and individual developers seek cost-effective solutions for integrating contact forms into their websites without incurring additional costs.
 - Traditional email service providers often come with monthly fees or limitations on the number of emails sent, making them less ideal for small projects or startups.
 - Setting up a reliable and secure mail server can be complex and requires maintenance, which might be overkill for a simple contact form.
+
+---
 
 # Solutions
 
@@ -30,13 +34,17 @@ Nodemailer and Zoho Mail Integration offers a seamless solution to the challenge
 
 I have been using it from day one and I really love the simplicity of the implementation, something as simple as setting up an API route and Contact Form component to ping it.
 
+---
+
 # Choose your journey
 
 Follow along the step-by-step walkthrough or jump straight to the complete code at the bottom of the post with the Index.
 
+---
+
 # What you need
 
-You will need a Zoho Mail Business Account for your domain, you can set up one for free here --> [Zoho Mail](https://www.zoho.com/mail/)
+You will need a Zoho Mail Business Account for your domain, you can set up one for free here → [Zoho Mail](https://www.zoho.com/mail/)
 
 # Install Nodemailer
 
@@ -57,26 +65,29 @@ But first we need to configure an App Password, to be used by our API.
 <AsideImage
   src="/assets/images/notes/note_one-snip_one.png"
   alt="Zoho Mail My Account Button"
-  caption="Zoho Mail Profile UI"
 />
 
-- In your Zoho Mail Account, Click or Tap in your avatar to access the Menu and then Click or Tap in 'My Account' to access your account options & settings.
+<ul data-aside-image>
+  <li>In your Zoho Mail Account, Click or Tap in your avatar to access the Menu and then Click or Tap in 'My Account' to access your account options & settings.</li>
+</ul>
 
 <AsideImage
   src="/assets/images/notes/note_one-snip_two.png"
   alt="Zoho Mail My Account UI"
-  caption="Zoho Mail My Account UI"
 />
 
-- Then in the Menu or Left Panel Click or Tap in Security --> App Passwords
+<ul data-aside-image>
+  <li>Then in the Menu or Left Panel Click or Tap in Security → App Passwords.</li>
+</ul>
 
 <AsideImage
   src="/assets/images/notes/note_one-snip_three.png"
   alt="Zoho Mail My Account App Password"
-  caption="App Password Modal"
 />
 
-- Finally Click on Generate New Password, type in your desired app name and copy your generated key, we'll use it right away.
+<ul data-aside-image>
+  <li>Finally Click on Generate New Password, type in your desired app name and copy your generated key, we'll use it right away.</li>
+</ul>
 
 ## Configure .env variables
 
@@ -115,6 +126,8 @@ Then you can add the corresponding variables to the file, to make them accessibl
 NEXT_PUBLIC_ZOHO_USER=javier.flores@zjavier.com
 NEXT_PUBLIC_ZOHO_PASSWORD=CcsiSdxPmZUb
 ```
+
+---
 
 # Creating an API endpoint
 
@@ -806,6 +819,6 @@ With this setup you can ensure tht you receive messages from anyone using your f
 
 Whether you're a freelancer, a small business owner, or just someone looking to setup a personal website, this solution is definitely worth considering.
 
-If you like this type of content let me know in my --> [X/Twitter Account](https://twitter.com/zjavier94)
+If you like this type of content let me know in my → [X/Twitter Account](https://twitter.com/zjavier94)
 
 # Full code

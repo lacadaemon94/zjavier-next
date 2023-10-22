@@ -8,10 +8,9 @@ import styles from '../../styles/sideimage.module.css'
 type Props = {
   src: string;
   alt: string;
-  caption: string;
 };
 
-export const BlurImage = ({ caption, ...imageProps }: Props) => {
+export const BlurImage = ({ ...imageProps }: Props) => {
   return (
     <div className={styles.blurimage}>
       <Image
@@ -20,9 +19,9 @@ export const BlurImage = ({ caption, ...imageProps }: Props) => {
         alt={imageProps.alt}
         placeholder="blur"
         blurDataURL={`data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==`}
-        fill={true}
+        width={280}
+        height={150}
       />
-      <caption>{caption}</caption>
     </div>
   );
 };

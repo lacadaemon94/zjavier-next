@@ -10,7 +10,6 @@ import { BlurImage } from "./BlurImage";
 type Props = {
   src: string;
   alt: string;
-  caption: string;
 };
 
 export const AsideImage = (props: Props) => {
@@ -19,7 +18,6 @@ export const AsideImage = (props: Props) => {
       <BlurImage
         src={props.src}
         alt={props.alt}
-        caption={props.caption}
       />
     </div>
   );

@@ -1,0 +1,219 @@
+/* Post General Styles */
+.post {
+    display: grid;
+    grid-template-columns: 17.75rem 40.5rem 17.75rem;
+    position: relative;
+    column-gap: 2rem;
+    row-gap: 1rem;
+
+    margin: auto;
+    padding-top: 2rem;
+}
+.post > * {
+    grid-column: 2;
+}
+/* Post Index */
+.post .index {
+    display: grid;
+    position: sticky;
+    grid-column: 3;
+    grid-row: 2;
+    top: 1.5rem;
+    height: 0px;
+
+    opacity: 0.3;
+
+    transition: opacity 0.3s ease-out;
+}
+.post .index:hover {
+    opacity: 1;
+}
+.post .index .wrapper {
+    display: grid;
+    position: absolute;
+    gap: 12px;
+}
+.index .wrapper .title {
+    font-size: 1em;
+    color: var(--neutral-500);
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.index .wrapper .headings {
+    display: grid;
+    gap: 12px;
+    font-weight: 400;
+    font-size: 0.875em;
+    list-style: none;
+}
+.wrapper .headings .subheadings {
+    gap: 8px;
+    color: var(--neutral-400);
+    font-weight: 200;
+    font-size: 0.75em;
+    list-style: none;
+    text-indent: 1.5em;
+    margin-top: 12px;
+}
+.index .wrapper .headings a {
+    text-decoration: none;
+    appearance: none;
+    color: var(--neutral-200);
+}
+.index .wrapper .headings a:hover {
+    color: var(--neutral-50);
+    text-decoration: underline;
+}
+/* Headings */
+.post .header {
+    display: grid;
+
+    width: 60.25rem;
+
+    grid-column-start: 2;
+    grid-column-end: 3;
+
+    gap: 1rem;
+    padding-bottom: 2rem;
+}
+.header h1 {
+    font-size: 3em;
+    font-style: normal;
+    font-weight: 600;
+    color: var(--neutral-100);
+    text-align: left;
+    text-transform: capitalize;
+    text-wrap: wrap;
+}
+.header .header_details {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 12px;
+}
+.header_details p {
+    font-size: 1.25em;
+    font-weight: 300;
+    color: var(--neutral-100);
+    text-align: left;
+}
+.post h1 a, .post h2 a {
+    display: flex;
+    position: relative;
+    color: var(--neutral-50);
+    font-size: 1.5em;
+    text-decoration: none;
+    appearance: none;
+}
+.post h2 a {
+    font-size: 1em;
+}
+.post h1 a::before, .post h2 a::before {
+    content: "#";
+    color: var(--neutral-400);
+    position: absolute;
+    left: -1em; /* Adjust as needed to position the # to the left of the a element */
+    top: 50%;
+    transform: translateY(-50%); /* Center vertically */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.2s; /* Smooth transition for hover effect */
+}
+.post h1 a:hover::before, .post h2 a:hover::before {
+    opacity: 1; /* Show the # sign on hover */
+}
+/* Ordered Lists */
+.post ul {
+    display: grid;
+    gap: 12px;
+}
+.post p, .post li {
+    font-size: 1.25em;
+}
+.post ul[data-aside-image="true"] {
+    display: grid;
+    align-items: center;
+    padding: 12px;
+    background-color: var(--neutral-950);
+    border-radius: 1rem;
+    text-align: center;
+    color: var(--neutral-alt);
+    list-style: none;
+
+    gap: unset;
+}
+/* Dividers */
+.post hr {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid var(--neutral-950);
+}
+/* Code Blocs */
+.post div[data-rehype-pretty-code-fragment] {
+    display: grid;
+    gap: 8px;
+}
+.post div[data-rehype-pretty-code-title] {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: fit-content;
+    height: fit-content;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--neutral-100);
+    color: var(--neutral-absolute);
+    font-size: 0.875em;
+    font-weight: 500;
+    border-radius: 10px;
+    padding: 4px 12px;
+}
+.post pre {
+    overflow: scroll;
+    padding: 1rem 0;
+    border-radius: 1rem;
+
+    background-color: var(--neutral-900) !important;
+
+    border: var(--code-block-border-color);
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+    -ms-overflow-style: none;
+}
+.post pre::-webkit-scrollbar {
+    display: none;
+}
+.post pre code {
+    display: grid;
+}
+.post pre code > span {
+    padding: 3px 1rem;
+}
+.post pre code span[data-highlighted-line] {
+    border-left: 2px solid var(--color-primary);
+    background-color: var(--highlight-line-bg-color);
+}
+.post pre code[data-line-numbers] {
+    counter-reset: line; /* Initialize the line counter */
+    position: relative;
+    display: grid;
+}
+.post pre code[data-line-numbers] > span {
+    counter-increment: line; /* Increment the line counter for each line */
+    position: relative; /* Make it the stacking context for the ::before pseudo-element */  
+}
+.post pre code[data-line-numbers] > span::before {
+    content: counter(line); /* Display the current line number */
+    display: inline-block;
+    width: 1em; /* You might need to adjust this depending on the font size/expected max line number */
+    text-align: right;
+    margin-right: 1em; /* Spacing between line numbers and code content */
+    color: var(--neutral-500); /* Lighter color for line numbers. Adjust as needed */  
+}
+.post pre code[data-line-numbers] > span[data-highlighted-line]::before {
+    color: var(--neutral-50);
+}
+.post {
+    color: var(--neutral-50);
+}

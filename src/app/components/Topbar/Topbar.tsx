@@ -1,5 +1,6 @@
 "use client";
 import React, { useContext } from "react";
+import { useSelectedLayoutSegments } from "next/navigation";
 import { SessionContext } from "@/app/utils/SessionProvider";
 import { motion } from "framer-motion";
 
@@ -15,18 +16,22 @@ import InstagramIcon from "@/assets/icons/InstagramIcon";
 import FacebookIcon from "@/assets/icons/FacebookIcon";
 import DribbbleIcon from "@/assets/icons/DribbbleIcon";
 import BehanceIcon from "@/assets/icons/BehanceIcon";
+import LeftArrowIcon from "@/assets/icons/LeftArrowIcon";
 
 // Elements
 import Button from "@/app/elements/buttons/Button";
 import ExternalLink from "@/app/elements/buttons/ExternalLink";
+import NavButton from "@/app/elements/buttons/NavButton";
 
 type Props = {};
 
 export const Topbar = (props: Props) => {
   const { toggleTheme } = useContext(SessionContext);
+  const segment = useSelectedLayoutSegments();
+  const isNote = segment.length > 1;
 
   return (
-    <div className={styles.topbar}>
+    <div className={styles.topbar} data-isnote={isNote ? "true" : "false"}>
       <Button
         type="button"
         className={styles.logo}
@@ -47,6 +52,9 @@ export const Topbar = (props: Props) => {
           <LogoIcon />
         </motion.div>
       </Button>
+      <motion.div whileHover={{ scale: 1.1, transition: { duration: 0.2 } }} whileTap={{ scale: 0.9 }} style={{ display: isNote ? 'flex' : 'none' }}>
+        <NavButton href="/notes" ariaLabel="Back to Notes" icon={<LeftArrowIcon />} className={styles.backnotes}/>
+      </motion.div>
       <div className={styles.socialsbar}>
         <ExternalLink
           linkUrl="https://twitter.com/zjavier94"
