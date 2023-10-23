@@ -52,7 +52,11 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
   }, [isLightTheme]);
 
   if (isLoading) {
-    return <SplashScreen />;
+    return (
+      <SessionContext.Provider value={{ isLightTheme, toggleTheme }}>
+        <SplashScreen />;
+      </SessionContext.Provider>
+    )
   }
 
   return (

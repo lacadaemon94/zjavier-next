@@ -29,6 +29,7 @@
 }
 
 :root[data-theme="light"] {
+  --bg-loading: #d6eeff;
   --background-radial-one: rgb(255, 255, 255, 1);
   --background-radial-two: rgba(246, 251, 252, 1);
   --color-primary: #1b53fa;
@@ -53,11 +54,18 @@
   --button-hover: #b5dfff;
   --logo-bg: #0b205b;
   --scrollbar-color: #1b53fa transparent;
-  --code-block-border-color: 1px solid rgba(250, 84, 28, 0.10);
-  --highlight-line-bg-color: rgba(250, 84, 28, 0.08);
+  --code-block-border-color: 1px solid rgba(27, 83, 250, 0.10);
+  --highlight-line-bg-color: rgba(27, 83, 250, 0.15);
+}
+
+:root[data-theme="dark"] pre[data-theme='light'],
+:root[data-theme="dark"] code[data-theme='light'],
+:root[data-theme="dark"] div[data-rehype-pretty-code-title][data-theme="light"] {
+    display: none;
 }
 
 :root[data-theme="dark"] {
+  --bg-loading: #100e0c;
   --background-radial-one: rgb(0, 0, 0, 1);
   --background-radial-two: rgba(12, 12, 12, 1);
   --color-primary: #fa541c;
@@ -84,6 +92,12 @@
   --scrollbar-color: #fa541c transparent;
   --code-block-border-color: 1px solid rgba(250, 84, 28, 0.10);
   --highlight-line-bg-color: rgba(250, 84, 28, 0.08);
+}
+
+:root[data-theme="light"] pre[data-theme='dark'],
+:root[data-theme="light"] code[data-theme='dark'],
+:root[data-theme="light"] div[data-rehype-pretty-code-title][data-theme="dark"] {
+    display: none;
 }
 
 * {
@@ -136,6 +150,7 @@ body {
 }
 
 button {
+  font-family: var(--font-outfit);
   box-shadow: none;
   outline: none;
   border: none;

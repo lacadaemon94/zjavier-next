@@ -1,24 +1,28 @@
-import React from 'react'
-
-import styles from '../../styles/posts.module.css'
+// Core
+import React from "react";
+// Helpers
+import scrollToTop from "@/app/utils/scrollTopTop";
+// Styles
+import styles from "../../styles/posts.module.css";
+// Ui elements
+import Button from "@/app/elements/buttons/Button";
+import { LikeButton } from "./LikeButton";
 
 type Heading = {
   heading: number;
   text: string;
   slug: string;
-}
+};
 
 type Props = {
-    headings: Heading[];
-}
+  headings: Heading[];
+};
 
-export const PostIndex = ({headings}: Props) => {
+export const PostIndex = ({ headings }: Props) => {
   return (
     <div className={styles.index}>
       <div className={styles.wrapper}>
-        <div className={styles.title}>
-          INDEX
-        </div>
+        <div className={styles.title}>INDEX</div>
         <ul className={styles.headings}>
           {headings.map((heading, index) => {
             if (heading.heading === 1) {
@@ -53,7 +57,18 @@ export const PostIndex = ({headings}: Props) => {
             return null;
           })}
         </ul>
+        <hr />
+        <div className={styles.actions}>
+          <div className={styles.reactions}>
+            <LikeButton />
+          </div>
+          <Button type="button" className={styles.totop} onClick={scrollToTop}>
+            <p>
+              back to top
+            </p>
+          </Button>
+        </div>
       </div>
     </div>
   );
-}
+};

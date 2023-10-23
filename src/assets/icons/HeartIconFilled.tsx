@@ -4,7 +4,7 @@ interface SVGRProps {
   title?: string;
   titleId?: string;
 }
-const HeartIcon = ({
+const HeartIconFilled = ({
   title,
   titleId,
   ...props
@@ -27,4 +27,4 @@ const HeartIcon = ({
     />
   </svg>
 )
-export default HeartIcon
+export default HeartIconFilled

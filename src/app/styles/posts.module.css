@@ -9,9 +9,11 @@
     margin: auto;
     padding-top: 2rem;
 }
-.post > * {
+
+.post>* {
     grid-column: 2;
 }
+
 /* Post Index */
 .post .index {
     display: grid;
@@ -25,20 +27,24 @@
 
     transition: opacity 0.3s ease-out;
 }
+
 .post .index:hover {
     opacity: 1;
 }
+
 .post .index .wrapper {
     display: grid;
     position: absolute;
     gap: 12px;
 }
+
 .index .wrapper .title {
     font-size: 1em;
     color: var(--neutral-500);
     font-weight: 500;
     text-transform: uppercase;
 }
+
 .index .wrapper .headings {
     display: grid;
     gap: 12px;
@@ -46,6 +52,7 @@
     font-size: 0.875em;
     list-style: none;
 }
+
 .wrapper .headings .subheadings {
     gap: 8px;
     color: var(--neutral-400);
@@ -55,14 +62,46 @@
     text-indent: 1.5em;
     margin-top: 12px;
 }
+
 .index .wrapper .headings a {
     text-decoration: none;
     appearance: none;
     color: var(--neutral-200);
 }
+
 .index .wrapper .headings a:hover {
     color: var(--neutral-50);
     text-decoration: underline;
+}
+
+.index .wrapper .actions {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.wrapper .actions .reactions {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    width: fit-content;
+    height: fit-content;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.wrapper .actions .totop p {
+    font-size: 1em;
+    font-weight: 400;
+    color: var(--neutral-300);
+    text-transform: uppercase;
+}
+
+.wrapper .actions .totop:hover p {
+    color: var(--neutral-50);
 }
 /* Headings */
 .post .header {
@@ -76,6 +115,7 @@
     gap: 1rem;
     padding-bottom: 2rem;
 }
+
 .header h1 {
     font-size: 3em;
     font-style: normal;
@@ -85,19 +125,23 @@
     text-transform: capitalize;
     text-wrap: wrap;
 }
+
 .header .header_details {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     gap: 12px;
 }
+
 .header_details p {
     font-size: 1.25em;
     font-weight: 300;
     color: var(--neutral-100);
     text-align: left;
 }
-.post h1 a, .post h2 a {
+
+.post h1 a,
+.post h2 a {
     display: flex;
     position: relative;
     color: var(--neutral-50);
@@ -105,30 +149,44 @@
     text-decoration: none;
     appearance: none;
 }
+
 .post h2 a {
     font-size: 1em;
 }
-.post h1 a::before, .post h2 a::before {
+
+.post h1 a::before,
+.post h2 a::before {
     content: "#";
     color: var(--neutral-400);
     position: absolute;
-    left: -1em; /* Adjust as needed to position the # to the left of the a element */
+    left: -1em;
+    /* Adjust as needed to position the # to the left of the a element */
     top: 50%;
-    transform: translateY(-50%); /* Center vertically */
-    opacity: 0; /* Initially hidden */
-    transition: opacity 0.2s; /* Smooth transition for hover effect */
+    transform: translateY(-50%);
+    /* Center vertically */
+    opacity: 0;
+    /* Initially hidden */
+    transition: opacity 0.2s;
+    /* Smooth transition for hover effect */
 }
-.post h1 a:hover::before, .post h2 a:hover::before {
-    opacity: 1; /* Show the # sign on hover */
+
+.post h1 a:hover::before,
+.post h2 a:hover::before {
+    opacity: 1;
+    /* Show the # sign on hover */
 }
+
 /* Ordered Lists */
 .post ul {
     display: grid;
     gap: 12px;
 }
-.post p, .post li {
+
+.post p,
+.post li {
     font-size: 1.25em;
 }
+
 .post ul[data-aside-image="true"] {
     display: grid;
     align-items: center;
@@ -141,17 +199,20 @@
 
     gap: unset;
 }
+
 /* Dividers */
 .post hr {
     margin-top: 1rem;
     margin-bottom: 0.5rem;
     border: 1px solid var(--neutral-950);
 }
+
 /* Code Blocs */
 .post div[data-rehype-pretty-code-fragment] {
     display: grid;
     gap: 8px;
 }
+
 .post div[data-rehype-pretty-code-title] {
     display: flex;
     position: relative;
@@ -168,6 +229,7 @@
     border-radius: 10px;
     padding: 4px 12px;
 }
+
 .post pre {
     overflow: scroll;
     padding: 1rem 0;
@@ -181,39 +243,55 @@
     scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
     -ms-overflow-style: none;
 }
+
 .post pre::-webkit-scrollbar {
     display: none;
 }
+
 .post pre code {
     display: grid;
 }
-.post pre code > span {
+
+.post pre code>span {
     padding: 3px 1rem;
 }
+
 .post pre code span[data-highlighted-line] {
     border-left: 2px solid var(--color-primary);
     background-color: var(--highlight-line-bg-color);
 }
+
 .post pre code[data-line-numbers] {
-    counter-reset: line; /* Initialize the line counter */
+    counter-reset: line;
+    /* Initialize the line counter */
     position: relative;
     display: grid;
 }
-.post pre code[data-line-numbers] > span {
-    counter-increment: line; /* Increment the line counter for each line */
-    position: relative; /* Make it the stacking context for the ::before pseudo-element */  
+
+.post pre code[data-line-numbers]>span {
+    counter-increment: line;
+    /* Increment the line counter for each line */
+    position: relative;
+    /* Make it the stacking context for the ::before pseudo-element */
 }
-.post pre code[data-line-numbers] > span::before {
-    content: counter(line); /* Display the current line number */
+
+.post pre code[data-line-numbers]>span::before {
+    content: counter(line);
+    /* Display the current line number */
     display: inline-block;
-    width: 1em; /* You might need to adjust this depending on the font size/expected max line number */
+    width: 1em;
+    /* You might need to adjust this depending on the font size/expected max line number */
     text-align: right;
-    margin-right: 1em; /* Spacing between line numbers and code content */
-    color: var(--neutral-500); /* Lighter color for line numbers. Adjust as needed */  
+    margin-right: 1em;
+    /* Spacing between line numbers and code content */
+    color: var(--neutral-500);
+    /* Lighter color for line numbers. Adjust as needed */
 }
-.post pre code[data-line-numbers] > span[data-highlighted-line]::before {
+
+.post pre code[data-line-numbers]>span[data-highlighted-line]::before {
     color: var(--neutral-50);
 }
+
 .post {
     color: var(--neutral-50);
 }

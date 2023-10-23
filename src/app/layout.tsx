@@ -14,6 +14,7 @@ import { Leftbar } from "./components/LeftBar/LeftBar";
 const outfit = Outfit({
   subsets: ["latin-ext"],
   display: "swap",
+  variable: '--font-outfit'
 });
 
 export const metadata = {
