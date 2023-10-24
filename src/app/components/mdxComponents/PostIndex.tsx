@@ -16,9 +16,10 @@ type Heading = {
 
 type Props = {
   headings: Heading[];
+  flatPath: string;
 };
 
-export const PostIndex = ({ headings }: Props) => {
+export const PostIndex = ({ headings, flatPath }: Props) => {
   return (
     <div className={styles.index}>
       <div className={styles.wrapper}>
@@ -60,12 +61,10 @@ export const PostIndex = ({ headings }: Props) => {
         <hr />
         <div className={styles.actions}>
           <div className={styles.reactions}>
-            <LikeButton />
+            <LikeButton flatPath={flatPath} />
           </div>
           <Button type="button" className={styles.totop} onClick={scrollToTop}>
-            <p>
-              back to top
-            </p>
+            <p>back to top</p>
           </Button>
         </div>
       </div>

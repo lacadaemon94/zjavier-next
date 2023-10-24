@@ -59,7 +59,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           <p>{format(new Date(post.publishedAt), "MMMM do, yyyy")}</p>
         </div>
       </header>
-      <PostIndex headings={post.headings} />
+      <PostIndex headings={post.headings} flatPath={post._raw.flattenedPath} />
       <MDXContent components={mdxComponents} />
     </article>
   );
