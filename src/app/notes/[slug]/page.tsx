@@ -9,6 +9,10 @@ import { format } from "date-fns";
 // MDX Components
 import { BlurImage } from "@/app/components/mdxComponents/BlurImage";
 import { AsideImage } from "@/app/components/mdxComponents/AsideImage";
+import {
+  FullCode,
+  FullCodeProps,
+} from "@/app/components/mdxComponents/FullCode";
 
 // Styles
 import styles from "../../styles/posts.module.css";
@@ -23,6 +27,7 @@ export async function generateStaticParams() {
 const mdxComponents = {
   BlurImage,
   AsideImage,
+  FullCode: (props: FullCodeProps) => <FullCode {...props} />,
 };
 
 type Props = {

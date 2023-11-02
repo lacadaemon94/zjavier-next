@@ -4,10 +4,9 @@ export type FormState = {
     lname: string;
     email: string;
     phone: string;
-    service: string;
     message: string;
   };
-  status: "enviar" | "enviando..." | "enviado";
+  status: "send" | "sending" | "sent";
   messageLength: number;
 };
 
@@ -44,9 +43,8 @@ export const initialState: FormState = {
     lname: "",
     email: "",
     phone: "",
-    service: "",
     message: "",
   },
-  status: "enviar",
+  status: "send",
   messageLength: 0,
 };

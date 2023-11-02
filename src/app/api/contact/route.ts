@@ -7,14 +7,13 @@ type ContactRequestBody = {
   lname: string;
   email: string;
   phone: string;
-  service: string;
   message: string;
 };
 
 const { NEXT_PUBLIC_ZOHO_USER, NEXT_PUBLIC_ZOHO_RECIPIENT_EMAIL } = process.env;
 
 export async function POST({ json }: NextRequest) {
-  const { fname, lname, email, phone, service, message }: ContactRequestBody =
+  const { fname, lname, email, phone, message }: ContactRequestBody =
     await json();
 
   const mailOptions = {
@@ -26,7 +25,6 @@ export async function POST({ json }: NextRequest) {
       Last Name: ${lname}
       Email: ${email}
       Phone: ${phone}
-      Service: ${service}
       Message: ${message}
     `,
   };

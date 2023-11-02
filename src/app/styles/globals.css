@@ -174,3 +174,12 @@ a {
 
   transition: background-color 0.3s ease-out;
 }
+
+input, textarea {
+  border: none;
+  appearance: none;
+  box-shadow: none;
+  text-decoration: none;
+  background: none;
+  outline: none;
+}

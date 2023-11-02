@@ -1,25 +1,41 @@
 import { toast } from "react-toastify";
 import { FormState, FormAction } from "./formReducer";
-import { isValid } from './formValidation';
+import { isValid } from "./formValidation";
 
 type HandlersReturn = {
-  handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>, dispatch: React.Dispatch<FormAction>, state: FormState) => Promise<void>;
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  handleSubmit: (
+    e: React.FormEvent<HTMLFormElement>,
+    dispatch: React.Dispatch<FormAction>,
+    state: FormState
+  ) => Promise<void>;
 };
 
-export const useHandlers = (initialState: FormState): HandlersReturn => {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
+export const useHandlers = (
+  initialState: FormState,
+  dispatch: React.Dispatch<FormAction>
+): HandlersReturn => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const target = e.target as HTMLInputElement | HTMLTextAreaElement;
+    const { name, value } = target;
     // ... any other logic specific to handleChange
-    return { type: "SET_VALUE", name, value };
+    dispatch({ type: "SET_VALUE", name, value });
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>, dispatch: React.Dispatch<FormAction>, state: FormState) => {
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>,
+    dispatch: React.Dispatch<FormAction>,
+    state: FormState
+  ) => {
     e.preventDefault();
 
     if (!isValid(state.values)) return;
 
-    dispatch({ type: "SET_STATUS", status: "enviando..." });
+    dispatch({ type: "SET_STATUS", status: "sending" });
 
     try {
       const response = await fetch("/api/contact", {
@@ -31,12 +47,12 @@ export const useHandlers = (initialState: FormState): HandlersReturn => {
       });
 
       if (response.ok) {
-        toast.success("Mensaje Enviado!");
-        dispatch({ type: "SET_STATUS", status: "enviado" });
+        toast.success("Message Sent!");
+        dispatch({ type: "SET_STATUS", status: "sent" });
       } else {
         const data = await response.json();
-        toast.error("Error al enviar", data);
-        dispatch({ type: "SET_STATUS", status: "enviar" });
+        toast.error("Error While Sending :(", data);
+        dispatch({ type: "SET_STATUS", status: "send" });
       }
     } catch (error) {
       console.error("Error while sending form", error);

@@ -14,6 +14,14 @@
     grid-column: 2;
 }
 
+.post code {
+    padding: 4px;
+    background-color: var(--neutral-950);
+    border-radius: 6px 8px;
+}
+.post code[data-language=".token"] span {
+    color: var(--color-primary) !important;
+}
 /* Post Index */
 .post .index {
     display: grid;
@@ -250,6 +258,9 @@
 
 .post pre code {
     display: grid;
+    background: none;
+    padding: 0;
+    border-radius: unset;
 }
 
 .post pre code>span {

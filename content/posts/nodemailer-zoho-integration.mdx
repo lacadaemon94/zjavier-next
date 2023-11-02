@@ -1,7 +1,8 @@
 ---
 title: "Cost-free Contact Form Solutions: Nodemailer & Zoho Mail Integration."
+excerpt: "In today's digital age, having a contact form on your website is essential. It provides a straightforward way for visitors to get in touch with you.  However, setting up a contact form can sometimes involve costs, especially when integrating with email services. In this article, we'll explore a cost-free solution using Nodemailer and Zoho Mail to handle contact form submissions in a Next.js application. Nodemailer and Zoho Mail Integration offers a seamless solution to the challenges of cost-effective contact form implementations by transforming the traditional email sending process into a streamlined, secure, and cost-free system. I have been using it from day one and I really love the simplicity of the implementation, something as simple as setting up an API route and Contact Form component to ping it."
 description: "In today's digital age, having a contact form on your website is essential."
-publishedAt: "2023-08-08"
+publishedAt: "2023-10-25"
 status: "published"
 series:
   order: 1
@@ -10,6 +11,7 @@ tags:
   - Next.js
   - Nodemailer
   - Zoho Mail
+project: "none"
 ---
 
 In today's digital age, having a contact form on your website is essential. It provides a straightforward way for visitors to get in touch with you.
@@ -68,7 +70,11 @@ But first we need to configure an App Password, to be used by our API.
 />
 
 <ul data-aside-image>
-  <li>In your Zoho Mail Account, Click or Tap in your avatar to access the Menu and then Click or Tap in 'My Account' to access your account options & settings.</li>
+  <li>
+    In your Zoho Mail Account, Click or Tap in your avatar to access the Menu
+    and then Click or Tap in 'My Account' to access your account options &
+    settings.
+  </li>
 </ul>
 
 <AsideImage
@@ -77,7 +83,9 @@ But first we need to configure an App Password, to be used by our API.
 />
 
 <ul data-aside-image>
-  <li>Then in the Menu or Left Panel Click or Tap in Security → App Passwords.</li>
+  <li>
+    Then in the Menu or Left Panel Click or Tap in Security → App Passwords.
+  </li>
 </ul>
 
 <AsideImage
@@ -86,7 +94,10 @@ But first we need to configure an App Password, to be used by our API.
 />
 
 <ul data-aside-image>
-  <li>Finally Click on Generate New Password, type in your desired app name and copy your generated key, we'll use it right away.</li>
+  <li>
+    Finally Click on Generate New Password, type in your desired app name and
+    copy your generated key, we'll use it right away.
+  </li>
 </ul>
 
 ## Configure .env variables
@@ -143,7 +154,7 @@ const { NEXT_PUBLIC_ZOHO_USER, NEXT_PUBLIC_ZOHO_PASSWORD } = process.env;
 
 Then let's proceed to configure the nodemailer transporter.
 
-```ts showLineNumbers title="/src/app/utils/mailConfig.ts" {7-8}
+```ts showLineNumbers title="/src/app/utils/mailConfig.ts" {6-7}
 import nodemailer from "nodemailer";
 
 const { NEXT_PUBLIC_ZOHO_USER, NEXT_PUBLIC_ZOHO_PASSWORD } = process.env;
@@ -210,7 +221,7 @@ This line extracts data from the request body. It uses the json method from the 
 
 ## Email Options Configuration
 
-```ts showLineNumbers {1-2}
+```ts showLineNumbers {2-3}
 const mailOptions = {
   from: NEXT_PUBLIC_ZOHO_USER,
   to: NEXT_PUBLIC_ZOHO_RECIPIENT_EMAIL,
@@ -255,7 +266,7 @@ These lines handle the API response. If the email is sent successfully, a `JSON`
 
 The complete API Contact Route:
 
-```ts showLineNumbers title="/src/app/api/contact/route.ts" {4-11, 19, 21-33, 35-41}
+```ts showLineNumbers title="/src/app/api/contact/route.ts" {4-10, 35-44}
 import { NextRequest, NextResponse } from "next/server";
 import { transporter } from "./mailConfig";
 
@@ -355,6 +366,8 @@ With the API in place, let's move on to the frontend. First let's break down wha
 
 - We have added `formHandlers{:.fn}` , `formReducer{:.fn}` and `formValidation{:.fn}`
 
+---
+
 ## The Form Component
 
 - We need `useReducer` hook to manage states.
@@ -382,7 +395,7 @@ Then we need to create our component, this will include:
 
 We will end up with something like this:
 
-```tsx showLineNumbers title="/src/app/ui/Form.tsx" {14-15, 29}
+```tsx showLineNumbers title="/src/app/ui/Form.tsx" {14, 31}
 import React, { useReducer } from "react";
 import { ToastContainer } from "react-toastify";
 import { motion } from "framer-motion";
@@ -768,11 +781,11 @@ Ok, we have the basics, now we need to use our API:
 
 ```tsx showLineNumbers /"/api/contact"/ {2-6}
 const response = await fetch("/api/contact", {
-   method: "POST",
-   headers: {
-     "Content-Type": "application/json",
-   },
-   body: JSON.stringify(state.values),
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(state.values),
 });
 ```
 
@@ -782,12 +795,12 @@ We then need to handle any responses from our API:
 
 ```tsx showLineNumbers
 if (response.ok) {
-   toast.success("Mensaje Enviado!");
-   dispatch({ type: "SET_STATUS", status: "sent" });
+  toast.success("Mensaje Enviado!");
+  dispatch({ type: "SET_STATUS", status: "sent" });
 } else {
-   const data = await response.json();
-   toast.error("Error al enviar", data);
-   dispatch({ type: "SET_STATUS", status: "send" });
+  const data = await response.json();
+  toast.error("Error al enviar", data);
+  dispatch({ type: "SET_STATUS", status: "send" });
 }
 ```
 
@@ -822,3 +835,466 @@ Whether you're a freelancer, a small business owner, or just someone looking to 
 If you like this type of content let me know in my → [X/Twitter Account](https://twitter.com/zjavier94)
 
 # Full code
+
+<FullCode>
+```tsx showLineNumbers title="/src/app/layout.tsx"
+import "./styles/globals.css";
+import { Space_Grotesk } from "next/font/google";
+
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin-ext"] });
+
+export const metadata = {
+  title: "Create Next App",
+  description: "Generated by create next app",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body className={spaceGrotesk.className}>{children}</body>
+    </html>
+  );
+}
+```
+
+```tsx showLineNumbers title="/src/app/page.tsx"
+// @/app/page.tsx ---> Home
+// UI
+import Form from "./ui/Form";
+
+// Styles
+import styles from "./styles/contact.module.css";
+
+export default function Page() {
+  return (
+    <main className={styles.contact}>
+      <Form />
+    </main>
+  );
+}
+```
+
+```tsx showLineNumbers title="src/app/ui/Form.tsx"
+"use client";
+import React, { useReducer } from "react";
+import { ToastContainer } from "react-toastify";
+import { motion } from "framer-motion";
+
+// Custom Hooks
+import { formReducer, initialState } from "@/app/utils/formReducer";
+import { useHandlers } from "@/app/utils/formHandlers";
+
+// UI
+import Button from "@/app/ui/Button";
+import SendIcon from "@/app/assets/icons/SendIcon";
+import LoadingIcon from "@/app/assets/icons/LoadingIcon";
+import DoneIcon from "@/app/assets/icons/DoneIcon";
+
+// Styles
+import "react-toastify/dist/ReactToastify.css";
+import styles from "../styles/contact.module.css";
+
+type Props = {
+  // In case you need some other action in the parent
+  onSubmitSuccess?: () => void;
+};
+
+const Form: React.FC<Props> = ({ onSubmitSuccess }) => {
+  const [state, dispatch] = useReducer(formReducer, initialState);
+  const { handleChange, handleSubmit } = useHandlers(initialState, dispatch);
+
+  return (
+    <motion.div
+      className={styles.formcontainer}
+      initial={{
+        opacity: 0,
+        x: 40,
+      }}
+      whileInView={{
+        opacity: 1,
+        x: 0,
+      }}
+      viewport={{ once: true }}
+      transition={{
+        type: "spring",
+        duration: 1.5,
+      }}
+    >
+      <form
+        className={styles.form}
+        onSubmit={(e) => handleSubmit(e, dispatch, state)}
+        data-isstatus={state.status}
+      >
+        <div className={styles.row}>
+          <div className={styles.inputwrapper}>
+            <input
+              required={true}
+              type="text"
+              name="fname"
+              autoComplete="no-autocomplete-fname"
+              className={styles.formfield}
+              onChange={handleChange}
+            />
+            <label className={styles.inputlabel}>First Name</label>
+          </div>
+          <div className={styles.inputwrapper}>
+            <input
+              required={true}
+              type="text"
+              name="lname"
+              autoComplete="no-autocomplete-lname"
+              className={styles.formfield}
+              onChange={handleChange}
+            />
+            <label className={styles.inputlabel}>Last Name</label>
+          </div>
+        </div>
+        <div className={styles.row}>
+          <div className={styles.inputwrapper}>
+            <input
+              required={true}
+              type="text"
+              name="email"
+              autoComplete="no-autocomplete-email"
+              className={styles.formfield}
+              onChange={handleChange}
+              style={{ textTransform: "none" }}
+            />
+            <label className={styles.inputlabel}>Email</label>
+          </div>
+          <div className={styles.inputwrapper}>
+            <input
+              required={true}
+              type="text"
+              name="phone"
+              autoComplete="no-autocomplete-phone"
+              className={styles.formfield}
+              onChange={handleChange}
+              style={{ textTransform: "none" }}
+            />
+            <label className={styles.inputlabel}>Phone</label>
+          </div>
+        </div>
+        <fieldset
+          name="service"
+          className={styles.fieldset}
+          onChange={handleChange}
+        >
+          <legend>What type of servicedo you need?</legend>
+          <input
+            type="radio"
+            id="web-design"
+            name="service"
+            value={"web design"}
+          />
+          <label htmlFor="web-design">
+            <button type="button">
+              <div></div>
+            </button>
+            <p>Web Design</p>
+          </label>
+          <input type="radio" id="app-dev" name="service" value={"app dev"} />
+          <label htmlFor="app-dev">
+            <button type="button">
+              <div></div>
+            </button>
+            <p>App Development</p>
+          </label>
+          <input
+            type="radio"
+            id="d-marketing"
+            name="service"
+            value={"digital marketing"}
+          />
+          <label htmlFor="d-marketing">
+            <button type="button">
+              <div></div>
+            </button>
+            <p>Digital Marketing</p>
+          </label>
+          <input type="radio" id="other" name="service" value={"other"} />
+          <label htmlFor="other">
+            <button type="button">
+              <div></div>
+            </button>
+            <p>Others</p>
+          </label>
+        </fieldset>
+        <div className={styles.messagewrapper}>
+          <textarea
+            name="message"
+            id="message"
+            minLength={20}
+            maxLength={250}
+            placeholder="Write your message"
+            autoComplete="off"
+            onChange={handleChange}
+          ></textarea>
+          <div
+            className={styles.textareacounter}
+            style={{
+              color:
+                state.values.message.length >= 250
+                  ? "#cc3300"
+                  : "var(--color-neutral-light-2)",
+            }}
+          >
+            {state.values.message.length}/250
+          </div>
+        </div>
+        <Button
+          type="submit"
+          className={styles.submit}
+          disabled={state.status === "sent" ? true : false}
+        >
+          <p>{`${state.status}`}</p>
+          <div>
+            {state.status === "send" && <SendIcon />}
+            {state.status === "sending..." && <LoadingIcon />}
+            {state.status === "sent" && <DoneIcon />}
+          </div>
+        </Button>
+      </form>
+      <ToastContainer />
+    </motion.div>
+  );
+};
+
+export default Form;
+```
+
+```ts showLineNumbers title="src/app/utils/formHandlers.ts"
+import { toast } from "react-toastify";
+import { FormState, FormAction } from "./formReducer";
+import { isValid } from "./formValidation";
+
+type HandlersReturn = {
+  handleChange: (
+    e:
+      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      | React.FormEvent<HTMLFieldSetElement>
+  ) => void;
+  handleSubmit: (
+    e: React.FormEvent<HTMLFormElement>,
+    dispatch: React.Dispatch<FormAction>,
+    state: FormState
+  ) => Promise<void>;
+};
+
+export const useHandlers = (
+  initialState: FormState,
+  dispatch: React.Dispatch<FormAction>
+): HandlersReturn => {
+  const handleChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      | React.FormEvent<HTMLFieldSetElement>
+  ) => {
+    const target = e.target as HTMLInputElement | HTMLTextAreaElement;
+    const { name, value } = target;
+    // ... any other logic specific to handleChange
+    dispatch({ type: "SET_VALUE", name, value });
+  };
+
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>,
+    dispatch: React.Dispatch<FormAction>,
+    state: FormState
+  ) => {
+    e.preventDefault();
+
+    if (!isValid(state.values)) return;
+
+    dispatch({ type: "SET_STATUS", status: "sending..." });
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(state.values),
+      });
+
+      if (response.ok) {
+        toast.success("Message Sent!");
+        dispatch({ type: "SET_STATUS", status: "sent" });
+      } else {
+        const data = await response.json();
+        toast.error("Error while sending", data);
+        dispatch({ type: "SET_STATUS", status: "send" });
+      }
+    } catch (error) {
+      console.error("Error while sending form", error);
+      toast.error("Error while sending form");
+    }
+  };
+
+  return { handleChange, handleSubmit };
+};
+```
+
+```ts showLineNumbers title="src/app/utils/formReducer.ts"
+export type FormState = {
+  values: {
+    fname: string;
+    lname: string;
+    email: string;
+    phone: string;
+    service: string;
+    message: string;
+  };
+  status: "send" | "sending..." | "sent";
+  messageLength: number;
+};
+
+export type FormAction =
+  | { type: "SET_VALUE"; name: string; value: string }
+  | { type: "SET_STATUS"; status: FormState["status"] };
+
+export const formReducer = (
+  state: FormState,
+  action: FormAction
+): FormState => {
+  switch (action.type) {
+    case "SET_VALUE":
+      return {
+        ...state,
+        values: {
+          ...state.values,
+          [action.name]: action.value,
+        },
+      };
+    case "SET_STATUS":
+      return {
+        ...state,
+        status: action.status,
+      };
+    default:
+      return state;
+  }
+};
+
+export const initialState: FormState = {
+  values: {
+    fname: "",
+    lname: "",
+    email: "",
+    phone: "",
+    service: "",
+    message: "",
+  },
+  status: "send",
+  messageLength: 0,
+};
+```
+
+```ts showLineNumbers title="src/app/utils/formValidation.ts"
+import { toast } from "react-toastify";
+
+type FormValues = {
+  fname: string;
+  lname: string;
+  email: string;
+  phone: string;
+  service: string;
+  message: string;
+};
+
+export const isValid = (values: FormValues): boolean => {
+  // Validate First Name & Last Name
+  if (values.fname.length < 2 || values.lname.length < 2) {
+    toast.error("Name and Last Name must have more than 1 character");
+    return false;
+  }
+
+  // Validate Email
+  const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+  if (!emailRegex.test(values.email)) {
+    toast.error("Please enter a valid e-mail address");
+    return false;
+  }
+
+  // Validate message
+  if (values.message.length < 10) {
+    toast.error("Message must contain more than 10 characters");
+    return false;
+  }
+
+  // Add more validations as needed...
+
+  return true;
+};
+```
+
+```ts showLineNumbers title="src/app/utils/mailConfig.ts"
+import nodemailer from "nodemailer";
+
+const { NEXT_PUBLIC_ZOHO_USER, NEXT_PUBLIC_ZOHO_PASSWORD } = process.env;
+
+export const transporter = nodemailer.createTransport({
+  host: "smtppro.zoho.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: NEXT_PUBLIC_ZOHO_USER,
+    pass: NEXT_PUBLIC_ZOHO_PASSWORD,
+  },
+});
+```
+
+```ts showLineNumbers title"src/app/api/contact/route.ts"
+// Contact Route - api/contact
+import { NextRequest, NextResponse } from "next/server";
+import { transporter } from "@/app/utils/mailConfig";
+
+type ContactRequestBody = {
+  fname: string;
+  lname: string;
+  email: string;
+  phone: string;
+  service: string;
+  message: string;
+};
+
+const { NEXT_PUBLIC_ZOHO_USER, NEXT_PUBLIC_ZOHO_RECIPIENT_EMAIL } = process.env;
+
+export async function POST({ json }: NextRequest) {
+  const { fname, lname, email, phone, service, message }: ContactRequestBody =
+    await json();
+
+  const mailOptions = {
+    from: NEXT_PUBLIC_ZOHO_USER,
+    to: NEXT_PUBLIC_ZOHO_RECIPIENT_EMAIL,
+    subject: `New message from ${fname} ${lname}`,
+    text: `
+      Name: ${fname}
+      Last Name: ${lname}
+      Email: ${email}
+      Phone: ${phone}
+      Service: ${service}
+      Message: ${message}
+    `,
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    return NextResponse.json({
+      status: "success",
+      message: "Message sent successfully",
+    });
+  } catch (error) {
+    console.error(error); // Consider using a dedicated logging service for production.
+    return NextResponse.json({
+      status: "error",
+      message: (error as Error).message,
+    });
+  }
+}
+```
+
+</FullCode>

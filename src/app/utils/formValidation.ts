@@ -5,7 +5,6 @@ type FormValues = {
   lname: string;
   email: string;
   phone: string;
-  service: string;
   message: string;
 };
 

@@ -8,7 +8,7 @@ import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { formatDate } from "./src/app/utils/formatDate";
-import GithubSlugger from 'github-slugger'
+import GithubSlugger from "github-slugger";
 
 const Series = defineNestedType(() => ({
   name: "Series",
@@ -53,6 +53,10 @@ const Post = defineDocumentType(() => ({
       type: "string",
       required: true,
     },
+    excerpt: {
+      type: "string",
+      required: true,
+    },
     publishedAt: { type: "string", required: true },
     description: { type: "string", required: true },
     status: { type: "enum", options: ["draft", "published"], required: true },
@@ -62,8 +66,9 @@ const Post = defineDocumentType(() => ({
     },
     tags: {
       type: "list",
-      of: { type: 'string' },
+      of: { type: "string" },
     },
+    project: { type: "string", required: true },
   },
   computedFields: {
     slug: {
@@ -84,34 +89,34 @@ const Post = defineDocumentType(() => ({
       resolve: async (doc) => {
         // use same package as rehypeSlug so toc and sluggified headings match
         // https://github.com/rehypejs/rehype-slug/blob/main/package.json#L36
-        const slugger = new GithubSlugger()
+        const slugger = new GithubSlugger();
 
         // https://stackoverflow.com/a/70802303
-        const regXHeader = /\n\n(?<flag>#{1,6})\s+(?<content>.+)/g
+        const regXHeader = /\n\n(?<flag>#{1,6})\s+(?<content>.+)/g;
 
         const headings = Array.from(doc.body.raw.matchAll(regXHeader)).map(
           ({ groups }) => {
-            const flag = groups?.flag
-            const content = groups?.content
+            const flag = groups?.flag;
+            const content = groups?.content;
             return {
               heading: flag?.length,
               text: content,
               slug: content ? slugger.slug(content) : undefined,
-            }
-          },
-        )
+            };
+          }
+        );
 
-        return headings
+        return headings;
       },
     },
   },
 }));
 
 /** @type {import('rehype-pretty-code').Options} */
-const options: import('rehype-pretty-code').Options = {
+const options: import("rehype-pretty-code").Options = {
   theme: {
-    dark: 'material-theme-darker',
-    light: 'github-light',
+    dark: "material-theme-darker",
+    light: "github-light",
   },
   tokensMap: {
     // VScode command palette: Inspect Editor Tokens and Scopes
@@ -127,8 +132,8 @@ export default makeSource({
   documentTypes: [Post],
   mdx: {
     esbuildOptions(options) {
-      options.target = "esnext"
-      return options
+      options.target = "esnext";
+      return options;
     },
     rehypePlugins: [
       [rehypeSlug],
