@@ -16,6 +16,12 @@
 
   z-index: 5;
 }
+@media only screen and (max-width: 1440px) {
+  .home {
+    height: fit-content;
+    padding: 0;
+  }
+}
 .home .rowone {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -27,6 +33,13 @@
   gap: 2rem;
 
   overflow: hidden;
+}
+@media only screen and (max-width: 1440px) {
+  .home .rowone {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+  }
 }
 .home .rowtwo {
   display: grid;
@@ -53,6 +66,14 @@
   background-color: var(--color-risdblue);
 
   border-radius: 2rem;
+
+  overflow: hidden;
+}
+@media only screen and (max-width: 1440px) {
+  .aboutme {
+    height: fit-content;
+    padding: clamp(1rem, 1.75vw, 1.5rem);
+  }
 }
 .aboutme .header {
   display: flex;
@@ -65,12 +86,23 @@
   justify-content: flex-start;
   gap: 1rem;
 }
+@media only screen and (max-width: 1440px) {
+  .aboutme .header {
+    height: fit-content;
+    gap: clamp(8px, 1vw, 1rem);
+  }
+}
 .header h3 {
-  font-size: 4.25em;
+  font-size: clamp(1.5em, 3vw, 4em);
   font-weight: 700;
   color: var(--color-seasalt);
   text-transform: uppercase;
   white-space: nowrap;
+}
+@media only screen and (max-width: 1440px) {
+  .aboutme .header h3 {
+    font-size: clamp(1.5em, 5vw, 6em);
+  }
 }
 .header .decoration {
   display: flex;
@@ -83,6 +115,11 @@
   justify-content: center;
 
   z-index: 4;
+}
+@media only screen and (max-width: 1440px) {
+  .aboutme .header .decoration {
+    height: clamp(1.5em, 5vw, 6em);
+  }
 }
 .decoration .square {
   display: flex;
@@ -102,6 +139,12 @@
 
   z-index: 5;
 }
+@media only screen and (max-width: 1440px) {
+  .decoration .square {
+    height: clamp(1.75em, 5.5vw, 6.5em);
+    padding: 0 clamp(8px, 1vw, 12px);
+  }
+}
 .square div {
   display: flex;
   position: relative;
@@ -111,6 +154,17 @@
 
   border: 2px solid var(--color-seasalt);
   border-radius: 1rem;
+}
+@media only screen and (max-width: 1440px) {
+  .square div {
+    width: clamp(1.5em, 5vw, 6em);
+    height: clamp(1.5em, 5vw, 6em);
+    border-radius: clamp(8px, 1.25vw, 1rem);
+    -webkit-border-radius: clamp(8px, 1.25vw, 1rem);
+    -moz-border-radius: clamp(8px, 1.25vw, 1rem);
+    -ms-border-radius: clamp(8px, 1.25vw, 1rem);
+    -o-border-radius: clamp(8px, 1.25vw, 1rem);
+}
 }
 .decoration .lineswrapper {
   display: flex;
@@ -137,13 +191,25 @@
 
   align-items: flex-start;
   gap: 5rem;
+
+  overflow: auto;
+}
+@media only screen and (max-width: 1440px) {
+  .aboutme .content {
+    gap: clamp(2rem, 6vw, 5rem);
+  }
 }
 .content p {
-  font-size: 1.75em;
+  font-size: clamp(1.5em, 1.5vw, 1.75em);
   font-style: normal;
   font-weight: 300;
   text-align: left;
   color: var(--color-seasalt);
+}
+@media only screen and (max-width: 1440px) {
+  .content p {
+    font-size: clamp(1.25em, 1.25vw, 1.75em);
+  }
 }
 .whatiliketodo {
   display: flex;
@@ -157,6 +223,20 @@
   padding-top: 1.5rem;
 
   gap: 1.5rem;
+
+  overflow: hidden;
+}
+@media only screen and (max-width: 1440px) {
+  .whatiliketodo {
+    height: fit-content;
+    padding: clamp(1rem, 1.5vw, 1.5rem);
+    background-color: var(--neutral-950);
+    border-radius: 2rem;
+    -webkit-border-radius: 2rem;
+    -moz-border-radius: 2rem;
+    -ms-border-radius: 2rem;
+    -o-border-radius: 2rem;
+}
 }
 .whatiliketodo .navbar {
   display: flex;
@@ -167,9 +247,14 @@
   height: 4rem;
   align-items: center;
 
-  padding: 8px 0;
+  padding: clamp(2px, 0.3vw, 8px) 0;
 
-  gap: 3rem;
+  gap: clamp(8px, 0.5vw, 3rem);
+}
+@media only screen and (max-width: 1440px) {
+  .whatiliketodo .navbar {
+    height: fit-content;
+  }
 }
 .navbar .controls {
   display: flex;
@@ -178,15 +263,20 @@
   flex-wrap: nowrap;
   width: fit-content;
   height: 100%;
-  gap: 12px;
+  gap: clamp(8px, 1vw, 12px);
+}
+@media only screen and (max-width: 1440px) {
+  .navbar .controls :nth-child(3) {
+    display: none;
+  }
 }
 .controls .gridview {
   display: flex;
   position: relative;
   flex-direction: column;
   flex-wrap: nowrap;
-  width: 3rem;
-  height: 3rem;
+  width: clamp(2rem, 3vw, 3rem);
+  height: clamp(2rem, 3vw, 3rem);
   align-items: center;
   justify-content: center;
 
@@ -205,8 +295,8 @@
   position: relative;
   flex-direction: column;
   flex-wrap: nowrap;
-  width: 3rem;
-  height: 3rem;
+  width: clamp(2rem, 3vw, 3rem);
+  height: clamp(2rem, 3vw, 3rem);
   align-items: center;
   justify-content: center;
 
@@ -225,8 +315,8 @@
   position: relative;
   flex-direction: column;
   flex-wrap: nowrap;
-  width: 3rem;
-  height: 3rem;
+  width: clamp(2rem, 3vw, 3rem);
+  height: clamp(2rem, 3vw, 3rem);
   align-items: center;
   justify-content: center;
 
@@ -246,12 +336,12 @@
   flex-direction: row;
   flex-wrap: nowrap;
   width: 100%;
-  height: 100%;
+  height: clamp(2rem, 3vw, 3rem);
   align-items: center;
   justify-content: flex-start;
 
   gap: 4px;
-  padding: 4px 12px;
+  padding: 2px 8px;
 
   border-radius: 16px;
 
@@ -297,15 +387,15 @@
   width: fit-content;
   height: 100%;
 
-  gap: 1rem;
+  gap: clamp(8px, 1vw, 12px);
 }
 .navigation .navbutton {
   display: flex;
   position: relative;
   flex-direction: column;
   flex-wrap: nowrap;
-  width: 3rem;
-  height: 3rem;
+  width: clamp(2rem, 3vw, 3rem);
+  height: clamp(2rem, 3vw, 3rem);
 
   align-items: center;
   justify-content: center;
@@ -328,6 +418,8 @@
   width: 100%;
   height: 100%;
   gap: 2rem;
+
+  overflow: hidden;
 }
 .areas .area {
   display: flex;
@@ -336,8 +428,8 @@
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
-  padding: 2rem;
+  gap: clamp(1rem, 1.5vw, 1.5rem);
+  padding: clamp(1rem, 2vw, 2rem);
 
   border: 2px solid var(--logo-bg);
   border-radius: 32px;
@@ -345,11 +437,11 @@
   transition: background-color 0.3s ease-out;
 }
 .area .areaicon svg {
-  font-size: 3em;
+  font-size: clamp(2em, 2.5vw, 3em);
   color: var(--logo-bg);
 }
 .area .areatext p {
-  font-size: 1.5em;
+  font-size: clamp(1.25em, 1.5vw, 1.5em);
   font-weight: 400;
   text-transform: capitalize;
   text-align: center;

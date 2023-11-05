@@ -37,6 +37,7 @@
   --neutral-absolute: #f6fbfc;
   --neutral-alt: #0c0c0c;
   --neutral-50: #0b205b;
+  --input-placeholder: #6073a9;
   --neutral-100: #0b3ec8;
   --neutral-200: #0b3ec8;
   --neutral-300: #1b53fa;
@@ -83,6 +84,7 @@
   --neutral-200: #a8a8a8;
   --neutral-100: #bababa;
   --neutral-50: #cbcbcb;
+  --input-placeholder: #979797;
   --menubars-bg: #1e1e1e;
   --menu-button: #f6fbfc;
   --navlink-active-bg: #dcdcdc;
@@ -148,7 +150,12 @@ body {
   width: 100%;
   height: 58.5rem;
 }
-
+@media only screen and (max-width: 1440px) {
+  .hwrapper {
+    height: fit-content;
+    padding: clamp(1.5rem, 2vw, 2rem) 0 0 0;
+  }
+}
 button {
   font-family: var(--font-outfit);
   box-shadow: none;

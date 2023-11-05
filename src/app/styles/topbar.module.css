@@ -1,135 +1,140 @@
 .topbar {
-    display: flex;
-    position: relative;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    width: 100%;
-    height: fit-content;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    padding: 1.5rem;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: fit-content;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+@media only screen and (max-width: 1440px) {
+  .topbar {
+    display: none;
+  }
 }
 .topbar[data-isnote="true"] {
-    width: 40.5rem;
-    padding-left: 0px;
-    padding-right: 0px;
-    margin: auto;
+  width: 40.5rem;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin: auto;
 }
 .topbar .logo {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    width: fit-content;
-    height: fit-content;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: fit-content;
+  height: fit-content;
 
-    align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
 
-    padding: 1.5rem;
-    border-radius: 2rem;
+  padding: 1.5rem;
+  border-radius: 2rem;
 
-    background-color: var(--logo-bg);
+  background-color: var(--logo-bg);
 
-    outline: none;
-    border: none;
-    box-shadow: none;
-    appearance: none;
+  outline: none;
+  border: none;
+  box-shadow: none;
+  appearance: none;
 
-    cursor: pointer;
+  cursor: pointer;
 }
 .topbar[data-isnote="true"] .logo {
-    display: none;
+  display: none;
 }
 .topbar .backnotes {
-    display: none;
-    position: relative;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    width: 6rem;
-    height: 6rem;
-    min-width: 6rem;
-    min-height: 6rem;
+  display: none;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 6rem;
+  height: 6rem;
+  min-width: 6rem;
+  min-height: 6rem;
 
-    align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
 
-    padding: 1.5rem;
-    border-radius: 2rem;
+  padding: 1.5rem;
+  border-radius: 2rem;
 
-    background-color: var(--neutral-900);
+  background-color: var(--neutral-900);
 
-    text-decoration: none;
-    border: none;
-    box-shadow: none;
-    appearance: none;
+  text-decoration: none;
+  border: none;
+  box-shadow: none;
+  appearance: none;
 }
 .backnotes svg {
-    font-size: 2.5em;
-    color: var(--neutral-alt);
+  font-size: 2.5em;
+  color: var(--neutral-alt);
 }
 .topbar[data-isnote="true"] .backnotes {
-    display: flex;
+  display: flex;
 }
 .logo div {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    width: 3rem;
-    height: 3rem;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 3rem;
+  height: 3rem;
 
-    align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
 .logo div svg {
-    font-size: 3em;
-    color: var(--neutral-absolute);
+  font-size: 3em;
+  color: var(--neutral-absolute);
 }
 .topbar .socialsbar {
-    display: flex;
-    position: relative;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    width: 100%;
-    height: fit-content;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: fit-content;
 
-    justify-content: right;
+  justify-content: right;
 
-    padding: 1.5rem;
-    border-radius: 2rem;
+  padding: 1.5rem;
+  border-radius: 2rem;
 
-    background-color: var(--menubars-bg);
+  background-color: var(--menubars-bg);
 
-    gap: 1.5rem;
+  gap: 1.5rem;
 }
 .socialsbar a {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    flex-wrap: nowrap;
-    width: 3rem;
-    height: 3rem;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  flex-wrap: nowrap;
+  width: 3rem;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
 
-    padding: 4px;
+  padding: 4px;
 
-    border-radius: 12px;
+  border-radius: 12px;
 
-    text-decoration: none;
-    background: none;
-    appearance: none;
+  text-decoration: none;
+  background: none;
+  appearance: none;
 
-    transition: background-color 0.3s ease-out;
+  transition: background-color 0.3s ease-out;
 }
 .socialsbar a:hover {
-    background-color: var(--button-hover);
+  background-color: var(--button-hover);
 }
 .socialsbar a:focus {
-    outline: 2px solid var(--menu-button);
+  outline: 2px solid var(--menu-button);
 }
 .socialsbar a svg {
-    font-size: 3em;
-    color: var(--menu-button);
+  font-size: 3em;
+  color: var(--menu-button);
 }

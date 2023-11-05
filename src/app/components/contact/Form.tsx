@@ -14,6 +14,7 @@ import styles from "../../styles/contact.module.css";
 import { Input } from "./Input";
 import Button from "@/app/elements/buttons/Button";
 import { TextArea } from "./TextArea";
+import { SendingIndicator } from "./SendingIndicator";
 
 type Props = {
   onSubmitSuccess?: () => void;
@@ -103,10 +104,21 @@ const Form: React.FC<Props> = ({ onSubmitSuccess }) => {
           disabled={state.status === "sent" ? true : false}
           data-sending={state.status === "sending" ? true : false}
         >
-          <p>send</p>
+          {state.status === "send" ? (
+            <p>send</p>
+          ) : state.status === "sending" ? (
+            <SendingIndicator />
+          ) : state.status === "sent" ? (
+            <p>sent</p>
+          ) : (
+            <p>error</p>
+          )}
         </Button>
       </div>
-      <ToastContainer theme={isLightTheme ? "light" : "dark"} position="top-center" />
+      <ToastContainer
+        theme={isLightTheme ? "light" : "dark"}
+        position="top-center"
+      />
     </form>
   );
 };

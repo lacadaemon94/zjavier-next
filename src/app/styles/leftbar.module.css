@@ -1,64 +1,68 @@
 .navbar {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    width: fit-content;
-    height: 100%;
-    padding: 0rem 1.5rem 1.5rem 1.5rem;
-    border-radius: 2rem;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: fit-content;
+  height: 100%;
+  padding: 0rem 1.5rem 1.5rem 1.5rem;
+  border-radius: 2rem;
 
-    justify-content: flex-end;
+  justify-content: flex-end;
+}
+@media only screen and (max-width: 1440px) {
+  .navbar {
+    display: none;
+  }
 }
 .navbar[data-isnote="true"] {
-    display: none;
+  display: none;
 }
 .navbar .wrapper {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    width: fit-content;
-    height: 100%;
-    padding: 1.5rem;
-    border-radius: 2rem;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: fit-content;
+  height: 100%;
+  padding: 1.5rem;
+  border-radius: 2rem;
 
-    justify-content: center;
+  justify-content: center;
 
+  background-color: var(--menubars-bg);
 
-    background-color: var(--menubars-bg);
-
-    gap: 1.5rem;
+  gap: 1.5rem;
 }
 .wrapper a {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    flex-wrap: nowrap;
-    width: 3rem;
-    height: 3rem;
-    align-items: center;
-    justify-content: center;
-    padding: 12px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  flex-wrap: nowrap;
+  width: 3rem;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
 
-    border-radius: 12px;
+  border-radius: 12px;
 
-    text-decoration: none;
-    background: none;
-    appearance: none;
+  text-decoration: none;
+  background: none;
+  appearance: none;
 
-    transition: background-color 0.3s ease-out;
+  transition: background-color 0.3s ease-out;
 }
 .wrapper a:hover {
-    background-color: var(--button-hover);
+  background-color: var(--button-hover);
 }
 .wrapper a svg {
-    font-size: 3em;
-    color: var(--menu-button);
+  font-size: 3em;
+  color: var(--menu-button);
 }
 .wrapper a[data-isactive="true"] {
-    background-color: var(--navlink-active-bg);
+  background-color: var(--navlink-active-bg);
 }
 .wrapper a[data-isactive="true"] svg {
-    color: var(--navlink-active-color);
+  color: var(--navlink-active-color);
 }
