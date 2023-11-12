@@ -1,7 +1,6 @@
 // Core
 "use client";
 import React, { useReducer, useState, useEffect, useContext } from "react";
-import { SessionContext } from "@/app/utils/SessionProvider";
 import { ToastContainer } from "react-toastify";
 import { motion } from "framer-motion";
 // Custom Hooks
@@ -21,8 +20,6 @@ type Props = {
 };
 
 const Form: React.FC<Props> = ({ onSubmitSuccess }) => {
-  const { isLightTheme } = useContext(SessionContext);
-
   const [reset, setReset] = useState<boolean>(false);
   const [state, dispatch] = useReducer(formReducer, initialState);
   const { handleChange, handleSubmit } = useHandlers(initialState, dispatch);
@@ -116,7 +113,7 @@ const Form: React.FC<Props> = ({ onSubmitSuccess }) => {
         </Button>
       </div>
       <ToastContainer
-        theme={isLightTheme ? "light" : "dark"}
+        theme="dark"
         position="top-center"
       />
     </form>

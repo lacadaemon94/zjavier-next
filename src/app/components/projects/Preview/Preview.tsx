@@ -1,5 +1,4 @@
-import React, { useState, useContext } from 'react'
-import { SessionContext } from '@/app/utils/SessionProvider'
+import React, { useState } from 'react'
 import Image from 'next/image'
 
 // Styles
@@ -45,7 +44,6 @@ type ImageData = {
 
 export const Preview = ({ data, activeProject }: Props) => {
   const [viewType, setViewType] = useState('desktop');
-  const isLightTheme = useContext(SessionContext).isLightTheme ? 'light' : 'dark';
 
   return (
     <div className={styles.preview}>
@@ -59,7 +57,7 @@ export const Preview = ({ data, activeProject }: Props) => {
         </div>
         <div className={styles.container} data-isview={viewType}>
             <Image
-                src={data[activeProject].images[viewType as 'desktop' | 'mobile'][isLightTheme]}
+                src={data[activeProject].images[viewType as 'desktop' | 'mobile']['dark']}
                 alt={`${viewType} - ${data[activeProject].name}`}
                 width={2208}
                 height={1824}

@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import { SessionContext } from "@/app/utils/SessionProvider";
+import React from "react";
 import Image from "next/image";
 
 // Styles
@@ -53,9 +52,6 @@ export const FileSystem = ({
   activeProject,
   setActiveProject,
 }: Props) => {
-  const isLightTheme = useContext(SessionContext).isLightTheme
-    ? "light"
-    : "dark";
 
   return (
     <div className={styles.filesystem}>
@@ -174,7 +170,7 @@ export const FileSystem = ({
             </div>
             <div className={styles.logo}>
               <Image
-                src={data[activeProject].logos[isLightTheme]}
+                src={data[activeProject].logos['dark']}
                 alt={`${data[activeProject].name} - Logo`}
                 width={512}
                 height={512}

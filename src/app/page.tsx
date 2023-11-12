@@ -23,16 +23,16 @@ export default function Page() {
       <div className={styles.rowtwo}>
         <div className={styles.bentoswrapper}>
           <div className={styles.brow}>
-            <BentoText type="text" text="hello!" />
+            <BentoText type="text" text="hello!" data={'hello'} />
             <BentoText type="empty" />
           </div>
           <div className={styles.brow}>
-            <BentoText type="text" text="my name is" />
+            <BentoText type="text" text="my name is" data={'name'}/>
             <BentoText type="image" imageUrl={ExtrudeGif} imageUrlLight={ExtrudeGifLight} />
             <BentoText type="empty" />
           </div>
           <div className={styles.brow}>
-            <BentoText type="text" text="full stack developer" />
+            <BentoText type="text" text="full stack developer" data={'fullstack'}/>
             <BentoText type="empty" />
           </div>
         </div>

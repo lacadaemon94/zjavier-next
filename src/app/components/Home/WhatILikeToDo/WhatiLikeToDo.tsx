@@ -1,6 +1,5 @@
 "use client"
 import React, { useState, useContext } from "react";
-import { SessionContext } from "@/app/utils/SessionProvider";
 import { motion } from "framer-motion";
 
 // Styles
@@ -9,7 +8,6 @@ import styles from "../../../styles/home.module.css";
 // Icons
 import GridIcon from "@/assets/icons/GridIcon";
 import ListIcon from "@/assets/icons/ListIcon";
-import LightBulbIcon from "@/assets/icons/LightBulbIcon";
 import LockIcon from "@/assets/icons/LockIcon";
 import LeftArrowIcon from "@/assets/icons/LeftArrowIcon";
 import RightArrowIcon from "@/assets/icons/RightArrowIcon";
@@ -28,7 +26,6 @@ type Props = {};
 
 export const WhatiLikeToDo = (props: Props) => {
   const [isView, setIsView] = useState('grid');
-  const { toggleTheme } = useContext(SessionContext);
 
   return (
     <div className={styles.whatiliketodo}>
@@ -49,14 +46,6 @@ export const WhatiLikeToDo = (props: Props) => {
             onClick={() => setIsView('list')}
           >
             <ListIcon />
-          </Button>
-          <Button
-            type="button"
-            ariaLabel="Set List View"
-            className={styles.changetheme}
-            onClick={toggleTheme}
-          >
-            <LightBulbIcon />
           </Button>
         </div>
         <div className={styles.addressbar}>
