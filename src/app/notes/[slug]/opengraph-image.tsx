@@ -62,7 +62,7 @@ export default async function OpenGraph({
           }}
         >
           <img
-            src="http://localhost:3000/OG_BG.png"
+            src="https://zjavier.com/OG_BG.png"
             alt="Background"
             width={1200}
             height={630}
@@ -99,7 +99,7 @@ export default async function OpenGraph({
               }}
             >
               <img
-                src="http://localhost:3000/OG_Icon.png"
+                src="https://zjavier.com/OG_Icon.png"
                 alt="OG Icon"
                 width={96}
                 height={96}
