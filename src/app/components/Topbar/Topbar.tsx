@@ -1,7 +1,6 @@
 "use client";
-import React, { useContext } from "react";
+import React from "react";
 import { useSelectedLayoutSegments } from "next/navigation";
-import { SessionContext } from "@/app/utils/SessionProvider";
 import { motion } from "framer-motion";
 
 // Styles
@@ -26,7 +25,6 @@ import NavButton from "@/app/elements/buttons/NavButton";
 type Props = {};
 
 export const Topbar = (props: Props) => {
-  const { toggleTheme } = useContext(SessionContext);
   const segment = useSelectedLayoutSegments();
   const isNote = segment.length > 1;
 
@@ -36,7 +34,6 @@ export const Topbar = (props: Props) => {
         type="button"
         className={styles.logo}
         ariaLabel="Change Theme"
-        onClick={toggleTheme}
       >
         <motion.div
           whileHover={{
