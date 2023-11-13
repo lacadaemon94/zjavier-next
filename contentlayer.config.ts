@@ -114,10 +114,7 @@ const Post = defineDocumentType(() => ({
 
 /** @type {import('rehype-pretty-code').Options} */
 const options: import("rehype-pretty-code").Options = {
-  theme: {
-    dark: "material-theme-darker",
-    light: "github-light",
-  },
+  theme: "material-theme-darker",
   tokensMap: {
     // VScode command palette: Inspect Editor Tokens and Scopes
     // https://github.com/Binaryify/OneDark-Pro/blob/47c66a2f2d3e5c85490e1aaad96f5fab3293b091/themes/OneDark-Pro.json

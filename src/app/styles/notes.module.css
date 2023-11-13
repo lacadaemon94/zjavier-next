@@ -11,6 +11,12 @@
 
     overflow: hidden;
 }
+@media only screen and (max-width: 1440px) {
+    .notes {
+        padding: 0 1.5rem 1.5rem;
+        margin-bottom: 6rem;
+    }
+}
 
 .notes .wrapper {
     display: grid;
@@ -50,6 +56,7 @@
 
     align-items: flex-start;
     justify-content: space-between;
+    z-index: 6;
 }
 
 .selectedpill {
@@ -221,6 +228,12 @@
     scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
     -ms-overflow-style: none;
 }
+@media only screen and (max-width: 1280px) {
+    .noteswrapper {
+        display: flex;
+        flex-direction: column;
+    }
+}
 
 .noteswrapper::-webkit-scrollbar {
     display: none;
@@ -249,9 +262,10 @@
     flex-direction: column;
     flex-wrap: nowrap;
 
-    width: fit-content;
+    width: auto;
     max-width: 64rem;
-    height: 25rem;
+    height: auto;
+    max-height: 24rem;
 
     color: var(--neutral-alt);
     background-color: var(--neutral-900);
@@ -265,6 +279,14 @@
 
     appearance: none;
     text-decoration: none;
+}
+@media only screen and (max-width: 1280px) {
+    .notelink {
+        width: 100%;
+        max-width: unset;
+        height: fit-content;
+        max-height: unset;
+    }
 }
 
 .notelink .header {
@@ -296,6 +318,11 @@
 }
 
 .notelink .header .title h3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-weight: 500;
 }
 
@@ -376,13 +403,19 @@
 }
 
 .notelink .excerpt {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-size: 1.25em;
     line-height: 1.5em;
     font-weight: 200;
-    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+@media only screen and (max-width: 648px) {
+    .notelink .excerpt {
+        -webkit-line-clamp: 4;
+    }
 }

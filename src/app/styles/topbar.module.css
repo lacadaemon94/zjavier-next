@@ -14,12 +14,27 @@
   .topbar {
     display: none;
   }
+  .topbar[data-isnote="true"] {
+    display: flex;
+    margin-left: 1.5rem;
+  }
 }
 .topbar[data-isnote="true"] {
   width: 40.5rem;
   padding-left: 0px;
   padding-right: 0px;
   margin: auto;
+}
+@media only screen and (max-width: 1440px) {
+  .topbar[data-isnote="true"] {
+    width: fit-content;
+    margin-left: auto;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .topbar[data-isnote="true"] {
+    margin-left: 1.5rem;
+  }
 }
 .topbar .logo {
   display: flex;
@@ -107,6 +122,11 @@
   background-color: var(--menubars-bg);
 
   gap: 1.5rem;
+}
+@media only screen and (max-width: 768px) {
+  .topbar[data-isnote="true"] .socialsbar {
+    display: none;
+  }
 }
 .socialsbar a {
   display: flex;

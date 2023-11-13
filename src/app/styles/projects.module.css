@@ -13,6 +13,15 @@
   overflow: hidden;
   z-index: 5;
 }
+@media only screen and (max-width: 1440px){
+  .projects {
+    display: flex;
+    flex-direction: column;
+    padding: 0 1.5rem 1.5rem;
+    height: fit-content;
+    margin-bottom: 6rem;
+  }
+}
 .projects .filesystem {
   display: grid;
   grid-template-columns: 1fr;
@@ -21,6 +30,14 @@
   height: 100%;
 
   overflow: hidden;
+}
+@media only screen and (max-width: 1440px) {
+  .projects .filesystem {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    gap: 1.5rem;
+  }
 }
 .filesystem .navigator {
   display: flex;
@@ -35,6 +52,11 @@
 
   overflow: hidden;
 }
+@media only screen and (max-width: 1440px) {
+  .filesystem .navigator {
+    height: fit-content;
+  }
+}
 .navigator .title {
   display: flex;
   position: relative;
@@ -48,6 +70,11 @@
 
   overflow: hidden;
   flex-shrink: 0;
+}
+@media only screen and (max-width: 1440px) {
+  .navigator .title {
+    gap: 4px;
+  }
 }
 .navigator .title a {
   display: flex;
@@ -92,6 +119,11 @@
   align-items: center;
   justify-content: center;
 }
+@media only screen and  (max-width: 1440px) {
+  .navigator .title h3 {
+    font-size: clamp(1em, 2vw, 1.5em);
+  }
+}
 .navigator .title .selectors {
     display: flex;
     position: relative;
@@ -131,6 +163,11 @@
 
     gap: 8px;
     overflow: hidden;
+}
+@media only screen and (max-width: 1440px) {
+  .navigator .grid {
+    height: fit-content;
+  }
 }
 .grid .header {
     display: flex;
@@ -183,6 +220,11 @@
     text-align: center;
     text-transform: lowercase;
 }
+@media only screen and (max-width: 1440px) {
+  .grid .row div {
+    font-size: clamp(1em, 1.5vw, 1.25em);
+  }
+}
 .grid .row[data-isactive="true"] {
     outline: 2px solid var(--menu-button);
     outline-offset: -3px;
@@ -234,6 +276,12 @@
   background: radial-gradient( 52.2% 133.67% at 3.36% 6.62%, var(--background-radial-one) 0%, var(--background-radial-two) 100% );
   z-index: 6;
 }
+@media only screen and (max-width: 1440px) {
+  .details .title h2 {
+    font-size: clamp(1.25em, 5vw, 2.5em);
+    max-width: clamp(10rem, 48vw, 48rem);
+  }
+}
 .details .title .decoration {
   display: flex;
   position: relative;
@@ -263,6 +311,11 @@
   background: radial-gradient( 52.2% 133.67% at 3.36% 6.62%, var(--background-radial-one) 0%, var(--background-radial-two) 100% );
 
   z-index: 5;
+}
+@media only screen and (max-width: 1440px) {
+  .title .decoration .square {
+    left: 1rem;
+  }
 }
 .title .decoration .square div {
   display: flex;
@@ -300,6 +353,11 @@
 
   overflow: hidden;
 }
+@media only screen and (max-width: 1440px) {
+  .details .content {
+    height: fit-content;
+  }
+}
 .content .statusandlogo {
   display: grid;
   grid-template-columns: 0.3fr 0.7fr;
@@ -309,6 +367,12 @@
   height: 60%;
 
   overflow: hidden;
+}
+@media only screen and (max-width: 1440px) {
+  .content .statusandlogo {
+    display: flex;
+    flex-direction: column;
+  }
 }
 .statusandlogo .status {
   display: flex;
@@ -326,6 +390,11 @@
   border-radius: 1.5rem;
   background-color: var(--neutral-900)
 }
+@media only screen and (max-width: 1440px) {
+  .statusandlogo .status {
+    order: 1;
+  }
+}
 .status h4 {
   height: 3rem;
 
@@ -333,6 +402,11 @@
   font-weight: 600;
   color: var(--neutral-alt);
   text-transform: capitalize;
+}
+@media only screen and (max-width: 1440px) {
+  .status h4 {
+    font-size: 1.5em;
+  }
 }
 .status .wrapper {
   display: flex;
@@ -364,6 +438,11 @@
   text-transform: capitalize;
   text-align: left;
 }
+@media only screen and (max-width: 1440px) {
+  .percentage h5 {
+    font-size: 1.25em;
+  }
+}
 .percentage  .value {
   display: flex;
   position: relative;
@@ -383,6 +462,11 @@
   text-transform: capitalize;
   text-align: left;
 }
+@media only screen and (max-width: 1440px) {
+  .value p {
+    font-size: 1em;
+  }
+}
 .value .progress {
   display: flex;
   position: relative;
@@ -394,6 +478,11 @@
   padding: 2px;
   align-items: flex-start;
   gap: 4px;
+}
+@media only screen and (max-width: 1440px) {
+  .value .progress {
+    gap: 8px;
+  }
 }
 .progress .filledsquare {
   display: flex;
@@ -440,6 +529,11 @@
   text-transform: capitalize;
   text-align: left;
 }
+@media only screen and (max-width: 1440px) {
+  .released h5 {
+    font-size: 1.25em;
+  }
+}
 .released .yesorno {
   display: flex;
   position: relative;
@@ -459,6 +553,11 @@
   text-align: center;
   padding: 4px 8px;
   border-radius: 6px;
+}
+@media only screen and (max-width: 1440px) {
+  .yesorno p {
+    font-size: 1em;
+  }
 }
 .released[data-isreleased="true"] p:nth-child(1) {
   background-color: var(--color-risdblue);
@@ -486,6 +585,13 @@
 }
 .logo img {
   width: 75%;
+  height: auto;
+  aspect-ratio: 1/1;
+}
+@media only screen and (max-width: 1440px) {
+  .logo img {
+    width: 50%;
+  }
 }
 .content .description {
   display: flex;
@@ -512,6 +618,11 @@
   color: var(--neutral-alt);
   text-align: center;
 }
+@media only screen and (max-width: 1440px) {
+  .description p {
+    font-size: clamp(1em, 2.5vw, 2em);
+  }
+}
 .projects .preview {
   display: flex;
   flex-direction: column;
@@ -524,6 +635,14 @@
   align-items: flex-start;
   overflow: hidden;
 }
+@media only screen and (max-width: 1440px) {
+  .projects .preview {
+    height: fit-content;
+    overflow: visible;
+    align-items: center;
+    padding: 0;
+  }
+}
 .preview .device {
   display: flex;
   position: relative;
@@ -535,6 +654,13 @@
   justify-content: space-between;
 
   z-index: 6;
+}
+@media only screen and (max-width: 1440px) {
+  .preview .device {
+    position: absolute;
+    width: 85%;
+    top: 2.5rem;
+  }
 }
 .device button {
   display: flex;
@@ -593,12 +719,25 @@
 
   overflow: hidden;
 }
+@media only screen and (max-width: 1440px) {
+  .preview .container {
+    height: fit-content;
+    position: relative;
+  }
+}
 .container img {
   object-fit: cover;
   height: 100%;
   width: 100%;
 
   transition: scale 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@media only screen and (max-width: 1440px) {
+  .container img {
+    height: auto;
+    position: relative;
+    aspect-ratio: 2/1.5;
+  }
 }
 .container[data-isview="mobile"] {
   padding: 2rem;
@@ -608,6 +747,13 @@
   border-radius: 3rem;
   width: auto;
   border: 3px solid var(--neutral-alt);
+}
+@media only screen and (max-width: 1440px) {
+  .container[data-isview="mobile"] img {
+    width: 95%;
+    max-width: 480px;
+    aspect-ratio: unset;
+  }
 }
 .container img:hover {
   scale: 1.06;

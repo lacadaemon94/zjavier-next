@@ -11,6 +11,12 @@
 
   overflow: hidden;
 }
+@media only screen and (max-width: 1440px) {
+  .contact {
+    padding: 0 1.5rem 1.5rem;
+    margin-bottom: 6rem;
+  }
+}
 
 .contact .form {
   display: flex;
@@ -38,6 +44,11 @@
   height: fit-content;
 
   gap: 1.5rem;
+}
+@media only screen and (max-width: 1440px) {
+  .form .fandlname {
+    flex-direction: column;
+  }
 }
 
 .input {
@@ -83,6 +94,16 @@
   text-transform: uppercase;
 
   color: var(--neutral-50);
+}
+@media only screen and (max-width: 1440px) {
+  .input input[data-input] {
+    font-size: clamp(1.5em, 5vw, 4.75em);
+    border-radius: clamp(1rem, 1.75vw, 1.5rem);
+    -webkit-border-radius: clamp(1rem, 1.75vw, 1.5rem);
+    -moz-border-radius: clamp(1rem, 1.75vw, 1.5rem);
+    -ms-border-radius: clamp(1rem, 1.75vw, 1.5rem);
+    -o-border-radius: clamp(1rem, 1.75vw, 1.5rem);
+  }
 }
 .input input[data-input]::placeholder {
   color: var(--input-placeholder);
@@ -135,6 +156,20 @@
   color: var(--neutral-50);
 
   resize: none;
+}
+@media only screen and (max-width: 1440px) {
+  .textarea textarea {
+    min-height: 20rem;
+    font-size: clamp(1.5em, 5vw, 4.75em);
+    border-radius: clamp(1rem, 1.75vw, 1.5rem);
+    -webkit-border-radius: clamp(1rem, 1.75vw, 1.5rem);
+    -moz-border-radius: clamp(1rem, 1.75vw, 1.5rem);
+    -ms-border-radius: clamp(1rem, 1.75vw, 1.5rem);
+    -o-border-radius: clamp(1rem, 1.75vw, 1.5rem);
+  }
+  .textarea div[data-counter] {
+    font-size: clamp(12px, 1.25vw, 1em);
+  }
 }
 .textarea textarea::placeholder {
   color: var(--input-placeholder);
@@ -189,7 +224,7 @@
 }
 
 .formaction:disabled {
-    cursor: default;
+  cursor: default;
 }
 
 .formaction p {
@@ -200,7 +235,18 @@
   font-weight: 600;
   color: var(--neutral-50);
 }
-
+@media only screen and (max-width: 1440px) {
+  .formaction.formaction {
+    border-radius: clamp(1rem, 1.75vw, 1.5rem);
+    -webkit-border-radius: clamp(1rem, 1.75vw, 1.5rem);
+    -moz-border-radius: clamp(1rem, 1.75vw, 1.5rem);
+    -ms-border-radius: clamp(1rem, 1.75vw, 1.5rem);
+    -o-border-radius: clamp(1rem, 1.75vw, 1.5rem);
+  }
+  .formaction p {
+    font-size: clamp(1.5em, 5vw, 4.75em);
+  }
+}
 .sending {
   border: none;
   width: 200px;

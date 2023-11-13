@@ -16,6 +16,15 @@
     left: 0;
     margin-top: 0;
 }
+@media only screen and (max-width: 1440px) {
+    .fullcode .sideheader {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin-bottom: 2rem;
+        width: 100%;
+    }
+}
 .sideheader .title {
     font-size: 1.5em;
     color: var(--neutral-200);

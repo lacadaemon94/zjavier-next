@@ -10,6 +10,11 @@
     
     grid-column: 1;
 }
+@media only screen and (max-width: 1440px) {
+    .sideimage {
+        display: none;
+    }
+}
 .sideimage .blurimage {
     display: flex;
     position: relative;

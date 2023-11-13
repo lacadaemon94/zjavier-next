@@ -20,6 +20,7 @@
   .home {
     height: fit-content;
     padding: 0;
+    margin-bottom: 6rem;
   }
 }
 .home .rowone {
@@ -354,13 +355,19 @@
   height: clamp(2rem, 3vw, 3rem);
   align-items: center;
   justify-content: flex-start;
-
   gap: 4px;
   padding: 2px 8px;
-
-  border-radius: 16px;
-
+  border-radius: clamp(10px, 1.25vw, 16px);
   background-color: var(--menubars-bg);
+  -webkit-border-radius: clamp(10px, 1.25vw, 16px);
+  -moz-border-radius: clamp(10px, 1.25vw, 16px);
+  -ms-border-radius: clamp(10px, 1.25vw, 16px);
+  -o-border-radius: clamp(10px, 1.25vw, 16px);
+}
+@media only screen and (max-width: 1440px) {
+  .addressbar.addressbar {
+    background-color: var(--neutral-absolute);
+  }
 }
 @media only screen and (max-width: 648px) {
   .addressbar {

@@ -152,6 +152,7 @@ body {
 }
 @media only screen and (max-width: 1440px) {
   .hwrapper {
+    justify-content: center;
     height: fit-content;
     padding: clamp(1.5rem, 2vw, 2rem) 0 0 0;
   }
