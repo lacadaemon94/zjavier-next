@@ -59,7 +59,7 @@ export const metadata = {
     { media: "(prefers-color-scheme: light)", color: "#F6FBFC" },
     { media: "(prefers-color-scheme: dark)", color: "#0C0C0C" },
   ],
-  manifest: "http://localhost:3000/manifest.json",
+  manifest: "https://zjavier.com/manifest.json",
 };
 
 export default function RootLayout({
