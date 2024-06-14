@@ -64,6 +64,7 @@ export const metadata = {
     { media: "(prefers-color-scheme: dark)", color: "#0C0C0C" },
   ],
   manifest: "https://zjavier.com/manifest.json",
+  metadataBase: new URL("https://zjavier.com"),
 };
 
 export default function RootLayout({
