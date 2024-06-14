@@ -5,7 +5,7 @@ import scrollToTop from "@/app/utils/scrollTopTop";
 // Styles
 import styles from "../../styles/posts.module.css";
 // Ui elements
-import Button from "@/app/elements/buttons/Button";
+import Button from "../Button";
 import { LikeButton } from "./LikeButton";
 
 type Heading = {

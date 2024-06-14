@@ -43,6 +43,8 @@ const Tag = defineNestedType(() => ({
   },
 }));
 
+const allCategoryNames = ["Tutorial", "Opinion", "Note"];
+
 const Post = defineDocumentType(() => ({
   name: "Post",
   contentType: "mdx",
@@ -51,6 +53,11 @@ const Post = defineDocumentType(() => ({
   fields: {
     title: {
       type: "string",
+      required: true,
+    },
+    category: {
+      type: 'enum',
+      options: allCategoryNames,
       required: true,
     },
     excerpt: {
@@ -63,12 +70,13 @@ const Post = defineDocumentType(() => ({
     series: {
       type: "nested",
       of: Series,
+      required: false,
     },
     tags: {
       type: "list",
       of: { type: "string" },
+      required: true,
     },
-    project: { type: "string", required: true },
   },
   computedFields: {
     slug: {

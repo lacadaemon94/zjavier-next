@@ -1,0 +1,124 @@
+- .contentlayer
+  - .cache
+    - v0.3.4
+      - compiled-contentlayer-config-PAT4O2LS.mjs
+      - compiled-contentlayer-config-PAT4O2LS.mjs.map
+      - compiled-contentlayer-config-RKWJRDPT.mjs
+      - compiled-contentlayer-config-RKWJRDPT.mjs.map
+      - data-PAT4O2LS.json
+      - data-RKWJRDPT.json
+      - data-X4EID7S3.json
+  - generated
+    - Post
+      - _index.json
+      - _index.mjs
+      - posts__nodemailer-zoho-integration.mdx.json
+    - index.d.ts
+    - index.mjs
+    - types.d.ts
+  - package.json
+- .env.local
+- .eslintrc.json
+- .gitignore
+- README.md
+- content
+  - posts
+    - nodemailer-zoho-integration.mdx
+- contentlayer.config.ts
+- next-env.d.ts
+- next.config.js
+- package-lock.json
+- package.json
+- public
+  - MuseoModerno-Bold.ttf
+  - MuseoModerno-Thin.ttf
+  - OG_BG.png
+  - OG_Icon.png
+  - android-chrome-192x192.png
+  - android-chrome-256x256.png
+  - apple-touch-icon.png
+  - favicon-16x16.png
+  - favicon-32x32.png
+  - manifest.json
+  - maskable_icon_x192.png
+  - maskable_icon_x512.png
+  - mstile-150x150.png
+- src
+  - app
+    - [slug]
+      - MuseoModerno-Bold.ttf
+      - MuseoModerno-Thin.ttf
+      - opengraph-image.tsx
+      - page.tsx
+    - api
+    - apple-touch-icon.png
+    - components
+      - SplashScreen
+        - SplashScreen.tsx
+      - mdxComponents
+        - AsideImage.tsx
+        - BlurImage.tsx
+        - FullCode.tsx
+        - LikeButton.tsx
+        - LikeCounter.tsx
+        - PostIndex.tsx
+      - notes
+        - DetailPill.tsx
+        - NoteLink.tsx
+        - Notes.tsx
+        - NotesFilter.tsx
+    - elements
+      - DropDown.tsx
+      - DropDownPill.tsx
+      - buttons
+        - Button.tsx
+        - ExternalLink.tsx
+        - NavButton.tsx
+    - favicon.ico
+    - icon.png
+    - layout.tsx
+    - page.tsx
+    - styles
+      - fullcode.module.css
+      - globals.css
+      - home.module.css
+      - likebutton.module.css
+      - notes.module.css
+      - posts.module.css
+      - sideimage.module.css
+      - splashscreen.module.css
+    - utils
+      - AdjustHeight.tsx
+      - SessionProvider.tsx
+      - fetchLikes.ts
+      - formatDate.ts
+      - scrollTopTop.ts
+  - assets
+    - icons
+      - AllIcon.tsx
+      - ApiDesignIcon.tsx
+      - CalendarDetailIcon.tsx
+      - DateSortIcon.tsx
+      - DbDesignIcon.tsx
+      - FacebookIcon.tsx
+      - FilterIcon.tsx
+      - GitHubIcon.tsx
+      - InstagramIcon.tsx
+      - LikeIcon.tsx
+      - LinkedInIcon.tsx
+      - NoteIcon.tsx
+      - OpinionIcon.tsx
+      - SortIcon.tsx
+      - TelegramIcon.tsx
+      - TikTokIcon.tsx
+      - TutorialIcon.tsx
+      - ViewIcon.tsx
+      - WebDesignIcon.tsx
+      - WhatsAppIcon.tsx
+      - XIcon.tsx
+      - YouTubeIcon.tsx
+    - images
+      - SplashScreen.gif
+  - global.d.ts
+  - supabaseClient.ts
+- tsconfig.json

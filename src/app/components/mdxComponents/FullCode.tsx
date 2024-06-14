@@ -4,7 +4,7 @@ import React, { useState, Children, isValidElement } from "react";
 // Styles
 import styles from "../../styles/fullcode.module.css";
 // Ui Elements
-import Button from "@/app/elements/buttons/Button";
+import Button from "../Button";
 
 export type FullCodeProps = {
   children: React.ReactNode;

@@ -1,0 +1,135 @@
+.stickyheader {
+  display: flex;
+  position: sticky;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  max-width: 40.5rem;
+  height: 4rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  -webkit-border-radius: 1.5rem;
+  -moz-border-radius: 1.5rem;
+  -ms-border-radius: 1.5rem;
+  -o-border-radius: 1.5rem;
+  border: 1px solid rgb(87 87 87 / 50%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(30, 30, 30, 1) 100%
+  );
+  box-shadow: 0px 108px 30px 0px rgba(51, 51, 51, 0),
+    0px 69px 28px 0px rgba(51, 51, 51, 0.02),
+    0px 39px 23px 0px rgba(51, 51, 51, 0.06),
+    0px 17px 17px 0px rgba(51, 51, 51, 0.3),
+    0px 4px 9px 0px rgba(51, 51, 51, 0.45);
+  backdrop-filter: blur(6px);
+  top: 2rem;
+  z-index: 5;
+  margin-bottom: 5.75rem;
+}
+@media only screen and (max-width: 1440px) {
+  .stickyheader {
+    align-self: center;
+  }
+}
+.stickyheader .avatar {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+  border: 1px solid var(--primary-500);
+  padding: 1.75px;
+}
+.stickyheader .avatar img {
+  width: 100%;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 0.25rem;
+  -webkit-border-radius: 0.25rem;
+  -moz-border-radius: 0.25rem;
+  -ms-border-radius: 0.25rem;
+  -o-border-radius: 0.25rem;
+}
+.stickyheader .linkswrapper {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+.stickyheader .shsociallink {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+.stickyheader .shsociallink span {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 1.5rem;
+  height: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 1em;
+  color: var(--foreground-50);
+  line-height: 0;
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+  border: 1px solid rgb(87 87 87 / 50%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(30, 30, 30, 1) 100%
+  );
+  transition: background-color 0.3s ease-out;
+  -webkit-transition: background-color 0.3s ease-out;
+  -moz-transition: background-color 0.3s ease-out;
+  -ms-transition: background-color 0.3s ease-out;
+  -o-transition: background-color 0.3s ease-out;
+}
+.stickyheader .shsociallink:hover span {
+  background-color: var(--background-800);
+}
+.stickyheader .shsociallink p {
+  font-family: var(--font-museoModerno);
+  font-size: 0.75em;
+  font-weight: 400;
+  color: var(--foreground-200);
+  white-space: nowrap;
+  transition: color 0.3s ease-out;
+  -webkit-transition: color 0.3s ease-out;
+  -moz-transition: color 0.3s ease-out;
+  -ms-transition: color 0.3s ease-out;
+  -o-transition: color 0.3s ease-out;
+}
+.stickyheader .shsociallink:hover p {
+  color: var(--foreground-50);
+}
+@media only screen and (max-width: 648px) {
+  .stickyheader .shsociallink p {
+    display: none;
+  }
+}

@@ -1,0 +1,55 @@
+.badge {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  -webkit-border-radius: 0.75rem;
+  -moz-border-radius: 0.75rem;
+  -ms-border-radius: 0.75rem;
+  -o-border-radius: 0.75rem;
+  background: linear-gradient(226deg, #434343 0%, #000 71.68%);
+}
+.badge span {
+  font-size: 1.5em;
+  color: var(--foreground-50);
+  line-height: 0;
+}
+.tooltip {
+  display: flex;
+  position: absolute;
+  flex-wrap: nowrap;
+  width: fit-content;
+  max-width: 150px;
+  background-color: var(--background-900);
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+  z-index: 1;
+  bottom: 125%;
+  padding: 4px 6px;
+}
+.tooltip::after {
+  content: " ";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--background-900) transparent transparent transparent;
+  border-radius: 2px;
+}
+.tooltip p {
+  font-size: 1em;
+  font-weight: 200;
+  white-space: nowrap;
+}

@@ -1,324 +1,535 @@
 /* Post General Styles */
 .post {
-    display: grid;
-    grid-template-columns: 17.75rem 40.5rem 17.75rem;
-    position: relative;
-    column-gap: 2rem;
-    row-gap: 1rem;
+  display: grid;
+  grid-template-columns: 17.75rem 40.5rem 17.75rem;
+  max-width: 80rem;
+  position: relative;
+  column-gap: 2rem;
+  row-gap: 1rem;
 
-    margin: auto;
-    padding-top: 2rem;
+  margin: auto;
+  padding-top: 5.75rem;
 }
 @media only screen and (max-width: 1440px) {
-    .post {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        padding: 1.5rem;
-        margin-bottom: 6rem;
-    }
+  .post {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1.5rem;
+    margin-bottom: 6rem;
+  }
 }
-.post>* {
-    grid-column: 2;
+.post > * {
+  grid-column: 2;
 }
 
 .post code {
-    padding: 4px;
-    background-color: var(--neutral-950);
-    border-radius: 6px 8px;
+  padding: 4px;
+  background-color: var(--background-950);
+  border-radius: 6px 8px;
 }
 .post code[data-language=".token"] span {
-    color: var(--color-primary) !important;
+  color: var(--primary-500) !important;
 }
 /* Post Index */
 .post .index {
-    display: grid;
-    position: sticky;
-    grid-column: 3;
-    grid-row: 2;
-    top: 1.5rem;
-    height: 0px;
+  display: grid;
+  position: sticky;
+  grid-column: 3;
+  grid-row: 3;
+  top: 2rem;
+  height: 0px;
 
-    opacity: 0.3;
+  opacity: 0.3;
 
-    transition: opacity 0.3s ease-out;
+  transition: opacity 0.3s ease-out;
 }
 @media only screen and (max-width: 1440px) {
-    .post .index {
-        display: none;
-    }
+  .post .index {
+    display: none;
+  }
 }
 .post .index:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
 .post .index .wrapper {
-    display: grid;
-    position: absolute;
-    gap: 12px;
+  display: grid;
+  position: absolute;
+  gap: 12px;
 }
 
 .index .wrapper .title {
-    font-size: 1em;
-    color: var(--neutral-500);
-    font-weight: 500;
-    text-transform: uppercase;
+  font-size: 1em;
+  color: var(--background-500);
+  font-weight: 500;
+  text-transform: uppercase;
 }
 
 .index .wrapper .headings {
-    display: grid;
-    gap: 12px;
-    font-weight: 400;
-    font-size: 0.875em;
-    list-style: none;
+  display: grid;
+  gap: 12px;
+  font-weight: 400;
+  font-size: 0.875em;
+  list-style: none;
 }
 
 .wrapper .headings .subheadings {
-    gap: 8px;
-    color: var(--neutral-400);
-    font-weight: 200;
-    font-size: 0.75em;
-    list-style: none;
-    text-indent: 1.5em;
-    margin-top: 12px;
+  gap: 8px;
+  color: var(--background-400);
+  font-weight: 200;
+  font-size: 0.75em;
+  list-style: none;
+  text-indent: 1.5em;
+  margin-top: 12px;
 }
 
 .index .wrapper .headings a {
-    text-decoration: none;
-    appearance: none;
-    color: var(--neutral-200);
+  text-decoration: none;
+  appearance: none;
+  color: var(--background-200);
 }
 
 .index .wrapper .headings a:hover {
-    color: var(--neutral-50);
-    text-decoration: underline;
+  color: var(--background-50);
+  text-decoration: underline;
 }
 
 .index .wrapper .actions {
-    display: flex;
-    position: relative;
-    flex-direction: row;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .wrapper .actions .reactions {
-    display: flex;
-    position: relative;
-    flex-direction: row;
-    width: fit-content;
-    height: fit-content;
-    align-items: flex-start;
-    gap: 8px;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  width: fit-content;
+  height: fit-content;
+  align-items: flex-start;
+  gap: 8px;
 }
 
 .wrapper .actions .totop p {
-    font-size: 1em;
-    font-weight: 400;
-    color: var(--neutral-300);
-    text-transform: uppercase;
+  font-family: var(--font-outfit);
+  font-size: 1em;
+  font-weight: 400;
+  color: var(--background-300);
+  text-transform: uppercase;
 }
 
 .wrapper .actions .totop:hover p {
-    color: var(--neutral-50);
+  color: var(--background-50);
 }
 /* Headings */
 .post .header {
-    display: grid;
+  display: grid;
 
-    width: 60.25rem;
+  width: 60.25rem;
 
-    grid-column-start: 2;
-    grid-column-end: 3;
+  grid-column-start: 2;
+  grid-column-end: 3;
 
-    gap: 1rem;
-    padding-bottom: 2rem;
+  gap: 1rem;
+  padding-bottom: 2rem;
 }
 @media only screen and (max-width: 1440px) {
-    .post .header {
-        width: 100%;
-    }
+  .post .header {
+    width: 100%;
+  }
 }
 .header h1 {
-    font-size: 3em;
-    font-style: normal;
-    font-weight: 600;
-    color: var(--neutral-100);
-    text-align: left;
-    text-transform: capitalize;
-    text-wrap: wrap;
+  font-family: var(--font-museoModerno);
+  line-height: 112%;
+  font-size: 3em;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--background-200);
+  text-align: left;
+  text-transform: capitalize;
+  text-wrap: wrap;
 }
 
 .header .header_details {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    gap: 12px;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  gap: 1.5rem;
+  width: fit-content;
 }
 
 .header_details p {
-    font-size: 1.25em;
-    font-weight: 300;
-    color: var(--neutral-100);
-    text-align: left;
+  font-size: 1.25em;
+  font-weight: 300;
+  color: var(--background-300);
+  text-align: left;
 }
 
 .post h1 a,
 .post h2 a {
-    display: flex;
-    position: relative;
-    color: var(--neutral-50);
-    font-size: 1.5em;
-    text-decoration: none;
-    appearance: none;
+  display: flex;
+  position: relative;
+  color: var(--background-50);
+  font-size: 1.5em;
+  text-decoration: none;
+  appearance: none;
 }
 
 .post h2 a {
-    font-size: 1em;
+  font-size: 1em;
 }
 
 .post h1 a::before,
 .post h2 a::before {
-    content: "#";
-    color: var(--neutral-400);
-    position: absolute;
-    left: -1em;
-    /* Adjust as needed to position the # to the left of the a element */
-    top: 50%;
-    transform: translateY(-50%);
-    /* Center vertically */
-    opacity: 0;
-    /* Initially hidden */
-    transition: opacity 0.2s;
-    /* Smooth transition for hover effect */
+  content: "#";
+  color: var(--background-400);
+  position: absolute;
+  left: -1em;
+  /* Adjust as needed to position the # to the left of the a element */
+  top: 50%;
+  transform: translateY(-50%);
+  /* Center vertically */
+  opacity: 0;
+  /* Initially hidden */
+  transition: opacity 0.2s;
+  /* Smooth transition for hover effect */
 }
 
 .post h1 a:hover::before,
 .post h2 a:hover::before {
-    opacity: 1;
-    /* Show the # sign on hover */
+  opacity: 1;
+  /* Show the # sign on hover */
 }
 
 /* Ordered Lists */
 .post ul {
-    display: grid;
-    gap: 12px;
+  display: grid;
+  gap: 12px;
 }
 
 .post p,
 .post li {
-    font-size: 1.25em;
+  font-size: 1.25em;
 }
 
 .post ul[data-aside-image="true"] {
-    display: grid;
-    align-items: center;
-    padding: 12px;
-    background-color: var(--neutral-950);
-    border-radius: 1rem;
-    text-align: center;
-    color: var(--neutral-alt);
-    list-style: none;
+  display: grid;
+  align-items: center;
+  padding: 12px;
+  background-color: var(--background-950);
+  border-radius: 1rem;
+  text-align: center;
+  color: var(--foreground-50);
+  list-style: none;
 
-    gap: unset;
+  gap: unset;
 }
 
 /* Dividers */
 .post hr {
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-    border: 1px solid var(--neutral-950);
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid var(--background-950);
 }
 
 /* Code Blocs */
 .post div[data-rehype-pretty-code-fragment] {
-    display: grid;
-    gap: 8px;
+  display: grid;
+  gap: 8px;
 }
 
 .post div[data-rehype-pretty-code-title] {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    width: fit-content;
-    height: fit-content;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--neutral-100);
-    color: var(--neutral-absolute);
-    font-size: 0.875em;
-    font-weight: 500;
-    border-radius: 10px;
-    padding: 4px 12px;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: fit-content;
+  height: fit-content;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background-900);
+  color: var(--foreground-50);
+  font-size: 0.875em;
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 4px 12px;
 }
 
 .post pre {
-    overflow: scroll;
-    padding: 1rem 0;
-    border-radius: 1rem;
+  overflow: scroll;
+  padding: 1rem 0;
+  border-radius: 1rem;
 
-    background-color: var(--neutral-900) !important;
+  background-color: var(--background-950) !important;
 
-    border: var(--code-block-border-color);
+  border: 1px solid rgba(250, 84, 28, 0.15);
 
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
-    -ms-overflow-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+  -ms-overflow-style: none;
 }
 
 .post pre::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .post pre code {
-    display: grid;
-    background: none;
-    padding: 0;
-    border-radius: unset;
+  display: grid;
+  background: none;
+  padding: 0;
+  border-radius: unset;
 }
 
-.post pre code>span {
-    padding: 3px 1rem;
+.post pre code > span {
+  padding: 3px 1rem;
 }
 
 .post pre code span[data-highlighted-line] {
-    border-left: 2px solid var(--color-primary);
-    background-color: var(--highlight-line-bg-color);
+  border-left: 2px solid var(--color-primary);
+  background-color: var(--highlight-line-bg-color);
 }
 
 .post pre code[data-line-numbers] {
-    counter-reset: line;
-    /* Initialize the line counter */
-    position: relative;
-    display: grid;
+  counter-reset: line;
+  /* Initialize the line counter */
+  position: relative;
+  display: grid;
 }
 
-.post pre code[data-line-numbers]>span {
-    counter-increment: line;
-    /* Increment the line counter for each line */
-    position: relative;
-    /* Make it the stacking context for the ::before pseudo-element */
+.post pre code[data-line-numbers] > span {
+  counter-increment: line;
+  /* Increment the line counter for each line */
+  position: relative;
+  /* Make it the stacking context for the ::before pseudo-element */
 }
 
-.post pre code[data-line-numbers]>span::before {
-    content: counter(line);
-    /* Display the current line number */
-    display: inline-block;
-    width: 1em;
-    /* You might need to adjust this depending on the font size/expected max line number */
-    text-align: right;
-    margin-right: 1em;
-    /* Spacing between line numbers and code content */
-    color: var(--neutral-500);
-    /* Lighter color for line numbers. Adjust as needed */
+.post pre code[data-line-numbers] > span::before {
+  content: counter(line);
+  /* Display the current line number */
+  display: inline-block;
+  width: 1em;
+  /* You might need to adjust this depending on the font size/expected max line number */
+  text-align: right;
+  margin-right: 1em;
+  /* Spacing between line numbers and code content */
+  color: var(--background-500);
+  /* Lighter color for line numbers. Adjust as needed */
 }
 
-.post pre code[data-line-numbers]>span[data-highlighted-line]::before {
-    color: var(--neutral-50);
+.post pre code[data-line-numbers] > span[data-highlighted-line]::before {
+  color: var(--background-50);
 }
 
 .post {
-    color: var(--neutral-50);
+  color: var(--background-50);
+}
+.goback {
+  display: flex;
+  position: sticky;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  align-items: center;
+  grid-column: 1;
+  grid-row: 2;
+  align-self: flex-start;
+  justify-self: center;
+  padding-top: 0.5rem;
+  top: 2.5rem;
+  z-index: 0;
+}
+@media only screen and (max-width: 1440px) {
+  .goback {
+    position: relative;
+    top: unset;
+  }
+}
+.goback .gobackbutton {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+.goback .gobackbutton span {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background-950);
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+  font-size: 1.5em;
+  color: var(--foreground-50);
+  line-height: 0;
+  transition: font-size 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  -webkit-transition: font-size 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  -moz-transition: font-size 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  -ms-transition: font-size 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  -o-transition: font-size 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.goback .gobackbutton:hover span {
+  font-size: 1.875em;
+}
+.goback .gobackbutton p {
+  font-size: 1em;
+  font-weight: 400;
+  color: var(--foreground-300);
+  transition: color 0.4s ease-out;
+  -webkit-transition: color 0.4s ease-out;
+  -moz-transition: color 0.4s ease-out;
+  -ms-transition: color 0.4s ease-out;
+  -o-transition: color 0.4s ease-out;
+}
+.goback .gobackbutton:hover p {
+  color: var(--foreground-50);
+}
+.detailswrapper {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 1rem;
+}
+.detailswrapper .detailpill {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+.detailswrapper .detailpill span {
+  font-size: 1.25em;
+  color: var(--foreground-200);
+  line-height: 0;
+}
+.detailswrapper .detailpill p {
+  font-size: 0.875em;
+  font-weight: 300;
+  color: var(--foreground-200);
+}
+.mobileactionswrapper {
+  display: none;
+  position: fixed;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: fit-content;
+  height: fit-content;
+  gap: 1rem;
+  bottom: 2rem;
+  right: 2rem;
+  opacity: 0.5;
+  transition: opacity 0.3s ease-out;
+  -webkit-transition: opacity 0.3s ease-out;
+  -moz-transition: opacity 0.3s ease-out;
+  -ms-transition: opacity 0.3s ease-out;
+  -o-transition: opacity 0.3s ease-out;
+}
+.mobileactionswrapper:hover {
+  opacity: 1;
+}
+@media only screen and (max-width: 1440px) {
+  .mobileactionswrapper {
+    display: flex;
+  }
+}
+.mobileactionswrapper .gobackmobile {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background-950);
+  border-radius: 0.75rem;
+  -webkit-border-radius: 0.75rem;
+  -moz-border-radius: 0.75rem;
+  -ms-border-radius: 0.75rem;
+  -o-border-radius: 0.75rem;
+}
+.mobileactionswrapper .gobackmobile span {
+  font-size: 1.5em;
+  color: var(--foreground-300);
+  line-height: 0;
+  transition: font-size, color 0.3s ease-out;
+  -webkit-transition: font-size, color 0.3s ease-out;
+  -moz-transition: font-size, color 0.3s ease-out;
+  -ms-transition: font-size, color 0.3s ease-out;
+  -o-transition: font-size, color 0.3s ease-out;
+}
+.mobileactionswrapper .gobackmobile:hover span {
+  font-size: 2em;
+  color: var(--foreground-50);
+}
+.mobileactionswrapper .likemobile {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+  width: fit-content;
+  height: fit-content;
+
+  align-items: center;
+}
+.mobileactionswrapper .likemobile .likemobilebutton {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background-950);
+  scale: 1;
+  filter: blur(0);
+  border-radius: 0.75rem;
+  -webkit-border-radius: 0.75rem;
+  -moz-border-radius: 0.75rem;
+  -ms-border-radius: 0.75rem;
+  -o-border-radius: 0.75rem;
+}
+.likemobilebutton[data-hover="true"] {
+  border-radius: 10px;
+  scale: 1.12;
+  filter: blur(0.3px);
+}
+.likemobilebutton div {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+
+  width: 2rem;
+  height: 2rem;
+
+  align-items: center;
+  justify-content: center;
+
+  scale: 1;
+}
+.likemobilebutton[data-hover="true"] div {
+  scale: 1.3;
+}
+.likemobilebutton div svg {
+  font-size: 1.5em;
+  color: var(--background-100);
+}
+.likemobilebutton[data-liked="true"] div svg {
+  color: var(--foreground-50);
 }

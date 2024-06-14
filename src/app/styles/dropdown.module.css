@@ -1,0 +1,82 @@
+.dropdown {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  -webkit-border-radius: 0.75rem;
+  -moz-border-radius: 0.75rem;
+  -ms-border-radius: 0.75rem;
+  -o-border-radius: 0.75rem;
+  background-color: var(--background-900);
+  cursor: pointer;
+}
+.dropdown span {
+  font-size: 1.25em;
+  line-height: 0;
+  color: var(--foreground-50);
+}
+.optionscontainer {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: fit-content;
+  max-width: 20rem;
+  gap: 4px;
+  align-items: flex-start;
+  border-radius: 0.75rem;
+  -webkit-border-radius: 0.75rem;
+  -moz-border-radius: 0.75rem;
+  -ms-border-radius: 0.75rem;
+  -o-border-radius: 0.75rem;
+  background-color: var(--background-900);
+  top: 120%;
+  left: 0;
+  padding: 0.75rem 0.5rem;
+  z-index: 5;
+}
+.ddoption {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: fit-content;
+  min-width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 0.5rem;
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  -ms-border-radius: 0.5rem;
+  -o-border-radius: 0.5rem;
+  background: none;
+  transition: border 0.3s ease-out;
+  -webkit-transition: border 0.3s ease-out;
+  -moz-transition: border 0.3s ease-out;
+  -ms-transition: border 0.3s ease-out;
+  -o-transition: border 0.3s ease-out;
+}
+.ddoption span {
+  font-size: 1em;
+  line-height: 0;
+  color: var(--foreground-50);
+}
+.ddoption p {
+  font-size: 0.875em;
+  font-weight: 300;
+  color: var(--foreground-50);
+  white-space: nowrap;
+}
+.ddoption:hover {
+  outline: 1px solid var(--foreground-50);
+}
+.ddoption[data-isactive="true"] {
+  outline: 1px solid var(--foreground-50);
+}

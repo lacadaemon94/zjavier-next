@@ -5,21 +5,25 @@ import { SessionProvider } from "./utils/SessionProvider";
 import "./styles/globals.css";
 
 // Global Assets
-import { Outfit } from "next/font/google";
+import { Outfit, MuseoModerno } from "next/font/google";
 
 // Global Elements
-import { Topbar } from "./components/Topbar/Topbar";
-import { Leftbar } from "./components/LeftBar/LeftBar";
 
 const outfit = Outfit({
   subsets: ["latin-ext"],
   display: "swap",
-  variable: '--font-outfit'
+  variable: "--font-outfit",
+});
+
+const museoModerno = MuseoModerno({
+  subsets: ["latin-ext"],
+  display: "swap",
+  variable: "--font-museoModerno",
 });
 
 export const metadata = {
   title: {
-    template: 'Javier Flores | %s',
+    template: "Javier Flores | %s",
     default: "Full Stack Developer",
   },
   description:
@@ -68,15 +72,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es">
-      <body className={outfit.className}>
-        <SessionProvider>
-          <Topbar></Topbar>
-          <div className='hwrapper' id="content">
-            <Leftbar />
-            {children}
-          </div>
-        </SessionProvider>
+    <html lang="en">
+      <body className={`${outfit.variable} ${museoModerno.variable}`}>
+        <SessionProvider>{children}</SessionProvider>
       </body>
     </html>
   );

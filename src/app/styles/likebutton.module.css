@@ -27,7 +27,7 @@
 
     border-radius: 8px;
 
-    background-color: var(--neutral-950);
+    background-color: var(--background-950);
 
     scale: 1;
 
@@ -41,7 +41,7 @@
 }
 
 .likebutton[data-liked="true"] {
-    background-color: var(--color-primary);
+    background-color: var(--primary-500);
     cursor: default;
 }
 
@@ -65,11 +65,11 @@
 
 .likebutton div svg {
     font-size: 1.5em;
-    color: var(--neutral-100);
+    color: var(--background-100);
 }
 
 .likebutton[data-liked="true"] div svg {
-    color: var(--color-seasalt);
+    color: var(--foreground-50);
 }
 .counter {
     display: flex;

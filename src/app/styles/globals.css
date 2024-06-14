@@ -2,111 +2,63 @@
 /* ---------------------------------------------------------- /*
 # Table of Contents
 
-- Vars
+- Colors
 - UI Base
-- Font Base Styling
-- Layout Styling
-- 
 
 /* Variables
 /* ---------------------------------------------------------- */
-
 :root {
-  /* Colors */
-  --color-night: #0C0C0C;
-  --color-seasalt: #F6FBFC;
-  --color-risdblue: #1B53FA;
-  --color-giantsorange: #FA541C;
-  --color-semantic-warning: #ffd014;
-  --color-semantic-safety: #1250ff;
-  --color-semantic-success: #43db53;
-  --color-semantic-danger: #ff1c22;
-
-  /* Outer Margins */
-  --margin-outer-desktop: 4rem;
-  --margin-outer-tablet: 3rem;
-  --margin-outer-mobile: 1.5rem;
-}
-
-/* :root[data-theme="light"] {
-  --bg-loading: #d6eeff;
-  --background-radial-one: rgb(255, 255, 255, 1);
-  --background-radial-two: rgba(246, 251, 252, 1);
-  --color-primary: #1b53fa;
-  --color-secondary: #fa541c;
-  --neutral-absolute: #f6fbfc;
-  --neutral-alt: #0c0c0c;
-  --neutral-50: #0b205b;
-  --input-placeholder: #6073a9;
-  --neutral-100: #0b3ec8;
-  --neutral-200: #0b3ec8;
-  --neutral-300: #1b53fa;
-  --neutral-400: #1250ff;
-  --neutral-500: #357cff;
-  --neutral-600: #5aa2ff;
-  --neutral-700: #89c8ff;
-  --neutral-800: #b5dfff;
-  --neutral-900: #d6eeff;
-  --neutral-950: #e8f7ff;
-  --menubars-bg: #d6eeff;
-  --menu-button: #0b205b;
-  --navlink-active-bg: #357cff;
-  --navlink-active-color: #e8f7ff;
-  --button-hover: #b5dfff;
-  --logo-bg: #0b205b;
-  --scrollbar-color: #1b53fa transparent;
-  --code-block-border-color: 1px solid rgba(27, 83, 250, 0.10);
-  --highlight-line-bg-color: rgba(27, 83, 250, 0.15);
-}
-
-:root[data-theme="dark"] pre[data-theme='light'],
-:root[data-theme="dark"] code[data-theme='light'],
-:root[data-theme="dark"] div[data-rehype-pretty-code-title][data-theme="light"] {
-    display: none;
-} */
-
-:root {
-  --bg-loading: #100e0c;
+  /* Splashscreen Background */
+  --bg-splashcreen: #100e0c;
+  /* Global Background Steps */
   --background-radial-one: rgb(0, 0, 0, 1);
   --background-radial-two: rgba(12, 12, 12, 1);
-  --color-primary: #fa541c;
-  --color-secondary: #1b53fa;
-  --neutral-absolute: #0c0c0c;
-  --neutral-alt: #f6fbfc;
-  --neutral-950: #1e1e1e;
-  --neutral-900: #1e1e1e;
-  --neutral-800: #414141;
-  --neutral-700: #525252;
-  --neutral-600: #636363;
-  --neutral-500: #757575;
-  --neutral-400: #868686;
-  --neutral-300: #979797;
-  --neutral-200: #a8a8a8;
-  --neutral-100: #bababa;
-  --neutral-50: #cbcbcb;
-  --input-placeholder: #979797;
-  --menubars-bg: #1e1e1e;
-  --menu-button: #f6fbfc;
-  --navlink-active-bg: #dcdcdc;
-  --navlink-active-color: #1e1e1e;
-  --button-hover: #2f2f2f;
-  --logo-bg: #f6fbfc;
-  --scrollbar-color: #fa541c transparent;
-  --code-block-border-color: 1px solid rgba(250, 84, 28, 0.10);
-  --highlight-line-bg-color: rgba(250, 84, 28, 0.08);
+  /* Primary Color Scale */
+  --primary-50: #fff4ed;
+  --primary-100: #ffe6d5;
+  --primary-200: #fecaaa;
+  --primary-300: #fea473;
+  --primary-400: #fc743b;
+  --primary-500: #fa541c;
+  --primary-600: #eb350b;
+  --primary-700: #c3240b;
+  --primary-800: #9b1e11;
+  --primary-900: #7c1c12;
+  --primary-950: #430b07;
+  --primary-1000: #140500;
+  /* Background Scale */
+  --background-50: #f6f6f6;
+  --background-100: #e7e7e7;
+  --background-200: #d1d1d1;
+  --background-300: #b0b0b0;
+  --background-400: #888888;
+  --background-500: #6d6d6d;
+  --background-600: #5d5d5d;
+  --background-700: #4f4f4f;
+  --background-800: #454545;
+  --background-900: #3d3d3d;
+  --background-950: #1e1e1e;
+  --background-1100: #0c0c0c;
+  /* Foreground Scale */
+  --foreground-50: #f5f5f5;
+  --foreground-100: #efefef;
+  --foreground-200: #dcdcdc;
+  --foreground-300: #bdbdbd;
+  --foreground-400: #989898;
+  --foreground-500: #7c7c7c;
+  --foreground-600: #656565;
+  --foreground-700: #525252;
+  --foreground-800: #464646;
+  --foreground-900: #3d3d3d;
+  --foreground-950: #292929;
 }
 
-/* :root[data-theme="light"] pre[data-theme='dark'],
-:root[data-theme="light"] code[data-theme='dark'],
-:root[data-theme="light"] div[data-rehype-pretty-code-title][data-theme="dark"] {
-    display: none;
-} */
+/* UI Base
+/* ---------------------------------------------------------- */
 
 * {
   font-style: normal;
   scroll-behavior: smooth;
-  scrollbar-color: var(--scrollbar-color);
-  scrollbar-width: thin;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -121,44 +73,41 @@
 }
 
 ::-webkit-scrollbar {
-  width: 2px;
-  background-color: transparent;
+  width: 6px;
+  background-color: var(--background-950);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--color-primary);
-  height: 32px;
+  background-color: var(--primary-500);
+  height: 8%;
   border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+}
+
+@-moz-document url-prefix() {
+  * {
+    scrollbar-color: var(--primary-500) transparent;
+    scrollbar-width: thin;
+  }
 }
 
 html,
 body {
-  background: radial-gradient(52.2% 133.67% at 3.36% 6.62%,
-      var(--background-radial-one) 0%,
-      var(--background-radial-two) 100%);
-  position: relative;
+  font-family: var(--font-outfit);
+  background: radial-gradient(
+    52.2% 133.67% at 3.36% 6.62%,
+    var(--background-radial-one) 0%,
+    var(--background-radial-two) 100%
+  );
   max-width: 100vw;
   min-height: 100vh;
   z-index: 5;
 }
 
-.hwrapper {
-  display: flex;
-  position: relative;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  width: 100%;
-  height: 58.5rem;
-}
-@media only screen and (max-width: 1440px) {
-  .hwrapper {
-    justify-content: center;
-    height: fit-content;
-    padding: clamp(1.5rem, 2vw, 2rem) 0 0 0;
-  }
-}
 button {
-  font-family: var(--font-outfit);
   box-shadow: none;
   outline: none;
   border: none;
@@ -166,8 +115,6 @@ button {
 
   cursor: pointer;
   background-color: unset;
-
-  transition: background-color 0.3s ease-out;
 }
 
 a {
@@ -179,11 +126,10 @@ a {
 
   cursor: pointer;
   background-color: unset;
-
-  transition: background-color 0.3s ease-out;
 }
 
-input, textarea {
+input,
+textarea {
   border: none;
   appearance: none;
   box-shadow: none;

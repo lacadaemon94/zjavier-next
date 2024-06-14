@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from "framer-motion";
 // Styles
 import styles from "../../styles/likebutton.module.css";
 // Ui Elements
-import Button from "@/app/elements/buttons/Button";
 
 type Props = {
   likes: number;

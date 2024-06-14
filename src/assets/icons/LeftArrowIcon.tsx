@@ -20,10 +20,10 @@ const LeftArrowIcon = ({
   >
     {title ? <title id={titleId}>{title}</title> : null}
     <path
-      fill="currentColor"
-      fillRule="evenodd"
-      d="M11.78 17.271a.75.75 0 0 1-1.06 0l-4.5-4.5a.75.75 0 0 1 0-1.06l4.5-4.5a.75.75 0 0 1 1.06 1.06l-3.22 3.22h8.69a.75.75 0 0 1 0 1.5H8.56l3.22 3.22a.75.75 0 0 1 0 1.06Z"
-      clipRule="evenodd"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M4 12h16M9 17s-5-3.682-5-5 5-5 5-5"
     />
   </svg>
 )

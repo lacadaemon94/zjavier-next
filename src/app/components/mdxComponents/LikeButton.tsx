@@ -3,12 +3,12 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 // Utils
-import { fetchLikes, saveLike } from "@/app/utils/fetchLikes";
+import { fetchLikes, saveLike } from "@/app/utils/likesUtil";
 // Styles
 import styles from "../../styles/likebutton.module.css";
 // Icons
-import HeartIconOutline from "@/assets/icons/HeartIconOutline";
-import HeartIconFilled from "@/assets/icons/HeartIconFilled";
+import LikeIcon from "@/assets/icons/LikeIcon";
+import LikeFilledIcon from "@/assets/icons/LikeFilledIcon";
 import { Counter } from "./LikeCounter";
 
 type Props = {
@@ -71,7 +71,7 @@ export const LikeButton = ({ flatPath }: Props) => {
                 type: "spring",
               }}
             >
-              <HeartIconFilled />
+              <LikeFilledIcon />
             </motion.div>
           ) : (
             <motion.div
@@ -93,7 +93,7 @@ export const LikeButton = ({ flatPath }: Props) => {
                 type: "spring",
               }}
             >
-              <HeartIconOutline />
+              <LikeIcon />
             </motion.div>
           )}
         </AnimatePresence>

@@ -47,7 +47,7 @@ async function headers() {
                 },
                 {
                     key: "Content-Security-Policy",
-                    value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://www.gstatic.com; img-src 'self' https://translate.google.com https://translate.googleapis.com https://www.google.com https://fonts.gstatic.com https://www.gstatic.com data:; connect-src https://translate.googleapis.com 'self' https://gotiwsqjyxonlyoehgek.supabase.co; manifest-src 'self'; script-src-elem 'self' 'unsafe-inline' https://translate.google.com https://translate.googleapis.com https://translate-pa.googleapis.com;",
+                    value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://www.gstatic.com; img-src 'self' https://translate.google.com https://translate.googleapis.com https://www.google.com https://fonts.gstatic.com https://www.gstatic.com data:; connect-src https://translate.googleapis.com 'self' https://jfmddohpgjczdcpdjcwj.supabase.co; manifest-src 'self'; script-src-elem 'self' 'unsafe-inline' https://translate.google.com https://translate.googleapis.com https://translate-pa.googleapis.com;",
                 }
             ],
         },
