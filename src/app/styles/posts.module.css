@@ -458,6 +458,11 @@
   -moz-border-radius: 0.75rem;
   -ms-border-radius: 0.75rem;
   -o-border-radius: 0.75rem;
+  box-shadow: 0px 26px 7px 0px rgba(135, 135, 135, 0),
+    0px 17px 7px 0px rgba(135, 135, 135, 0.02),
+    0px 9px 6px 0px rgba(135, 135, 135, 0.06),
+    0px 4px 4px 0px rgba(135, 135, 135, 0.1),
+    0px 1px 2px 0px rgba(135, 135, 135, 0.12);
 }
 .mobileactionswrapper .gobackmobile span {
   font-size: 1.5em;
@@ -501,6 +506,11 @@
   -moz-border-radius: 0.75rem;
   -ms-border-radius: 0.75rem;
   -o-border-radius: 0.75rem;
+  box-shadow: 0px 26px 7px 0px rgba(135, 135, 135, 0),
+    0px 17px 7px 0px rgba(135, 135, 135, 0.02),
+    0px 9px 6px 0px rgba(135, 135, 135, 0.06),
+    0px 4px 4px 0px rgba(135, 135, 135, 0.1),
+    0px 1px 2px 0px rgba(135, 135, 135, 0.12);
 }
 .likemobilebutton[data-hover="true"] {
   border-radius: 10px;
