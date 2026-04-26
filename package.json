@@ -8,7 +8,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "content": "contentlayer dev",
+    "sync-posts": "node scripts/updateDatabase.mjs",
+    "check": "npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.31.0",
