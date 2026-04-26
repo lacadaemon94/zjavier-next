@@ -43,7 +43,18 @@ const Tag = defineNestedType(() => ({
   },
 }));
 
-const allCategoryNames = ["Tutorial", "Opinion", "Note"];
+const allCategoryNames = [
+  "Tutorial",
+  "Opinion",
+  "Note",
+  "Case Study",
+  "Build Log",
+  "Automation",
+  "AI",
+  "Web Development",
+  "Product",
+  "Career",
+];
 
 const Post = defineDocumentType(() => ({
   name: "Post",
@@ -76,6 +87,31 @@ const Post = defineDocumentType(() => ({
       type: "list",
       of: { type: "string" },
       required: true,
+    },
+    language: {
+      type: "enum",
+      options: ["en", "es"],
+      required: true,
+    },
+    updatedAt: {
+      type: "string",
+      required: false,
+    },
+    featured: {
+      type: "boolean",
+      required: false,
+    },
+    coverPrompt: {
+      type: "string",
+      required: false,
+    },
+    socialSummary: {
+      type: "string",
+      required: false,
+    },
+    canonicalUrl: {
+      type: "string",
+      required: false,
     },
   },
   computedFields: {
