@@ -1,11 +1,21 @@
 import { useState, useEffect } from "react";
-import { allPosts, Post } from "contentlayer/generated";
+import { Post } from "contentlayer/generated";
+import { getPublishedPosts } from "./posts/getPublishedPosts";
+
+const publishedPosts = getPublishedPosts();
 
 export const categories = {
   ALL: "All",
   TUTORIAL: "Tutorial",
   OPINION: "Opinion",
   NOTE: "Note",
+  CASE_STUDY: "Case Study",
+  BUILD_LOG: "Build Log",
+  AUTOMATION: "Automation",
+  AI: "AI",
+  WEB_DEVELOPMENT: "Web Development",
+  PRODUCT: "Product",
+  CAREER: "Career",
 } as const;
 
 export type Category = (typeof categories)[keyof typeof categories];
@@ -19,14 +29,14 @@ const useFilteredPosts = () => {
     categories.ALL
   );
 
-  const [filteredPosts, setFilteredPosts] = useState<Post[]>(allPosts);
+  const [filteredPosts, setFilteredPosts] = useState<Post[]>(publishedPosts);
 
   useEffect(() => {
     if (selectedCategory === categories.ALL) {
-      setFilteredPosts(allPosts);
+      setFilteredPosts(publishedPosts);
     } else {
       setFilteredPosts(
-        allPosts.filter((post) => post.category === selectedCategory)
+        publishedPosts.filter((post) => post.category === selectedCategory)
       );
     }
   }, [selectedCategory]);

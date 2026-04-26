@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
-import { allPosts, Post } from "contentlayer/generated";
+import { Post } from "contentlayer/generated";
+import { getPublishedPosts } from "./posts/getPublishedPosts";
 import { fetchLikesAndViews } from "./fetchLikesAndViews";
+
+const publishedPosts = getPublishedPosts();
 
 export const categories = {
   ALL: "All",
@@ -29,13 +32,13 @@ const useFilteredAndSortedPosts = () => {
   );
   const [sortType, setSortType] = useState<SortType>(sortings.DATE);
   const [filteredAndSortedPosts, setFilteredAndSortedPosts] =
-    useState<any>(allPosts);
+    useState<any>(publishedPosts);
 
   useEffect(() => {
     const fetchAndCombineData = async () => {
       const likesAndViews = await fetchLikesAndViews();
 
-      const mergedPosts = allPosts.map((post) => {
+      const mergedPosts = publishedPosts.map((post) => {
         const stats = likesAndViews.find((item) => item.slug === post.slug);
         return {
           ...post,
