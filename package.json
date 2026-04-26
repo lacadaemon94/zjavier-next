@@ -4,14 +4,12 @@
   "private": true,
   "scripts": {
     "generate": "npx contentlayer dev",
-    "post": "node scripts/updateDatabase.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "content": "contentlayer dev",
-    "sync-posts": "node scripts/updateDatabase.mjs",
     "check": "npm run lint && npm run typecheck && npm run build"
   },
   "dependencies": {
