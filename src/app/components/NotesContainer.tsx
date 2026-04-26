@@ -4,7 +4,8 @@ import React from "react";
 // Utils
 import { useDropdownState } from "../utils/useDropDownState";
 import useFilteredAndSortedPosts from "../utils/useFilteredAndSortedPosts";
-import { categories, sortings } from "../utils/useFilteredAndSortedPosts";
+import { FILTER_CATEGORIES as categories } from "../constants/postCategories";
+import { sortings } from "../utils/useFilteredAndSortedPosts";
 // Ui Elements
 import { Posts } from "./notes/Posts";
 import DropDown from "./DropDown/DropDown";
