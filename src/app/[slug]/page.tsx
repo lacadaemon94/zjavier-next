@@ -1,6 +1,9 @@
 // Notes Posts - app/notes/[slug]/page.tsx
 import React from "react";
-import { allPosts } from "contentlayer/generated";
+import {
+  getPublishedPostBySlug,
+  getPublishedPosts,
+} from "../utils/posts/getPublishedPosts";
 import { Metadata, ResolvingMetadata } from "next";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import { notFound } from "next/navigation";
@@ -25,7 +28,7 @@ import styles from "../styles/posts.module.css";
 import LeftArrowIcon from "@/assets/icons/LeftArrowIcon";
 
 export async function generateStaticParams() {
-  return allPosts.map((post) => ({
+  return getPublishedPosts().map((post) => ({
     slug: post.slug,
   }));
 }
@@ -42,7 +45,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // read route params
-  const post = allPosts.find((post) => post.slug === params.slug);
+  const post = getPublishedPostBySlug(params.slug);
 
   if (!post) notFound();
 
@@ -53,7 +56,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default function Page({ params }: { params: { slug: string } }) {
   // Find the post for the current page.
-  const post = allPosts.find((post) => post.slug === params.slug);
+  const post = getPublishedPostBySlug(params.slug);
 
   // 404 if the post does not exist.
   if (!post) notFound();
