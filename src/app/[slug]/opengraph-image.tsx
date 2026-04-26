@@ -1,6 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import { ImageResponse } from "next/server";
-import { allPosts } from "contentlayer/generated";
+import {
+  getPublishedPostBySlug,
+  getPublishedPosts,
+} from "../utils/posts/getPublishedPosts";
 import format from "date-fns/format";
 
 export const runtime = "edge";
@@ -28,7 +31,7 @@ const museoModernoThin = async () => {
 };
 
 export async function generateStaticParams() {
-  return allPosts.map((post) => ({
+  return getPublishedPosts().map((post) => ({
     slug: post.slug,
   }));
 }
@@ -38,7 +41,7 @@ export default async function OpenGraph({
 }: {
   params: { slug: string };
 }) {
-  const post = allPosts.find((post) => post.slug === params.slug);
+  const post = getPublishedPostBySlug(params.slug);
   const boldFont = await museoModerno();
   const thinFont = await museoModernoThin();
 
