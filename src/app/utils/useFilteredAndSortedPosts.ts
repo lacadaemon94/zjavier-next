@@ -2,17 +2,12 @@ import { useState, useEffect } from "react";
 import { Post } from "contentlayer/generated";
 import { getPublishedPosts } from "./posts/getPublishedPosts";
 import { fetchLikesAndViews } from "./fetchLikesAndViews";
+import {
+  FILTER_CATEGORIES as categories,
+  type FilterCategory as Category,
+} from "../constants/postCategories";
 
 const publishedPosts = getPublishedPosts();
-
-export const categories = {
-  ALL: "All",
-  TUTORIAL: "Tutorial",
-  OPINION: "Opinion",
-  NOTE: "Note",
-} as const;
-
-export type Category = (typeof categories)[keyof typeof categories];
 
 export const sortings = {
   DATE: "date",
@@ -28,7 +23,7 @@ export type SortType = (typeof sortings)[keyof typeof sortings];
  */
 const useFilteredAndSortedPosts = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category>(
-    categories.ALL
+    categories.ALL,
   );
   const [sortType, setSortType] = useState<SortType>(sortings.DATE);
   const [filteredAndSortedPosts, setFilteredAndSortedPosts] =
@@ -52,7 +47,7 @@ const useFilteredAndSortedPosts = () => {
         filteredPosts = mergedPosts;
       } else {
         filteredPosts = mergedPosts.filter(
-          (post) => post.category === selectedCategory
+          (post) => post.category === selectedCategory,
         );
       }
 
@@ -61,15 +56,15 @@ const useFilteredAndSortedPosts = () => {
         sortedAndFilteredPosts = filteredPosts.sort(
           (a, b) =>
             new Date(b.publishedAt).getTime() -
-            new Date(a.publishedAt).getTime()
+            new Date(a.publishedAt).getTime(),
         );
       } else if (sortType === sortings.LIKES) {
         sortedAndFilteredPosts = filteredPosts.sort(
-          (a, b) => b.likes - a.likes
+          (a, b) => b.likes - a.likes,
         );
       } else if (sortType === sortings.VIEWS) {
         sortedAndFilteredPosts = filteredPosts.sort(
-          (a, b) => b.views - a.views
+          (a, b) => b.views - a.views,
         );
       }
 

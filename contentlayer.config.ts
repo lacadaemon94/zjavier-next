@@ -1,4 +1,5 @@
 // contentlayer.config.ts
+import { POST_CATEGORIES } from "./src/app/constants/postCategories";
 import {
   defineDocumentType,
   makeSource,
@@ -43,19 +44,6 @@ const Tag = defineNestedType(() => ({
   },
 }));
 
-const allCategoryNames = [
-  "Tutorial",
-  "Opinion",
-  "Note",
-  "Case Study",
-  "Build Log",
-  "Automation",
-  "AI",
-  "Web Development",
-  "Product",
-  "Career",
-];
-
 const Post = defineDocumentType(() => ({
   name: "Post",
   contentType: "mdx",
@@ -67,8 +55,8 @@ const Post = defineDocumentType(() => ({
       required: true,
     },
     category: {
-      type: 'enum',
-      options: allCategoryNames,
+      type: "enum",
+      options: [...POST_CATEGORIES],
       required: true,
     },
     excerpt: {
@@ -147,7 +135,7 @@ const Post = defineDocumentType(() => ({
               text: content,
               slug: content ? slugger.slug(content) : undefined,
             };
-          }
+          },
         );
 
         return headings;

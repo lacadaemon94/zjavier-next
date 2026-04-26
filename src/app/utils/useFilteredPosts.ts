@@ -1,24 +1,12 @@
 import { useState, useEffect } from "react";
 import { Post } from "contentlayer/generated";
 import { getPublishedPosts } from "./posts/getPublishedPosts";
+import {
+  FILTER_CATEGORIES as categories,
+  type FilterCategory as Category,
+} from "../constants/postCategories";
 
 const publishedPosts = getPublishedPosts();
-
-export const categories = {
-  ALL: "All",
-  TUTORIAL: "Tutorial",
-  OPINION: "Opinion",
-  NOTE: "Note",
-  CASE_STUDY: "Case Study",
-  BUILD_LOG: "Build Log",
-  AUTOMATION: "Automation",
-  AI: "AI",
-  WEB_DEVELOPMENT: "Web Development",
-  PRODUCT: "Product",
-  CAREER: "Career",
-} as const;
-
-export type Category = (typeof categories)[keyof typeof categories];
 
 /**
  * Custom hook to manage filtering of posts based on selected category
@@ -26,7 +14,7 @@ export type Category = (typeof categories)[keyof typeof categories];
  */
 const useFilteredPosts = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category>(
-    categories.ALL
+    categories.ALL,
   );
 
   const [filteredPosts, setFilteredPosts] = useState<Post[]>(publishedPosts);
@@ -36,7 +24,7 @@ const useFilteredPosts = () => {
       setFilteredPosts(publishedPosts);
     } else {
       setFilteredPosts(
-        publishedPosts.filter((post) => post.category === selectedCategory)
+        publishedPosts.filter((post) => post.category === selectedCategory),
       );
     }
   }, [selectedCategory]);
