@@ -40,11 +40,12 @@ const mdxComponents = {
 };
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = getPublishedPostBySlug(params.slug);
+  const { slug } = await params;
+  const post = getPublishedPostBySlug(slug);
 
   if (!post) notFound();
 
@@ -54,11 +55,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function Page({ params }: { params: { slug: string } }) {
-  // Find the post for the current page.
-  const post = getPublishedPostBySlug(params.slug);
+export default async function Page({ params }: Props) {
+  const { slug } = await params;
+  const post = getPublishedPostBySlug(slug);
 
-  // 404 if the post does not exist.
   if (!post) notFound();
 
   return (
