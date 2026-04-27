@@ -54,7 +54,6 @@ export default async function OpenGraph({
           alignItems: "flex-start",
           width: "100%",
           height: "100%",
-          zIndex: "3",
         }}
       >
         <div
@@ -67,7 +66,6 @@ export default async function OpenGraph({
             justifyContent: "space-between",
             alignItems: "flex-start",
             overflow: "hidden",
-            zIndex: "3",
           }}
         >
           <img
@@ -80,7 +78,6 @@ export default async function OpenGraph({
               position: "absolute",
               objectFit: "fill",
               objectPosition: "center",
-              zIndex: "0",
             }}
           />
           <div
