@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Post } from "contentlayer/generated";
-import { getPublishedPosts } from "./posts/getPublishedPosts";
+import type { Post } from "@/app/lib/posts/types";
+import { getPublishedPosts } from "@/app/lib/posts/getPosts";
 import {
   FILTER_CATEGORIES as categories,
   type FilterCategory as Category,

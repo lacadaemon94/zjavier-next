@@ -22,10 +22,13 @@ import SortIcon from "@/assets/icons/SortIcon";
 import DateSortIcon from "@/assets/icons/DateSortIcon";
 import LikeIcon from "@/assets/icons/LikeIcon";
 import ViewIcon from "@/assets/icons/ViewIcon";
+import type { PostWithStats } from "@/app/lib/posts/postWithStats";
 
-type Props = {};
+type Props = {
+  posts: PostWithStats[];
+};
 
-const NotesContainer = (props: Props) => {
+const NotesContainer = ({ posts }: Props) => {
   const filterDropDown = useDropdownState();
   const sortDropDown = useDropdownState();
 
@@ -35,7 +38,7 @@ const NotesContainer = (props: Props) => {
     handleSort,
     selectedCategory,
     sortType,
-  } = useFilteredAndSortedPosts();
+  } = useFilteredAndSortedPosts(posts);
 
   return (
     <div className={styles.notescontainer}>
