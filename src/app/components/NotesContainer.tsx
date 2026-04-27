@@ -29,8 +29,17 @@ type Props = {
 };
 
 const NotesContainer = ({ posts }: Props) => {
-  const filterDropDown = useDropdownState();
-  const sortDropDown = useDropdownState();
+  const {
+    isOpen: isFilterOpen,
+    toggleDropdown: toggleFilter,
+    ref: filterRef,
+  } = useDropdownState();
+
+  const {
+    isOpen: isSortOpen,
+    toggleDropdown: toggleSort,
+    ref: sortRef,
+  } = useDropdownState();
 
   const {
     filteredAndSortedPosts,
@@ -46,9 +55,9 @@ const NotesContainer = ({ posts }: Props) => {
         <DropDown
           icon={<FilterIcon />}
           ariaLabel="Filter"
-          isOpen={filterDropDown.isOpen}
-          toggleDropdown={filterDropDown.toggleDropdown}
-          ref={filterDropDown.ref}
+          isOpen={isFilterOpen}
+          toggleDropdown={toggleFilter}
+          ref={filterRef}
         >
           <DropDownOption
             icon={<AllIcon />}
@@ -82,9 +91,9 @@ const NotesContainer = ({ posts }: Props) => {
         <DropDown
           icon={<SortIcon />}
           ariaLabel="Sort"
-          isOpen={sortDropDown.isOpen}
-          toggleDropdown={sortDropDown.toggleDropdown}
-          ref={sortDropDown.ref}
+          isOpen={isSortOpen}
+          toggleDropdown={toggleSort}
+          ref={sortRef}
         >
           <DropDownOption
             icon={<DateSortIcon />}

@@ -17,17 +17,10 @@ const useFilteredPosts = () => {
     categories.ALL,
   );
 
-  const [filteredPosts, setFilteredPosts] = useState<Post[]>(publishedPosts);
-
-  useEffect(() => {
-    if (selectedCategory === categories.ALL) {
-      setFilteredPosts(publishedPosts);
-    } else {
-      setFilteredPosts(
-        publishedPosts.filter((post) => post.category === selectedCategory),
-      );
-    }
-  }, [selectedCategory]);
+  const filteredPosts =
+    selectedCategory === categories.ALL
+      ? publishedPosts
+      : publishedPosts.filter((post) => post.category === selectedCategory);
 
   /**
    * Handles the filter change
