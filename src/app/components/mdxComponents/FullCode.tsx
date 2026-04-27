@@ -20,19 +20,20 @@ export const FullCode = ({ children }: FullCodeProps) => {
   }
 
   const block = Children.map(children, (child, index) => {
-    if (
-      !isValidElement(child) ||
-      typeof child.props?.["data-rehype-pretty-code-fragment"] === "undefined"
-    ) {
+    if (!isValidElement(child)) return null;
+
+    const props = child.props as any;
+
+    if (typeof props["data-rehype-pretty-code-fragment"] === "undefined") {
       return null;
     }
 
     if (
-      typeof child.props.children?.[0]?.props?.[
-        "data-rehype-pretty-code-title"
+      typeof props.children?.[0]?.props?.[
+      "data-rehype-pretty-code-title"
       ] !== "undefined"
     ) {
-      let title = child.props.children[0].props.children.split("/");
+      let title = props.children[0].props.children.split("/");
       titles.push(title[title.length - 1]);
     }
 

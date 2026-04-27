@@ -7,7 +7,7 @@ import React from "react";
 import styles from "../../styles/dropdown.module.css";
 
 export type DropDownOption = {
-  icon?: JSX.Element;
+  icon?: React.JSX.Element;
   text?: string;
   title?: string;
   ariaLabel: string;

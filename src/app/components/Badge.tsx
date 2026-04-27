@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import styles from "../styles/badge.module.css";
 
 type BadgeProps = {
-  icon: JSX.Element;
+  icon: React.JSX.Element;
   tooltipText: string;
 };
 
