@@ -2,7 +2,7 @@
 import React from "react";
 
 type Props = {
-  icon?: JSX.Element;
+  icon?: React.JSX.Element;
   value?: string;
   className?: string;
 };

@@ -4,7 +4,8 @@ import React from "react";
 // Utils
 import { useDropdownState } from "../utils/useDropDownState";
 import useFilteredAndSortedPosts from "../utils/useFilteredAndSortedPosts";
-import { categories, sortings } from "../utils/useFilteredAndSortedPosts";
+import { FILTER_CATEGORIES as categories } from "../constants/postCategories";
+import { sortings } from "../utils/useFilteredAndSortedPosts";
 // Ui Elements
 import { Posts } from "./notes/Posts";
 import DropDown from "./DropDown/DropDown";
@@ -21,12 +22,24 @@ import SortIcon from "@/assets/icons/SortIcon";
 import DateSortIcon from "@/assets/icons/DateSortIcon";
 import LikeIcon from "@/assets/icons/LikeIcon";
 import ViewIcon from "@/assets/icons/ViewIcon";
+import type { PostWithStats } from "@/app/lib/posts/postWithStats";
 
-type Props = {};
+type Props = {
+  posts: PostWithStats[];
+};
 
-const NotesContainer = (props: Props) => {
-  const filterDropDown = useDropdownState();
-  const sortDropDown = useDropdownState();
+const NotesContainer = ({ posts }: Props) => {
+  const {
+    isOpen: isFilterOpen,
+    toggleDropdown: toggleFilter,
+    ref: filterRef,
+  } = useDropdownState();
+
+  const {
+    isOpen: isSortOpen,
+    toggleDropdown: toggleSort,
+    ref: sortRef,
+  } = useDropdownState();
 
   const {
     filteredAndSortedPosts,
@@ -34,7 +47,7 @@ const NotesContainer = (props: Props) => {
     handleSort,
     selectedCategory,
     sortType,
-  } = useFilteredAndSortedPosts();
+  } = useFilteredAndSortedPosts(posts);
 
   return (
     <div className={styles.notescontainer}>
@@ -42,9 +55,9 @@ const NotesContainer = (props: Props) => {
         <DropDown
           icon={<FilterIcon />}
           ariaLabel="Filter"
-          isOpen={filterDropDown.isOpen}
-          toggleDropdown={filterDropDown.toggleDropdown}
-          ref={filterDropDown.ref}
+          isOpen={isFilterOpen}
+          toggleDropdown={toggleFilter}
+          ref={filterRef}
         >
           <DropDownOption
             icon={<AllIcon />}
@@ -78,9 +91,9 @@ const NotesContainer = (props: Props) => {
         <DropDown
           icon={<SortIcon />}
           ariaLabel="Sort"
-          isOpen={sortDropDown.isOpen}
-          toggleDropdown={sortDropDown.toggleDropdown}
-          ref={sortDropDown.ref}
+          isOpen={isSortOpen}
+          toggleDropdown={toggleSort}
+          ref={sortRef}
         >
           <DropDownOption
             icon={<DateSortIcon />}

@@ -1,15 +1,10 @@
 import { useState, useEffect } from "react";
-import { allPosts, Post } from "contentlayer/generated";
+import type { PostWithStats } from "@/app/lib/posts/postWithStats";
 import { fetchLikesAndViews } from "./fetchLikesAndViews";
-
-export const categories = {
-  ALL: "All",
-  TUTORIAL: "Tutorial",
-  OPINION: "Opinion",
-  NOTE: "Note",
-} as const;
-
-export type Category = (typeof categories)[keyof typeof categories];
+import {
+  FILTER_CATEGORIES as categories,
+  type FilterCategory as Category,
+} from "../constants/postCategories";
 
 export const sortings = {
   DATE: "date",
@@ -19,62 +14,52 @@ export const sortings = {
 
 export type SortType = (typeof sortings)[keyof typeof sortings];
 
-/**
- * Custom hook to manage filtering and sorting of posts based on selected criteria
- * @returns An object containing filtered and sorted posts, functions to handle category and sort type changes, and the selected category and sort type
- */
-const useFilteredAndSortedPosts = () => {
+const useFilteredAndSortedPosts = (posts: PostWithStats[]) => {
   const [selectedCategory, setSelectedCategory] = useState<Category>(
-    categories.ALL
+    categories.ALL,
   );
   const [sortType, setSortType] = useState<SortType>(sortings.DATE);
   const [filteredAndSortedPosts, setFilteredAndSortedPosts] =
-    useState<any>(allPosts);
+    useState<PostWithStats[]>(posts);
 
   useEffect(() => {
     const fetchAndCombineData = async () => {
       const likesAndViews = await fetchLikesAndViews();
 
-      const mergedPosts = allPosts.map((post) => {
+      const mergedPosts: PostWithStats[] = posts.map((post) => {
         const stats = likesAndViews.find((item) => item.slug === post.slug);
+
         return {
           ...post,
-          likes: stats ? stats.likes : 0,
-          views: stats ? stats.views : 0,
+          likes: stats ? stats.likes : (post.likes ?? 0),
+          views: stats ? stats.views : (post.views ?? 0),
         };
       });
 
-      let filteredPosts;
-      if (selectedCategory === categories.ALL) {
-        filteredPosts = mergedPosts;
-      } else {
-        filteredPosts = mergedPosts.filter(
-          (post) => post.category === selectedCategory
-        );
-      }
+      const filteredPosts =
+        selectedCategory === categories.ALL
+          ? mergedPosts
+          : mergedPosts.filter((post) => post.category === selectedCategory);
 
-      let sortedAndFilteredPosts;
-      if (sortType === sortings.DATE) {
-        sortedAndFilteredPosts = filteredPosts.sort(
-          (a, b) =>
-            new Date(b.publishedAt).getTime() -
-            new Date(a.publishedAt).getTime()
+      const sortedAndFilteredPosts = [...filteredPosts].sort((a, b) => {
+        if (sortType === sortings.LIKES) {
+          return b.likes - a.likes;
+        }
+
+        if (sortType === sortings.VIEWS) {
+          return b.views - a.views;
+        }
+
+        return (
+          new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
         );
-      } else if (sortType === sortings.LIKES) {
-        sortedAndFilteredPosts = filteredPosts.sort(
-          (a, b) => b.likes - a.likes
-        );
-      } else if (sortType === sortings.VIEWS) {
-        sortedAndFilteredPosts = filteredPosts.sort(
-          (a, b) => b.views - a.views
-        );
-      }
+      });
 
       setFilteredAndSortedPosts(sortedAndFilteredPosts);
     };
 
     fetchAndCombineData();
-  }, [selectedCategory, sortType]);
+  }, [posts, selectedCategory, sortType]);
 
   const handleFilter = (category: Category) => {
     setSelectedCategory(category);

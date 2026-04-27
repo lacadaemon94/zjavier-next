@@ -3,7 +3,7 @@ import React from "react";
 import Link from "next/link";
 import format from "date-fns/format";
 // Types
-import { Post } from "contentlayer/generated";
+import type { PostWithStats } from "@/app/lib/posts/postWithStats";
 // Styles
 import styles from "../../styles/home.module.css";
 // Ui Elements
@@ -13,13 +13,8 @@ import ViewFilledIcon from "@/assets/icons/ViewFilledIcon";
 import LikeFilledIcon from "@/assets/icons/LikeFilledIcon";
 // import VideoIcon from "@/assets/icons/VideoIcon";
 
-interface ExtendedPost extends Post {
-  likes: number;
-  views: number;
-}
-
 type PostProps = {
-  post: ExtendedPost;
+  post: PostWithStats;
 };
 
 export const PostCard = ({ post }: PostProps) => {

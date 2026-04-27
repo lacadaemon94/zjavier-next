@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import styles from "../../styles/dropdown.module.css";
 
 export type DropDownProps = {
-  icon?: JSX.Element;
+  icon?: React.JSX.Element;
   text?: string;
   title?: string;
   ariaLabel: string;

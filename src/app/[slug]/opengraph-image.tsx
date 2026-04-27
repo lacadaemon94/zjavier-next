@@ -1,9 +1,14 @@
-/* eslint-disable @next/next/no-img-element */
-import { ImageResponse } from "next/server";
-import { allPosts } from "contentlayer/generated";
+import { ImageResponse } from "next/og";
+import {
+  getPublishedPostBySlug,
+  getPublishedPosts,
+} from "../lib/posts/getPosts";
 import format from "date-fns/format";
 
-export const runtime = "edge";
+import fs from "node:fs/promises";
+import path from "node:path";
+
+export const runtime = "nodejs";
 
 export const contentType = "image/png";
 
@@ -15,20 +20,18 @@ export const size = {
 
 // Font
 const museoModerno = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/MuseoModerno-Bold.ttf`
-  );
-  return res.arrayBuffer();
+  const fontPath = path.join(process.cwd(), "public", "MuseoModerno-Bold.ttf");
+  const fontData = await fs.readFile(fontPath);
+  return fontData;
 };
 const museoModernoThin = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/MuseoModerno-Thin.ttf`
-  );
-  return res.arrayBuffer();
+  const fontPath = path.join(process.cwd(), "public", "MuseoModerno-Thin.ttf");
+  const fontData = await fs.readFile(fontPath);
+  return fontData;
 };
 
 export async function generateStaticParams() {
-  return allPosts.map((post) => ({
+  return getPublishedPosts().map((post) => ({
     slug: post.slug,
   }));
 }
@@ -38,7 +41,7 @@ export default async function OpenGraph({
 }: {
   params: { slug: string };
 }) {
-  const post = allPosts.find((post) => post.slug === params.slug);
+  const post = getPublishedPostBySlug(params.slug);
   const boldFont = await museoModerno();
   const thinFont = await museoModernoThin();
 
@@ -51,7 +54,6 @@ export default async function OpenGraph({
           alignItems: "flex-start",
           width: "100%",
           height: "100%",
-          zIndex: "3",
         }}
       >
         <div
@@ -64,7 +66,6 @@ export default async function OpenGraph({
             justifyContent: "space-between",
             alignItems: "flex-start",
             overflow: "hidden",
-            zIndex: "3",
           }}
         >
           <img
@@ -77,7 +78,6 @@ export default async function OpenGraph({
               position: "absolute",
               objectFit: "fill",
               objectPosition: "center",
-              zIndex: "0",
             }}
           />
           <div

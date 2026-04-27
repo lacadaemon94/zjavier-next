@@ -47,7 +47,6 @@ export const metadata = {
     "Salvadoran",
   ],
   authors: [{ name: "Javier Flores", url: "https://zjavier.com" }],
-  colorScheme: "dark",
   creator: "Javier Flores",
   robots: {
     index: true,
@@ -59,12 +58,16 @@ export const metadata = {
       nocache: true,
     },
   },
+  manifest: "https://zjavier.com/manifest.json",
+  metadataBase: new URL("https://zjavier.com"),
+};
+
+export const viewport = {
+  colorScheme: "dark",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#F6FBFC" },
     { media: "(prefers-color-scheme: dark)", color: "#0C0C0C" },
   ],
-  manifest: "https://zjavier.com/manifest.json",
-  metadataBase: new URL("https://zjavier.com"),
 };
 
 export default function RootLayout({

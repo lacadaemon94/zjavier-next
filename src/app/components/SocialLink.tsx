@@ -7,7 +7,7 @@ import React from "react";
 import styles from "../styles/sociallink.module.css";
 
 type SocialLinkProps = {
-  icon?: JSX.Element;
+  icon?: React.JSX.Element;
   text?: string;
   href: string;
   ariaLabel: string;

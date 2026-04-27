@@ -11,7 +11,7 @@ import styles from "../styles/navlink.module.css";
 
 type Props = {
   href: string;
-  icon?: JSX.Element;
+  icon?: React.JSX.Element;
   text?: string;
   ariaLabel: string;
   className?: string;

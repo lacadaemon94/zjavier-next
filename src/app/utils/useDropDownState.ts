@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 
 /**
  * Custom hook to manage the state and behavior of a dropdown component.
@@ -33,5 +33,8 @@ export const useDropdownState = (initialState: boolean = false) => {
   }, []);
 
   // Return the state, ref, and functions to manage the dropdown
-  return { isOpen, closeDropdown, toggleDropdown, ref };
+  return useMemo(
+    () => ({ isOpen, closeDropdown, toggleDropdown, ref }),
+    [isOpen, ref],
+  );
 };
