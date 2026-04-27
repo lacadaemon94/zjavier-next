@@ -16,13 +16,13 @@ function getHeadings(content: string): PostHeading[] {
   const headingRegex = /\n\n(?<flag>#{1,6})\s+(?<content>.+)/g;
 
   return Array.from(content.matchAll(headingRegex)).map(({ groups }) => {
-    const flag = groups?.flag;
-    const text = groups?.content;
+    const flag = groups?.flag || "";
+    const text = groups?.content || "";
 
     return {
-      heading: flag?.length,
+      heading: flag.length,
       text,
-      slug: text ? slugger.slug(text) : undefined,
+      slug: slugger.slug(text),
     };
   });
 }

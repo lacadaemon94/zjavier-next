@@ -24,9 +24,9 @@ export type PostFrontmatter = {
 };
 
 export type PostHeading = {
-  heading?: number;
-  text?: string;
-  slug?: string;
+  heading: number;
+  text: string;
+  slug: string;
 };
 
 export type Post = PostFrontmatter & {
