@@ -8,6 +8,9 @@ import { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
 import { format } from "date-fns";
+import rehypePrettyCode from "rehype-pretty-code";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 // Ui Elements
 import StickyHeader from "../components/StickyHeader";
 import Footer from "../components/Footer";
@@ -32,6 +35,29 @@ export async function generateStaticParams() {
     slug: post.slug,
   }));
 }
+
+const prettyCodeOptions = {
+  theme: "material-theme-darker",
+  tokensMap: {
+    fn: "entity.name.function",
+    objKey: "meta.object-literal.key",
+  },
+};
+
+const mdxOptions = {
+  mdxOptions: {
+    rehypePlugins: [
+      rehypeSlug,
+      [rehypePrettyCode, prettyCodeOptions],
+      [
+        rehypeAutolinkHeadings,
+        {
+          behavior: "wrap",
+        },
+      ],
+    ],
+  },
+};
 
 const mdxComponents = {
   BlurImage,
@@ -82,7 +108,11 @@ export default async function Page({ params }: Props) {
         </div>
       </header>
       <PostIndex headings={post.headings} flatPath={post.slug} />
-      <MDXRemote source={post.content} components={mdxComponents} />
+      <MDXRemote
+        source={post.content}
+        components={mdxComponents}
+        options={mdxOptions as any}
+      />
       <Footer />
     </article>
   );
