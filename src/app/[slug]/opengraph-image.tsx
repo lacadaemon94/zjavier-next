@@ -3,10 +3,10 @@ import { ImageResponse } from "next/server";
 import {
   getPublishedPostBySlug,
   getPublishedPosts,
-} from "../utils/posts/getPublishedPosts";
+} from "../lib/posts/getPosts";
 import format from "date-fns/format";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 
 export const contentType = "image/png";
 
