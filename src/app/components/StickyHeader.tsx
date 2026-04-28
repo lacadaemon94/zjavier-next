@@ -23,7 +23,7 @@ const StickyHeader = (props: Props) => {
       <div className={styles.avatar}>
         <Image
           src={AvatarImage}
-          alt="Notion Avatar -  Javier Flores"
+          alt="Pixel Avatar - Javier Flores"
           width={128}
           height={128}
         />

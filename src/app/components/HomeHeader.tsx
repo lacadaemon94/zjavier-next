@@ -30,7 +30,7 @@ const HomeHeader = () => {
         <div className={styles.avatar}>
           <Image
             src={AvatarImage}
-            alt="Notion Avatar -  Javier Flores"
+            alt="Pixel Avatar - Javier Flores"
             width={256}
             height={256}
           />
