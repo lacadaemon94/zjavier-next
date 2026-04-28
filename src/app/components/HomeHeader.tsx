@@ -65,7 +65,7 @@ const HomeHeader = () => {
             />
             <SocialLink
               icon={<WhatsAppIcon />}
-              href="https://api.whatsapp.com/send?phone=50370533409&text=Hola!"
+              href="https://api.whatsapp.com/send?phone=50360581739&text=Hola!"
               ariaLabel="WhatsApp"
             />
             <SocialLink
@@ -82,7 +82,7 @@ const HomeHeader = () => {
           <div className={styles.column}>
             <SocialLink
               icon={<XIcon />}
-              href="https://x.com/zjavier94"
+              href="https://x.com/zj_javier94"
               ariaLabel="X/Twitter"
             />
             <SocialLink
@@ -100,11 +100,11 @@ const HomeHeader = () => {
               href="https://www.instagram.com/zjavier94/"
               ariaLabel="Instagram"
             />
-            <SocialLink
+            {/* <SocialLink
               icon={<TikTokIcon />}
               href="https://www.tiktok.com/@zjavier94"
               ariaLabel="TikTok"
-            />
+            /> */}
           </div>
         </div>
       </div>

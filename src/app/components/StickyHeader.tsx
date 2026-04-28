@@ -32,7 +32,7 @@ const StickyHeader = (props: Props) => {
         <SocialLink
           icon={<XIcon />}
           text="Not Twitter"
-          href="https://x.com/zjavier94"
+          href="https://x.com/zj_javier94"
           ariaLabel="Not Twitter"
           className={styles.shsociallink}
         />
@@ -57,13 +57,13 @@ const StickyHeader = (props: Props) => {
           ariaLabel="Instagram"
           className={styles.shsociallink}
         />
-        <SocialLink
+        {/* <SocialLink
           icon={<TikTokIcon />}
           text="TikTok"
           href="https://www.tiktok.com/@zjavier94"
           ariaLabel="TikTok"
           className={styles.shsociallink}
-        />
+        /> */}
       </div>
     </div>
   );
