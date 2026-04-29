@@ -33,7 +33,8 @@ const MobileActions = ({ slug }: Props) => {
   }, [slug]);
 
   const newLike = async () => {
-    await saveLike(slug, likes);
+    const newLikes = await saveLike(slug);
+    setLikes(newLikes);
     setIsLiked(true);
   };
 

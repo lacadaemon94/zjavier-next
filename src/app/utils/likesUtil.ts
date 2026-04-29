@@ -17,40 +17,23 @@ export const fetchLikes = async (flatPath: string): Promise<number> => {
     return 0;
   }
 
-  if (data) {
-    return data.likes;
-  }
-
-  return 0; // Return 0 if data is undefined
+  return data?.likes ?? 0;
 };
 
 /**
- * Updates the number of likes for a given post.
+ * Increments the number of likes for a given post.
  * @param flatPath The slug of the post to update likes for.
- * @param likes The new number of likes to set.
  * @returns A promise that resolves to the updated number of likes, or 1 if an error occurs.
  */
-export const saveLike = async (
-  flatPath: string,
-  likes: number
-): Promise<number> => {
-  const { data, error } = await supabase
-    .from("post")
-    .update({
-      likes: likes,
-    })
-    .eq("slug", flatPath)
-    .select()
-    .single();
+export const saveLike = async (flatPath: string): Promise<number> => {
+  const { data, error } = await supabase.rpc("increment_post_likes", {
+    post_slug: flatPath,
+  });
 
   if (error) {
-    console.error("Error updating likes", error);
+    console.error("Error incrementing likes", error);
     return 1;
   }
 
-  if (data) {
-    return data.likes;
-  }
-
-  return 1; // Return 1 if data is undefined
+  return data ?? 1;
 };

@@ -13,44 +13,27 @@ export const fetchViews = async (flatPath: string): Promise<number> => {
     .single();
 
   if (error) {
-    console.error("Error fetching likes", error);
+    console.error("Error fetching views", error);
     return 0;
   }
 
-  if (data) {
-    return data.views;
-  }
-
-  return 0; // Return 0 if data is undefined
+  return data?.views ?? 0;
 };
 
 /**
- * Updates the number of likes for a given post.
- * @param flatPath The slug of the post to update likes for.
- * @param likes The new number of likes to set.
- * @returns A promise that resolves to the updated number of likes, or 1 if an error occurs.
+ * Increments the number of views for a given post.
+ * @param flatPath The slug of the post to update views for.
+ * @returns A promise that resolves to the updated number of views, or 1 if an error occurs.
  */
-export const saveView = async (
-  flatPath: string,
-  views: number
-): Promise<number> => {
-  const { data, error } = await supabase
-    .from("post")
-    .update({
-      views: views,
-    })
-    .eq("slug", flatPath)
-    .select()
-    .single();
+export const saveView = async (flatPath: string): Promise<number> => {
+  const { data, error } = await supabase.rpc("increment_post_views", {
+    post_slug: flatPath,
+  });
 
   if (error) {
-    console.error("Error updating likes", error);
+    console.error("Error incrementing views", error);
     return 1;
   }
 
-  if (data) {
-    return data.views;
-  }
-
-  return 1; // Return 1 if data is undefined
+  return data ?? 1;
 };

@@ -26,7 +26,7 @@ const PostHeaderDetails = ({ slug }: Props) => {
     const fetchAndFindData = async () => {
       const likes = await fetchLikes(slug);
       const views = await fetchViews(slug);
-      const newViews = await saveView(slug, views + 1);
+      const newViews = await saveView(slug);
 
       setLikes(`${likes}`);
       setViews(`${newViews}`);

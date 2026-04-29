@@ -32,8 +32,7 @@ export const LikeButton = ({ flatPath }: Props) => {
   }, [flatPath]);
 
   const handleLike = async () => {
-    const newLikes = likes + 1;
-    const data = await saveLike(flatPath, newLikes);
+    const data = await saveLike(flatPath);
     setLikes(data);
     setIsLiked(true);
   };
