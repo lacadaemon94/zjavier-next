@@ -19,12 +19,7 @@ import PostHeaderDetails from "../components/PostHeaderDetails";
 import MobileActions from "../components/MobileActions";
 // MDX Components
 import { PostIndex } from "@/app/components/mdxComponents/PostIndex";
-import { BlurImage } from "@/app/components/mdxComponents/BlurImage";
-import { AsideImage } from "@/app/components/mdxComponents/AsideImage";
-import {
-  FullCode,
-  FullCodeProps,
-} from "@/app/components/mdxComponents/FullCode";
+import { mdxComponents } from "@/app/components/mdxComponents/registry";
 // Styles
 import styles from "../styles/posts.module.css";
 // Assets
@@ -57,12 +52,6 @@ const mdxOptions = {
       ],
     ],
   },
-};
-
-const mdxComponents = {
-  BlurImage,
-  AsideImage,
-  FullCode: (props: FullCodeProps) => <FullCode {...props} />,
 };
 
 type Props = {
@@ -117,4 +106,3 @@ export default async function Page({ params }: Props) {
     </article>
   );
 }
-
