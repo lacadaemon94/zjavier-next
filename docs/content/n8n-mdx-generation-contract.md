@@ -178,21 +178,21 @@ Publishing requires a human to:
 
 Generated content should use simple, stable MDX by default.
 
-Preferred:
+Preferred structure:
 
-````md
+```md
 # Title
 
 ## Section
 
 Paragraph text.
+```
+
+Preferred code block example:
 
 ```ts
 const example = "code";
 ```
-````
-
-````
 
 Avoid by default:
 
@@ -213,7 +213,7 @@ Current manually maintained MDX components:
 BlurImage
 AsideImage
 FullCode
-````
+```
 
 These are registered in:
 
