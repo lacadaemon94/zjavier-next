@@ -1,0 +1,106 @@
+---
+title: Building a Review-Based Blog Automation Workflow with n8n
+category: Automation
+excerpt: How I automated my review-based blog publishing process using n8n and Next.js to streamline content creation while maintaining manual control over publishing.
+publishedAt: 2026-04-30
+description: A practical walkthrough of building a content automation workflow with n8n and Next.js that drafts blog posts, generates social content, and integrates with GitHub PRs—without losing manual publishing control.
+status: draft
+tags:
+  - n8n
+  - automation
+  - blog
+  - nextjs
+  - github
+  - indiehackers
+  - content-automation
+language: en
+contentPillar: Automation systems
+coverPrompt: A visual diagram showing a digital workflow with n8n automating blog content drafts and GitHub PR integration, styled with a clean, professional brand color palette.
+socialSummary: I built a review-first content automation workflow using n8n and Next.js that drafts blog posts and social content while keeping publishing manual for better control. Here's how it works.
+---
+
+# Building a Review-Based Blog Automation Workflow with n8n
+
+Automating content workflows can be a double-edged sword. On one hand, it saves time and reduces human error. On the other, it risks losing the important human touch — especially for personal projects like this blog. Over the past few months, I’ve been working on an automation system that balances these demands by integrating **n8n** with my **Next.js** blog and GitHub-based publishing workflow.
+
+This post is a practical walkthrough of how I built this review-based blog automation workflow aimed at developers and indie hackers who want to improve their publishing process without handing over full control to automation.
+
+## The Problem
+
+I love writing and sharing insights, but I dislike repetitive administrative tasks around publishing — formatting posts, generating social media content, and creating visual assets, for instance. The manual overhead consumes valuable time I’d rather spend coding or building new projects.
+
+I tried various tools and scripts, but they either automated too little or too much — some tools would publish posts instantly, which is risky for me since I like to review content carefully before going live. I needed:
+
+- A way to **automatically draft blog posts** from structured data.
+- Automated **creation of GitHub pull requests** for posts so I could review and publish manually.
+- Generation of **social content** previews tied to posts but no automatic posting.
+- Image prompts aligned with my visual brand guide to help generate visuals later.
+
+In short: I wanted **automation without losing manual review and control.**
+
+## The Approach
+
+To solve this, I opted for a low-code workflow with **n8n**, an open-source, versatile workflow automation tool. Here’s the outline:
+
+1. Use an external trigger (like a form or content entry) to start the workflow.
+2. Generate a draft blog post in MDX format based on predefined templates and content input.
+3. Automatically open a GitHub pull request with the new draft post file.
+4. Generate draft social copy following my social content guidelines and save it alongside the blog PR.
+5. Automatically create image prompts following my visual brand system.
+6. Do **not publish** posts or social content automatically — keep this step for manual review within GitHub.
+
+This way I maintain a draft-first publishing mentality, which is crucial for quality and minimizing errors.
+
+## Building the Workflow
+
+Here’s how I put it together step-by-step using n8n’s nodes and GitHub integration:
+
+- **Trigger:** I use a webhook in n8n that accepts JSON structured content input (title, excerpts, key points, etc.).
+- **Content template node:** This builds the blog post text in MDX format. I keep it simple, embedding frontmatter with title, date, tags, and placeholders for the writeup.
+- **GitHub node:** Authenticates with my repo and creates a new branch with the draft post file under `content/posts/`. Then it opens a pull request for manual code review.
+- **Social pack generator:** A separate node creates markdown snippets for social posts, aligned with my social pack contract, saved in a sibling folder in the repo.
+- **Image prompt generator:** Using a template mapped to my brand’s visual style guide, it creates text prompts saved alongside the social content.
+- **No auto-merge:** I deliberately do not merge or publish anything automatically. The PR stays open until I’m ready to review.
+
+Throughout, I rely on constant testing and iteration to keep the workflow predictable and maintainable without over-engineering.
+
+## What Stays Manual
+
+This workflow solves a lot but there are intentional manual steps:
+
+- **Reviewing and editing blog drafts:** I open the GitHub PR, read through the generated post, tweak content, and check formatting.
+- **Approving and merging PRs:** I control when posts get published through the standard GitHub merge process.
+- **Scheduling social posts:** Social content is generated but I decide when and where to post.
+- **Creating images:** Prompts help guide visual creation, but I run generation manually to keep quality aligned with my brand.
+
+The manual bottleneck is deliberate — it respects the art and craft of publishing while reducing repetitive prep work.
+
+## What This Unlocks
+
+This workflow has improved my content process by:
+
+- Saving time on boilerplate post creation and formatting.
+- Keeping me in control via draft PRs rather than instant publishing.
+- Encouraging a review-first mindset that improves content quality.
+- Automating social content idea generation, so I don’t start from scratch every time.
+- Providing a scalable system—I can extend it with new integrations easily.
+
+For indie hackers and developers, having a tooling setup like this offers a practical balance between automation and craftsmanship—especially when publishing meaningful content.
+
+## Next Steps
+
+There’s plenty ahead:
+
+- Improving natural language generation for richer draft content without generic fluff.
+- Adding better error handling and notifications in n8n.
+- Experimenting with image generation automation while preserving manual review.
+- Exploring integration with scheduling tools for social posts.
+- Open sourcing this workflow for others to customize.
+
+I welcome feedback from fellow developers and indie hackers on how you tackle automation without losing control. For now, this system is a solid foundation for my personal dev brand’s content pipeline — automated but always human-reviewed.
+
+Thanks for reading this build log! If you’re curious about the exact n8n workflow or Next.js integration, I’ll aim to share those details in follow-up posts.
+
+---
+
+If you’ve built a similar content system or want to discuss automation tools, let’s connect!
