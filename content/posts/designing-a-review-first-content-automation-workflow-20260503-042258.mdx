@@ -1,0 +1,106 @@
+---
+title: "Designing a Review-First Content Automation Workflow"
+category: "Automation"
+excerpt: "Building a content workflow that automates draft creation and social assets but keeps publishing manual through GitHub PR reviews."
+publishedAt: "2026-05-03"
+description: "Learn how I designed a practical, review-first content automation workflow for my personal developer blog using n8n, Next.js, MDX, GitHub, Vercel, and OpenAI."
+status: "draft"
+tags:
+  - "content automation"
+  - "developer blog"
+  - "n8n"
+  - "GitHub PR"
+  - "social media automation"
+  - "content workflow"
+language: "en"
+contentPillar: "Automation systems"
+coverPrompt: "16:9 blog cover with black and white developer-lab aesthetic, orange accent highlights, minimal editorial layout, dot-matrix or dither texture background, clean technical grid overlay, high contrast between black, white, gray shades, modern typography emphasizing clarity, human-centered technology feel, no robots or neon, focused on content workflow task visualization."
+socialSummary: "A practical deep dive into building a review-first content automation workflow that streamlines drafting and social pack generation while keeping editorial control manual via GitHub PR reviews."
+updatedAt: "2026-05-03"
+canonicalUrl: "https://javierflores.dev/posts/designing-a-review-first-content-automation-workflow"
+series: "Automation Systems"
+featured: false
+---
+
+# Designing a Review-First Content Automation Workflow
+
+Publishing technical blog content consistently is hard—but automating the *wrong* way can create more work, or worse, dilute quality. I wanted a workflow that saves time without sacrificing the editorial judgment, taste, and care I put into my developer brand website.
+
+In this post, I’ll share how I built a *review-first* content automation workflow using n8n, Next.js, MDX, GitHub, Vercel, and OpenAI. The goal: automate draft generation, social media content, and image prompts, while requiring manual approval through GitHub pull requests. This is a practical, hands-on approach designed for developers, indie hackers, and technical builders who want to streamline content without losing control.
+
+## The Problem
+
+I often found myself stuck in the repetitive and manual task of creating initial blog drafts and social media snippets—all while wanting to keep final editing and publishing firmly in my hands. Purely automatic publishing wasn’t an option due to quality and brand consistency concerns.
+
+Key challenges:
+
+- Draft creation takes time and mental energy
+- Social posts need to be consistent but require a human touch to avoid generic or off-brand messages
+- Image ideas should align with a strict visual brand system, not random AI outputs
+- Publishing must stay manual to accommodate review, editing, and PR collaboration on GitHub
+
+## The Approach
+
+My principle? Automation should assist, not replace, judgment.
+
+- Use OpenAI to *generate* first draft content and social copy, but never publish automatically.
+- Automate the creation of a GitHub pull request (PR) with all generated assets, so I can review and iterate before publishing.
+- Social media posts and image prompts are generated but only saved as suggestions, never pushed to social platforms without my explicit action.
+- Image prompts are crafted following my visual brand system guidelines to keep consistency.
+
+The intent: maximize time saved on grunt work while maintaining crisp editorial quality.
+
+## Building the Workflow
+
+I chose **n8n** as my automation engine because it’s open source, robust, and flexible for orchestrating multi-step workflows.
+
+The workflow roughly follows these steps:
+
+1. **Trigger**: I start the process manually via a webhook or scheduled event.
+2. **Content Generation**: n8n calls OpenAI APIs to generate:
+   - Blog post draft in MDX format
+   - Social media snippets tailored to LinkedIn, X, Instagram, Facebook, WhatsApp
+   - Image prompt suggestions based on the article topic and brand visual rules
+3. **File Creation**: The workflow commits the new draft MDX file, the social pack markdown, and metadata to a new branch in my GitHub repository.
+4. **Pull Request Creation**: n8n creates a pull request targeting the main blog branch. This PR contains everything needed to review before merging.
+5. **Review & Edit**: I review the PR in GitHub, make edits to the draft or social pack as needed, and only merge when satisfied.
+6. **Publish**: Vercel previews the changes, and once merged, the blog post goes live through the usual Next.js flow.
+
+This setup keeps my workflow smooth and the final publishing decision in my hands.
+
+## What Stays Manual
+
+Critical steps where human judgment remains required:
+
+- **Content review and editing** of the generated draft to ensure accuracy, tone, and style.
+- **Approval and merging of GitHub PR** to publish the post.
+- **Social media publishing**—social packs are generated as suggestions only and require manual posting.
+- **Final selection or adjustment** of image prompts before commissioning artwork or designs.
+
+The system is designed so automation handles the tedious first-draft and preparatory steps, while I control all creative and publishing decisions.
+
+## What This Unlocks
+
+By offloading boilerplate draft writing and social copy generation, I free up mental bandwidth to focus on:
+
+- Deepening content quality and technical depth
+- Engaging more consistently with my audience
+- Iterating quickly on topics without starting from scratch
+- Maintaining brand consistency without increased overhead
+
+This review-first workflow is a compromise—it embraces automation as a collaborative assistant rather than a publisher.
+
+## Next Steps
+
+Going forward, I plan to:
+
+- Refine prompt engineering for more tailored and concise draft outputs
+- Extend n8n workflows to support featured snippet generation and timestamped changelogs
+- Introduce lightweight analytics on draft acceptance rates to improve model inputs
+- Explore ways to semi-automate social post scheduling while preserving manual approval
+
+I hope this detailed look at my workflow can inspire other developers and indie hackers to rethink how they automate content creation. If you have questions or want to learn more about the technical setup, feel free to reach out or check my repo for workflow examples.
+
+---
+
+This is a *working draft* of my evolving content automation journey. Thanks for reading—and happy building!
