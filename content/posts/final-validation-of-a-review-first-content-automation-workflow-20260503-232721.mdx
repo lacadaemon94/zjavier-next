@@ -1,0 +1,84 @@
+---
+title: "Final Validation of a Review-First Content Automation Workflow"
+category: "Automation"
+excerpt: "How I developed a content automation workflow that prioritizes draft review, using n8n, Next.js, GitHub, Vercel, and OpenAI to streamline blog post creation without losing human judgment."
+publishedAt: "2026-05-03"
+description: "A practical build log about creating a review-first content automation system that generates drafts, social content, and image prompts while keeping publishing manual and controlled."
+status: "draft"
+language: "en"
+contentPillar: "Automation systems"
+socialSummary: "Building a content automation workflow that respects human editing and review. Using n8n and OpenAI to generate drafts and social content, but keeping control through GitHub PRs."
+updatedAt: "2026-05-03"
+canonicalUrl: "https://javierflores.dev/blog/final-validation-of-a-review-first-content-automation-workflow"
+series: "Automation Systems Build Logs"
+featured: false
+tags:
+  - "content automation"
+  - "n8n"
+  - "GitHub"
+  - "OpenAI"
+  - "developer blog"
+  - "workflow"
+  - "automation"
+coverPrompt: "16:9 blog cover, black and white developer-lab aesthetic with orange accent, minimal editorial layout featuring dot-matrix and dither texture, clean technical grid lines, high contrast, modern typography direction, human-centered technology feel, specific to a review-first content automation workflow"
+---
+
+# Final Validation of a Review-First Content Automation Workflow
+
+## The Problem
+
+As a developer dedicated to building a personal brand, I’ve always wrestled with the tension between generating content efficiently and maintaining editorial control. Automation can save time, but automation that publishes blindly removes the necessary judgment, editing, and taste that make content worth reading.
+
+I wanted a system that could handle the heavy lifting of generating initial drafts, social media snippets, and image prompts, but without pushing content live automatically. The publishing phase must remain intentional, human-driven, and review-first.
+
+## The Approach
+
+To solve this, I designed a workflow geared around draft-first publishing. That means the automation creates initial content drafts and social packs, bundles image prompts aligned with my visual brand system, and then pushes everything as a GitHub Pull Request (PR). From there, I manually review, edit, and decide when to merge and deploy.
+
+This approach respects automation as a tool — not as a publisher itself — ensuring content quality and consistency.
+
+## Building the Workflow
+
+The core of this workflow relies on n8n for orchestration. Here's an outline of how the pieces fit together:
+
+- **Content Generation:** I use OpenAI’s API within n8n to generate blog post drafts in MDX format, following a specific prompt contract that avoids generic AI writing and ensures technical depth.
+
+- **GitHub Integration:** n8n creates a new branch and opens a PR on my blog’s GitHub repository. The PR includes the newly generated MDX draft, a social media pack file formatted for platforms like LinkedIn, X, Instagram, Facebook, and WhatsApp, and image prompt text files ready for the design phase.
+
+- **Visual Brand Compliance:** Image prompts are crafted according to my documented visual brand system, emphasizing a black-and-white developer-lab aesthetic with orange accents, clean grids, and a technical feel.
+
+- **No Automatic Publishing:** The workflow explicitly avoids any automatic merge or deployment actions. Publishing only happens after I review and approve the content via the GitHub PR process.
+
+This design keeps all stages of content creation transparent and under personal control, even while maximizing automation on the generation side.
+
+## What Stays Manual
+
+- **Review and Editing:** I still read through and edit every blog post draft, refining voice and ensuring accuracy.
+
+- **Publishing Approval:** I merge PRs only when the content meets my standards.
+
+- **Social Media Posting:** While social content is generated, I manually post or schedule it to maintain cadence and engagement strategy.
+
+- **Image Creation:** Graphic design and asset finalization based on prompts remain hands-on tasks.
+
+By keeping these steps manual, the workflow balances speed with quality.
+
+## What This Unlocks
+
+- **Time Savings:** Automation handles repetitive, mechanical tasks like draft writing and social content prepping.
+
+- **Consistent Quality:** Review-first preserves editorial excellence through deliberate human involvement.
+
+- **Scalability:** The system scales content production without overwhelming manual workloads.
+
+- **Aligned Visuals:** Image prompts help maintain brand consistency and streamline asset creation.
+
+More automation is possible, but never at the expense of good taste or review.
+
+## Next Steps
+
+Going forward, I plan to refine the prompt contracts for even tighter alignment with my blog’s voice and topics. I also want to improve social pack drafts to better accommodate platform-specific nuances.
+
+Eventually, I may explore semi-automated scheduling options, but always ensuring social posts do not go live without final manual review.
+
+For now, this review-first content automation workflow is a solid step in freeing up headspace while keeping my developer brand’s voice sharp and authentic.
