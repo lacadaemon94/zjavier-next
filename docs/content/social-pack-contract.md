@@ -662,20 +662,24 @@ Image prompts should follow the visual brand system.
 Default visual direction:
 
 ```txt
-black and white developer-lab aesthetic, orange accent, minimal editorial layout, dot-matrix/dither texture, clean technical grid, high contrast, modern typography direction, human-centered technology feel
+Black/off-white developer-lab aesthetic. Controlled orange accent. Dot-matrix, dither, low-density pixel noise, technical grid, interface cards. Built not generated.
 ```
 
 Image prompts should include:
 
-- Platform
-- Format
-- Topic
-- Main visual idea
-- Composition
-- Style
-- Mood
-- What to avoid
-- Aspect ratio if relevant
+1. Format/Aspect Ratio
+2. Topic/Context
+3. Visual Style
+4. Strict Typography Rule
+5. Composition
+6. Mood
+7. Avoid List
+
+The strict typography rule to include in all image prompts is:
+
+```txt
+Typography: Use MuseoModerno ONLY for the main title or large identity text. Use Chivo ONLY for subtitles, metadata, captions, and small UI labels. Do not use any other font. Keep generated text minimal, large, and readable.
+```
 
 Avoid vague prompts like:
 

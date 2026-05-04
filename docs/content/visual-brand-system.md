@@ -28,21 +28,26 @@ Use these keywords to guide images, layouts, prompts, components, and video form
 - developer-lab
 - system
 - signal
-- interface
-- grid
+- interface cards
+- technical grid
 - terminal
-- dots
+- low-density pixel noise
 - dither
-- matrix
+- dot-matrix
 - blueprint
 - archive
 - notebook
 - operating system
-- orange accent
+- controlled orange accent
 - black and white
 - technical but human
 - minimal but expressive
 - structured but creative
+- GitHub PR/branch lines
+- n8n-style workflow nodes
+- MDX file cards
+- review/check marks
+- small orange signal dots
 
 ---
 
@@ -134,18 +139,19 @@ Preferred typography direction:
 
 Primary brand typography references:
 
-- MuseoModerno for expressive name/logo usage
-- Chivo for subtitles, metadata, captions, and practical UI text
+- Use MuseoModerno ONLY for expressive titles, logo-like text, large typographic statements, and identity moments.
+- Use Chivo ONLY for subtitles, captions, metadata, UI labels, small technical labels, and readable supporting text.
+- Do not mention or allow any other font.
 
 Use typography to create contrast:
 
 - MuseoModerno: identity, headers, expressive moments
 - Chivo: readable body, captions, technical labels
 
-For generated images, prompts can reference:
+For generated images, prompts MUST include this strict rule:
 
 ```txt
-modern rounded geometric typography, inspired by MuseoModerno for titles and Chivo for small technical labels
+Typography: Use MuseoModerno ONLY for the main title or large identity text. Use Chivo ONLY for subtitles, metadata, captions, and small UI labels. Do not use any other font. Keep generated text minimal, large, and readable.
 ```
 
 Do not ask image models to reproduce exact fonts unless the tool supports text reliably.
@@ -624,19 +630,13 @@ Avoid:
 Use this structure when generating prompts:
 
 ```txt
-Create a [format] for [topic/context].
-
-Style:
-black and white developer-lab aesthetic, orange accent, minimal editorial layout, dot-matrix/dither texture, clean technical grid, modern typography direction inspired by MuseoModerno and Chivo, high contrast, human-centered technology feel.
-
-Composition:
-[describe focal point, layout, objects, diagrams, or interface elements]
-
-Mood:
-practical, precise, curious, independent, modern, not corporate.
-
-Avoid:
-generic AI robot, glowing brain, neon cyberpunk, stock photo style, cluttered dashboard, excessive gradients, unreadable text.
+1. Format/Aspect Ratio: [format/aspect ratio]
+2. Topic/Context: [e.g. Content Request Form, n8n workflow nodes, MDX Draft file, Social Pack file, GitHub draft PR, branch line, human review/check step]
+3. Visual Style: Black/off-white developer-lab aesthetic. Controlled orange accent. Dot-matrix, dither, low-density pixel noise, technical grid, interface cards, small orange signal dots.
+4. Typography: Use MuseoModerno ONLY for the main title or large identity text. Use Chivo ONLY for subtitles, metadata, captions, and small UI labels. Do not use any other font. Keep generated text minimal, large, and readable.
+5. Composition: [describe focal point, layout, specific concrete elements like GitHub PR/branch lines, n8n-style workflow nodes, MDX file cards, review/check marks]
+6. Mood: precise, minimal, practical, independent, technical but human, built not generated.
+7. Avoid: generic AI robot, glowing brain, blue SaaS dashboard, neon cyberpunk, stock photo people, corporate vector illustration, excessive gradients, cluttered dashboards, random futuristic fonts, unreadable generated text, any typography except MuseoModerno and Chivo.
 ```
 
 ---
@@ -646,19 +646,13 @@ generic AI robot, glowing brain, neon cyberpunk, stock photo style, cluttered da
 Use this structure for blog cover prompts:
 
 ```txt
-Create a 16:9 blog cover image for a technical article titled "[TITLE]".
-
-Visual direction:
-black and white developer-lab aesthetic with a controlled orange accent, minimal editorial composition, subtle dot-matrix/dither texture, clean technical grid, interface-inspired layout, modern typography direction but minimal readable text.
-
-Concept:
-[VISUAL METAPHOR OR SCENE]
-
-Mood:
-practical, precise, slightly experimental, human-centered, independent builder brand.
-
-Avoid:
-generic AI robot, glowing brain, neon cyberpunk, stock photo realism, cluttered dashboards, excessive gradients, too much text.
+1. Format/Aspect Ratio: 16:9 blog cover
+2. Topic/Context: Technical article titled "[TITLE]"
+3. Visual Style: Black/off-white developer-lab aesthetic. Controlled orange accent. Dot-matrix, dither, low-density pixel noise, technical grid, interface cards.
+4. Typography: Use MuseoModerno ONLY for the main title or large identity text. Use Chivo ONLY for subtitles, metadata, captions, and small UI labels. Do not use any other font. Keep generated text minimal, large, and readable.
+5. Composition: [Concrete elements like n8n workflow nodes, MDX file cards, or branch lines related to the post]
+6. Mood: precise, minimal, practical, independent, technical but human, built not generated.
+7. Avoid: generic AI robot, glowing brain, blue SaaS dashboard, neon cyberpunk, stock photo people, corporate vector illustration, excessive gradients, cluttered dashboards, random futuristic fonts, unreadable generated text, any typography except MuseoModerno and Chivo.
 ```
 
 ---
@@ -668,22 +662,13 @@ generic AI robot, glowing brain, neon cyberpunk, stock photo realism, cluttered 
 Use this structure for social image prompts:
 
 ```txt
-Create a social media visual for [PLATFORM] about "[TOPIC]".
-
-Style:
-high-contrast black and white layout, orange accent, minimal developer-lab aesthetic, dot-matrix texture, clean typography, simple technical diagram or editorial card composition.
-
-Content focus:
-[ONE MAIN IDEA]
-
-Composition:
-[QUOTE CARD / PROCESS DIAGRAM / CAROUSEL SLIDE / SCREENSHOT FRAME / MINI INFOGRAPHIC]
-
-Mood:
-clear, sharp, useful, modern, human, not corporate.
-
-Avoid:
-generic AI imagery, robot mascot, glowing brain, clutter, tiny unreadable text, stock design.
+1. Format/Aspect Ratio: [aspect ratio for PLATFORM]
+2. Topic/Context: Social media visual for [PLATFORM] about "[TOPIC]"
+3. Visual Style: Black/off-white developer-lab aesthetic. Controlled orange accent. Dot-matrix, dither, low-density pixel noise, technical grid, interface cards.
+4. Typography: Use MuseoModerno ONLY for the main title or large identity text. Use Chivo ONLY for subtitles, metadata, captions, and small UI labels. Do not use any other font. Keep generated text minimal, large, and readable.
+5. Composition: [Concrete layout like Quote Card / Process Diagram / Screenshot Frame / Mini Infographic with specific elements like branch lines or workflow nodes]
+6. Mood: precise, minimal, practical, independent, technical but human, built not generated.
+7. Avoid: generic AI robot, glowing brain, blue SaaS dashboard, neon cyberpunk, stock photo people, corporate vector illustration, excessive gradients, cluttered dashboards, random futuristic fonts, unreadable generated text, any typography except MuseoModerno and Chivo.
 ```
 
 ---
@@ -695,22 +680,13 @@ Use this structure for carousel prompts:
 ```txt
 Create a [NUMBER]-slide Instagram carousel about "[TOPIC]".
 
-Visual system:
-black and white base, orange accent, minimal developer-lab aesthetic, dot-matrix texture, clean grid, strong typographic hierarchy, technical but human.
-
-Slides:
-1. [HOOK]
-2. [PROBLEM]
-3. [CORE IDEA]
-4. [EXAMPLE OR PROCESS]
-5. [LESSON]
-6. [CTA]
-
-Rules:
-one idea per slide, large readable text, minimal icons, consistent footer/brand mark, strong contrast.
-
-Avoid:
-too much text, generic AI robot imagery, cluttered layouts, neon cyberpunk, stock illustrations.
+1. Format/Aspect Ratio: 4:5 Instagram carousel
+2. Topic/Context: "[TOPIC]"
+3. Visual Style: Black/off-white developer-lab aesthetic. Controlled orange accent. Dot-matrix, dither, low-density pixel noise, technical grid, interface cards.
+4. Typography: Use MuseoModerno ONLY for the main title or large identity text. Use Chivo ONLY for subtitles, metadata, captions, and small UI labels. Do not use any other font. Keep generated text minimal, large, and readable.
+5. Composition: One idea per slide, strong hierarchy, consistent footer. (1. [HOOK], 2. [PROBLEM], 3. [CORE IDEA], 4. [EXAMPLE/PROCESS], 5. [LESSON], 6. [CTA])
+6. Mood: precise, minimal, practical, independent, technical but human, built not generated.
+7. Avoid: generic AI robot, glowing brain, blue SaaS dashboard, neon cyberpunk, stock photo people, corporate vector illustration, excessive gradients, cluttered dashboards, random futuristic fonts, unreadable generated text, any typography except MuseoModerno and Chivo.
 ```
 
 ---
@@ -736,16 +712,13 @@ Before using a generated visual, check:
 
 A good visual prompt should include:
 
-- Format
-- Topic
-- Style
-- Composition
-- Mood
-- Color direction
-- Texture direction
-- What to avoid
-- Platform or use case
-- Aspect ratio when relevant
+1. Format/Aspect Ratio
+2. Topic/Context
+3. Visual Style
+4. Strict Typography Rule
+5. Composition
+6. Mood
+7. Avoid List
 
 Avoid prompts that only say:
 

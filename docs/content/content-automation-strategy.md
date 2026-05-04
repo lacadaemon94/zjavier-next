@@ -541,14 +541,11 @@ The prompts should follow the visual brand system once defined.
 
 Initial visual direction:
 
-- Developer-lab aesthetic
-- Strong black and white base
-- Orange as a recurring accent
-- Modern minimal layouts
-- Dot matrix or dithered visual language
-- Clean typography direction
-- Subtle technical/interface motifs
-- Human-centered technology feel
+- Black/off-white developer-lab aesthetic.
+- Controlled orange accent.
+- Dot-matrix, dither, low-density pixel noise, technical grid, interface cards, GitHub PR/branch lines, n8n-style workflow nodes, MDX file cards, review/check marks, small orange signal dots.
+- Mood: precise, minimal, practical, independent, technical but human, built not generated.
+- Strict typography rule: MuseoModerno for titles and Chivo for supporting text only. No other fonts allowed.
 
 ---
 
