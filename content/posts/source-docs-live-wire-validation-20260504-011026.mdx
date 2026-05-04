@@ -1,0 +1,92 @@
+---
+title: "Source Docs Live Wire Validation"
+category: "Automation"
+excerpt: "Testing runtime loading of source docs and confirming that the content automation workflow creates draft PRs with correct timestamps and files."
+publishedAt: "2026-05-04"
+description: "Validating the content automation workflow's ability to use runtime-loaded source documents and produce draft blog posts, social packs, and image prompts via a timestamped GitHub PR."
+status: "draft"
+tags:
+  - "automation"
+  - "content-automation"
+  - "n8n"
+  - "github-pr"
+  - "workflow"
+language: "en"
+contentPillar: "Automation systems"
+coverPrompt: "1. Format/Aspect Ratio: 16:9 blog cover\n2. Topic/Context: Technical article titled \"Source Docs Live Wire Validation\"\n3. Visual Style: Black/off-white developer-lab aesthetic. Controlled orange accent. Dot-matrix, dither, low-density pixel noise, technical grid, interface cards.\n4. Typography: Use MuseoModerno ONLY for the main title or large identity text. Use Chivo ONLY for subtitles, metadata, captions, and small UI labels. Do not use any other font. Keep generated text minimal, large, and readable.\n5. Composition: Abstract n8n workflow nodes connected to a GitHub branch and PR line, with subtle orange signal dots. Minimal text.\n6. Mood: precise, minimal, practical, independent, technical but human, built not generated.\n7. Avoid: generic AI robot, glowing brain, blue SaaS dashboard, neon cyberpunk, stock photo people, corporate vector illustration, excessive gradients, cluttered dashboards, random futuristic fonts, unreadable generated text, any typography except MuseoModerno and Chivo."
+socialSummary: "Testing a content automation workflow that loads source docs at runtime and generates draft blog posts with associated social content and GitHub PRs."
+updatedAt: "2026-05-04"
+canonicalUrl: ""
+series: ""
+featured: false
+---
+
+## The Problem
+
+When building an automated content workflow, one key challenge is ensuring that the system uses the most up-to-date source documents as authoritative context. This means that any style guides, brand systems, or social pack contracts should be loaded dynamically at runtime, so the generated content matches the latest rules without stale data.
+
+Another critical issue is maintaining a draft-first publishing model. Generating blog posts and social packs must result in draft content that is reviewed manually before publishing. This includes ensuring that GitHub PRs contain correctly timestamped branches and filenames for traceability.
+
+In this test, the focus is on validating these core aspects: runtime loading of docs/content source files, draft-first publishing, and GitHub PR creation with proper structuring.
+
+## The Approach
+
+To verify the live wire of this content automation workflow, the system was designed to:
+
+- Load all referenced authoritative source documents—such as style guides, visual brand system, social pack contract, and MDX generation contracts—at runtime for accurate context.
+- Generate a draft blog post following the automation and style guide rules, including correct frontmatter and draft status.
+- Create associated social content per platform without automatically posting it, preserving review control.
+- Produce image prompts consistent with the established visual brand system.
+- Create a GitHub branch and open a pull request with timestamped filenames and branch names reflecting the generation time.
+
+This approach ensures the automation respects the content constraints and keeps control in the hands of the human reviewer.
+
+## Building the Workflow
+
+The workflow leverages a manual n8n trigger where structured inputs guide the content generation. These include topic, language, category, and personal context to keep content specific and useful.
+
+When executed, the workflow:
+
+1. Reads all relevant content source docs live to inform the generation.
+2. Creates an MDX blog draft under `content/posts/`, named using a kebab-case slug appended with a generation timestamp.
+3. Generates a social media pack under `content/social/` aligned with the blog post slug and timestamp.
+4. Develops a custom cover image prompt respecting the black/white/orange developer-lab aesthetic with technical elements like n8n nodes and GitHub PR lines.
+5. Commits all generated files to a new GitHub branch named to include the post slug and a timestamp.
+6. Opens a GitHub pull request for review and manual publishing.
+
+This setup confirms that everything—from runtime context to file naming and PR creation—works end to end.
+
+## What Stays Manual
+
+The key manual steps remain:
+
+- Reviewing the MDX blog post draft for voice, technical accuracy, and style.
+- Evaluating the social content and adjusting tone and platform-specific adaptation before posting.
+- Changing the post `status` from `"draft"` to `"published"` after approval.
+- Merging the GitHub PR to publish the content.
+- Publishing social posts outside of this automated workflow to maintain control.
+
+Automation accelerates the initial draft creation and asset preparation, but final judgment and taste remain human responsibilities.
+
+## What This Unlocks
+
+By validating runtime source-doc loading and timed content generation, the workflow:
+
+- Ensures all generated content reflects the latest rules and brand direction without stale artifacts.
+- Streamlines the repetitive overhead of draft creation and social repurposing with consistent, version-controlled output.
+- Supports future expansion to automated image generation, video concepts, and scheduled publishing with a solid, predictable foundation.
+- Maintains a high-quality manual review gate to keep the content relevant, personal, and credible.
+
+Ultimately, this makes content production less tedious and more integrated with a developer's tooling while protecting quality.
+
+## Next Steps
+
+To build on this successful validation, the focus will be:
+
+- Adding safe, optional MDX components to enrich complex blog posts without compromising stability.
+- Experimenting with actual image generation based on the created prompts while maintaining the visual identity constraints.
+- Extending the workflow to handle content calendar integration and scheduling for smoother publishing.
+- Further refining social content adaptation with better hooks, CTAs, and hashtag strategies per platform.
+- Gradually lowering manual triggers toward semi-automated or issue-driven content generation once review confidence grows.
+
+For now, the system reliably produces draft content packages with proper GitHub tracking, respecting a review-first philosophy aligned with the brand voice and visual system.
