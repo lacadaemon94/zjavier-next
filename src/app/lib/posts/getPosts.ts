@@ -13,18 +13,23 @@ function getPostSlug(fileName: string) {
 
 function getHeadings(content: string): PostHeading[] {
   const slugger = new GithubSlugger();
-  const headingRegex = /\n\n(?<flag>#{1,6})\s+(?<content>.+)/g;
+  const headingRegex = /^(?<flag>#{1,6})\s+(?<content>.+?)\s*#*\s*$/gm;
 
-  return Array.from(content.matchAll(headingRegex)).map(({ groups }) => {
-    const flag = groups?.flag || "";
-    const text = groups?.content || "";
+  return Array.from(content.matchAll(headingRegex))
+    .map(({ groups }) => {
+      const flag = groups?.flag || "";
+      const text = (groups?.content || "")
+        .replace(/<\/?[^>]+(>|$)/g, "")
+        .replace(/[`*_~]/g, "")
+        .trim();
 
-    return {
-      heading: flag.length,
-      text,
-      slug: slugger.slug(text),
-    };
-  });
+      return {
+        heading: flag.length,
+        text,
+        slug: slugger.slug(text),
+      };
+    })
+    .filter((heading) => heading.text.length > 0);
 }
 
 function readPostFile(fileName: string): Post {
