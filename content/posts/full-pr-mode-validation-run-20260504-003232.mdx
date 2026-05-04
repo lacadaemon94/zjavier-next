@@ -1,0 +1,89 @@
+---
+title: "Full PR Mode Validation Run"
+category: "Automation"
+excerpt: "A practical validation of the draft-first GitHub PR automation workflow—testing timestamped branches, draft PR creation, and social content generation without auto-posting."
+publishedAt: "2026-05-04"
+description: "This post documents the process of validating a content automation workflow that uses n8n to create draft GitHub pull requests with timestamped branches and files, respecting a draft-first publishing approach and social content generation guidelines."
+status: "draft"
+tags:
+  - "automation"
+  - "content-automation"
+  - "github-pr"
+  - "n8n"
+  - "workflow"
+language: "en"
+contentPillar: "Automation systems"
+socialSummary: "Validating a GitHub PR draft-first automation workflow with n8n: timestamped branches, social content generation without auto-posting, and brand-aligned image prompts."
+updatedAt: "2026-05-04"
+canonicalUrl: "https://javierflores.dev/full-pr-mode-validation-run"
+series: "Automation Systems Build Logs"
+featured: false
+coverPrompt: "Black and white developer-lab aesthetic, orange accent, minimal editorial layout, dot-matrix or dither texture, clean technical grid, high contrast, modern typography direction, human-centered technology feel. Focus on a 16:9 blog cover showing a timestamped GitHub branch concept with draft PR elements, using black, white, gray, and orange colors."
+---
+
+# Full PR Mode Validation Run
+
+## The Problem
+
+One of the ongoing challenges in content automation is balancing efficiency with editorial control. Automating content publishing can speed things up, but skipping the draft stage risks pushing unvetted material live prematurely. This defeats the purpose of deliberate, iterative editing and review — especially when managing multiple platforms and content formats.
+
+In this build log, I’m validating a key workflow: using n8n to create draft GitHub pull requests (PRs) that reflect content changes without automatically publishing them. The goal is a *draft-first* publishing mode that respects human oversight but reduces manual overhead. This validation run ensures the workflow behaves as expected: timestamped branches and files, automatic draft PR creation, social content generation in "planning" mode, and compliance with the visual brand system.
+
+## The Approach
+
+Rather than diving into automatic publishing or multiple agents posting content instantly, the focus is on:
+
+- **Draft-first publishing:** The automation creates a draft GitHub PR first, signaling content is ready for review but not live.
+- **Branch timestamping:** Each PR branch includes a timestamp to provide unique, traceable snapshots for every run.
+- **Social content generation:** Social posts are generated but intentionally not posted automatically, allowing manual review and scheduling.
+- **Brand consistency:** All image prompts for social assets adhere strictly to the visual brand system to maintain design coherence.
+
+I set out to confirm that n8n can orchestrate these steps reliably without shortcuts or presumptions.
+
+## Building the Workflow
+
+The workflow begins with content changes staged locally or via connected tools. When triggered, n8n performs these actions:
+
+1. **Create a Timestamped Branch:** It generates a unique branch name with the current date and time, e.g., `full-pr-validation-20260504-003232`. This helps track iterations granularly.
+2. **Commit Content Updates:** Relevant files—including markdown drafts and metadata—are committed to the branch. The automation ensures filenames include timestamps to avoid collisions.
+3. **Open a Draft GitHub PR:** Using GitHub’s API, the workflow creates a pull request in "draft" mode targeted toward the main publishing branch, signaling that this iteration is ready for human review.
+4. **Generate Social Content:** Based on the PR metadata and content, the system prepares social messages for LinkedIn, X, Instagram, Facebook, and WhatsApp, formatting posts as per the social pack contract. Critically, this content is generated, saved, but **not** posted automatically to respect manual curation.
+5. **Create Image Asset Prompts:** Following the defined visual brand system, prompts for image generation are created in preparation for manual or automated image production later.
+
+The entire workflow prioritizes explicit control points rather than blind automation.
+
+## What Stays Manual
+
+Despite automation, key editorial steps remain manual for quality assurance:
+
+- **Review and merge PR:** Content creators or editors verify the draft PR contents before merging into the live branch.
+- **Social post scheduling:** Generated social copy is reviewed and scheduled manually across target platforms.
+- **Image generation and selection:** Image prompts act as guidelines; actual visual assets are reviewed or produced separately.
+
+These manual steps keep the workflow practical and flexible, avoiding premature publication or off-brand collateral.
+
+## What This Unlocks
+
+This validation run confirms a solid foundation for content automation that respects editorial processes:
+
+- Safe draft-first publishing guarantees that no changes go live prematurely.
+- Timestamped branches offer clear version history and rollback points.
+- Social content generation without auto-posting enables a consistent brand voice while maintaining human oversight.
+- Alignment with the visual brand system ensures image assets support the brand identity cohesively.
+
+Adopting this workflow reduces repetitive manual tasks but keeps content quality and timing firmly under control.
+
+## Next Steps
+
+Moving forward, I will:
+
+- Monitor draft PRs for potential edge cases and automations to handle them smoothly.
+- Explore semi-automated scheduling tools compatible with generated social packs.
+- Refine image prompts with actual asset production workflows.
+- Document the process thoroughly to onboard other developers and indie hackers interested in similar automation.
+
+This build log marks a valuable step toward a robust, scalable content automation system that balances speed and stewardship.
+
+---
+
+By focusing on control and specificity, this draft-first PR mode validation run demonstrates how automation can complement rather than replace careful content management. I look forward to iterating on this foundation in upcoming workflow enhancements.
