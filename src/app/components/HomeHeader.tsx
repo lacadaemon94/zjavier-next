@@ -35,6 +35,7 @@ type Props = {
 const HomeHeader = ({ locale, copy, language }: Props) => {
   return (
     <div className={styles.homeHeader}>
+      <LanguageSwitcher locale={locale} labels={language} />
       <div className={styles.header}>
         <div className={styles.avatar}>
           <Image
@@ -67,7 +68,6 @@ const HomeHeader = ({ locale, copy, language }: Props) => {
             </div>
           </div>
         </div>
-        <LanguageSwitcher locale={locale} labels={language} />
       </div>
       <div className={styles.aboutandlinks}>
         <div className={styles.itsabout}>

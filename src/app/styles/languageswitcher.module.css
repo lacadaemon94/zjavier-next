@@ -5,6 +5,7 @@
   flex-wrap: nowrap;
   width: fit-content;
   height: 2rem;
+  align-self: flex-end;
   align-items: center;
   justify-content: center;
   gap: 2px;

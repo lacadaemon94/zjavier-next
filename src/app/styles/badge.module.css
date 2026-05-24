@@ -24,7 +24,7 @@
   position: absolute;
   flex-wrap: nowrap;
   width: fit-content;
-  max-width: 150px;
+  max-width: 192px;
   background-color: var(--background-900);
   align-items: center;
   justify-content: center;
