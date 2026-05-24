@@ -4,6 +4,8 @@ import Link from "next/link";
 import format from "date-fns/format";
 // Types
 import type { PostWithStats } from "@/app/lib/posts/postWithStats";
+import type { Locale } from "@/app/i18n/config";
+import { getDateLocale } from "@/app/i18n/date";
 // Styles
 import styles from "../../styles/home.module.css";
 // Ui Elements
@@ -15,9 +17,10 @@ import LikeFilledIcon from "@/assets/icons/LikeFilledIcon";
 
 type PostProps = {
   post: PostWithStats;
+  locale: Locale;
 };
 
-export const PostCard = ({ post }: PostProps) => {
+export const PostCard = ({ post, locale }: PostProps) => {
   return (
     <Link href={`/${post.slug}`} className={styles.postcard}>
       <div className={styles.header}>
@@ -30,7 +33,9 @@ export const PostCard = ({ post }: PostProps) => {
         <div className={styles.detailswrapper}>
           <DetailPill
             icon={<CalendarDetailIcon />}
-            value={format(new Date(post.publishedAt), "MMM dd")}
+            value={format(new Date(post.publishedAt), "MMM dd", {
+              locale: getDateLocale(locale),
+            })}
             className={styles.detailpill}
           />
           <DetailPill

@@ -7,6 +7,7 @@ import styles from "../../styles/posts.module.css";
 // Ui elements
 import Button from "../Button";
 import { LikeButton } from "./LikeButton";
+import type { Dictionary } from "@/app/i18n/dictionaries";
 
 type Heading = {
   heading: number;
@@ -17,6 +18,7 @@ type Heading = {
 type Props = {
   headings: Heading[];
   flatPath: string;
+  labels: Dictionary["post"];
 };
 
 type HeadingGroup = Heading & {
@@ -43,13 +45,13 @@ function groupHeadings(headings: Heading[]): HeadingGroup[] {
   }, []);
 }
 
-export const PostIndex = ({ headings, flatPath }: Props) => {
+export const PostIndex = ({ headings, flatPath, labels }: Props) => {
   const headingGroups = groupHeadings(headings);
 
   return (
     <div className={styles.index}>
       <div className={styles.wrapper}>
-        <div className={styles.title}>INDEX</div>
+        <div className={styles.title}>{labels.index}</div>
 
         {headingGroups.length > 0 && (
           <ul className={styles.headings}>
@@ -79,7 +81,7 @@ export const PostIndex = ({ headings, flatPath }: Props) => {
           </div>
 
           <Button type="button" className={styles.totop} onClick={scrollToTop}>
-            <p>back to top</p>
+            <p>{labels.backToTop}</p>
           </Button>
         </div>
       </div>

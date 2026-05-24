@@ -1,0 +1,38 @@
+.switcher {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: fit-content;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid rgb(87 87 87 / 50%);
+  border-radius: 0.75rem;
+  background-color: var(--background-950);
+}
+
+.switcher button {
+  display: flex;
+  position: relative;
+  width: 2.75rem;
+  height: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  color: var(--foreground-300);
+  font-family: var(--font-museoModerno);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1;
+  background: transparent;
+  cursor: pointer;
+}
+
+.switcher button:hover,
+.switcher button[data-isactive="true"] {
+  color: var(--foreground-50);
+  background-color: var(--background-800);
+}

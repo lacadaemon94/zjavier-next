@@ -6,6 +6,9 @@ import Image from "next/image";
 // Ui Elements
 import Badge from "./Badge";
 import SocialLink from "./SocialLink";
+import LanguageSwitcher from "./LanguageSwitcher";
+import type { Locale } from "../i18n/config";
+import type { Dictionary } from "../i18n/dictionaries";
 // Assets
 import WebDesignIcon from "@/assets/icons/WebDesignIcon";
 import ApiDesignIcon from "@/assets/icons/ApiDesignIcon";
@@ -23,14 +26,20 @@ import AvatarImage from "../../assets/images/avatar.png";
 // Styles
 import styles from "../styles/homeheader.module.css";
 
-const HomeHeader = () => {
+type Props = {
+  locale: Locale;
+  copy: Dictionary["home"];
+  language: Dictionary["language"];
+};
+
+const HomeHeader = ({ locale, copy, language }: Props) => {
   return (
     <div className={styles.homeHeader}>
       <div className={styles.header}>
         <div className={styles.avatar}>
           <Image
             src={AvatarImage}
-            alt="Pixel Avatar - Javier Flores"
+            alt={copy.avatarAlt}
             width={256}
             height={256}
           />
@@ -39,22 +48,30 @@ const HomeHeader = () => {
           <h2>Javier Flores</h2>
           <div className={styles.titleandbadges}>
             <h4>
-              Full Stack Developer<span>, with experience in</span>
+              {copy.title}
+              <span>{copy.titleSuffix}</span>
             </h4>
             <div className={styles.badgeswrapper}>
-              <Badge icon={<WebDesignIcon />} tooltipText="Web Design" />
-              <Badge icon={<ApiDesignIcon />} tooltipText="API Development" />
-              <Badge icon={<DbDesignIcon />} tooltipText="Database Design" />
+              <Badge
+                icon={<WebDesignIcon />}
+                tooltipText={copy.badges.webDesign}
+              />
+              <Badge
+                icon={<ApiDesignIcon />}
+                tooltipText={copy.badges.apiDevelopment}
+              />
+              <Badge
+                icon={<DbDesignIcon />}
+                tooltipText={copy.badges.databaseDesign}
+              />
             </div>
           </div>
         </div>
+        <LanguageSwitcher locale={locale} labels={language} />
       </div>
       <div className={styles.aboutandlinks}>
         <div className={styles.itsabout}>
-          <h4>
-            Some of my learning experiences, note-worthy code, tutorials about
-            common development patterns and general opinions about stuff.
-          </h4>
+          <h4>{copy.about}</h4>
         </div>
         <div className={styles.linkswrapper}>
           <div className={styles.column}>

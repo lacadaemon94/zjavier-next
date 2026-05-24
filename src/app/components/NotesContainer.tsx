@@ -23,12 +23,16 @@ import DateSortIcon from "@/assets/icons/DateSortIcon";
 import LikeIcon from "@/assets/icons/LikeIcon";
 import ViewIcon from "@/assets/icons/ViewIcon";
 import type { PostWithStats } from "@/app/lib/posts/postWithStats";
+import type { Locale } from "../i18n/config";
+import type { Dictionary } from "../i18n/dictionaries";
 
 type Props = {
   posts: PostWithStats[];
+  locale: Locale;
+  copy: Dictionary["notes"];
 };
 
-const NotesContainer = ({ posts }: Props) => {
+const NotesContainer = ({ posts, locale, copy }: Props) => {
   const {
     isOpen: isFilterOpen,
     toggleDropdown: toggleFilter,
@@ -54,71 +58,71 @@ const NotesContainer = ({ posts }: Props) => {
       <div className={styles.modifierswrapper}>
         <DropDown
           icon={<FilterIcon />}
-          ariaLabel="Filter"
+          ariaLabel={copy.filter}
           isOpen={isFilterOpen}
           toggleDropdown={toggleFilter}
           ref={filterRef}
         >
           <DropDownOption
             icon={<AllIcon />}
-            text="All"
-            ariaLabel="Show All"
+            text={copy.all}
+            ariaLabel={copy.showAll}
             action={() => handleFilter(categories.ALL)}
             isActive={selectedCategory === categories.ALL}
           />
           <DropDownOption
             icon={<TutorialIcon />}
-            text="Tutorials"
-            ariaLabel="Show Tutorials"
+            text={copy.tutorials}
+            ariaLabel={copy.showTutorials}
             action={() => handleFilter(categories.TUTORIAL)}
             isActive={selectedCategory === categories.TUTORIAL}
           />
           <DropDownOption
             icon={<OpinionIcon />}
-            text="Opinions"
-            ariaLabel="Show Opinions"
+            text={copy.opinions}
+            ariaLabel={copy.showOpinions}
             action={() => handleFilter(categories.OPINION)}
             isActive={selectedCategory === categories.OPINION}
           />
           <DropDownOption
             icon={<NoteIcon />}
-            text="Notes"
-            ariaLabel="Show Notes"
+            text={copy.notes}
+            ariaLabel={copy.showNotes}
             action={() => handleFilter(categories.NOTE)}
             isActive={selectedCategory === categories.NOTE}
           />
         </DropDown>
         <DropDown
           icon={<SortIcon />}
-          ariaLabel="Sort"
+          ariaLabel={copy.sort}
           isOpen={isSortOpen}
           toggleDropdown={toggleSort}
           ref={sortRef}
         >
           <DropDownOption
             icon={<DateSortIcon />}
-            text="By Date"
-            ariaLabel="By Date"
+            text={copy.byDate}
+            ariaLabel={copy.byDate}
             action={() => handleSort("date")}
             isActive={sortType === sortings.DATE}
           />
           <DropDownOption
             icon={<LikeIcon />}
-            text="By Likes"
-            ariaLabel="By Likes"
+            text={copy.byLikes}
+            ariaLabel={copy.byLikes}
             action={() => handleSort("likes")}
             isActive={sortType === sortings.LIKES}
           />
           <DropDownOption
             icon={<ViewIcon />}
-            text="By Views"
-            ariaLabel="By Views"
+            text={copy.byViews}
+            ariaLabel={copy.byViews}
             action={() => handleSort("views")}
             isActive={sortType === sortings.VIEWS}
           />
         </DropDown>
       </div>
-      <Posts posts={filteredAndSortedPosts} />
+      <Posts locale={locale} posts={filteredAndSortedPosts} />
     </div>
   );
 };

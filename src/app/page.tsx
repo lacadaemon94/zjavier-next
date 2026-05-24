@@ -3,6 +3,7 @@
 import React from "react";
 import { getPublishedPosts } from "./lib/posts/getPosts";
 import type { PostWithStats } from "./lib/posts/postWithStats";
+import { getI18n } from "./i18n/server";
 // Utils
 // Ui Elements
 import HomeHeader from "./components/HomeHeader";
@@ -12,7 +13,8 @@ import Footer from "./components/Footer";
 // Styles
 import styles from "./styles/home.module.css";
 
-export default function Page() {
+export default async function Page() {
+  const { locale, dictionary } = await getI18n();
   const posts: PostWithStats[] = getPublishedPosts().map((post) => ({
     ...post,
     likes: 0,
@@ -21,9 +23,13 @@ export default function Page() {
 
   return (
     <div className={styles.home}>
-      <HomeHeader />
-      <NotesContainer posts={posts} />
-      <Footer />
+      <HomeHeader
+        locale={locale}
+        copy={dictionary.home}
+        language={dictionary.language}
+      />
+      <NotesContainer locale={locale} copy={dictionary.notes} posts={posts} />
+      <Footer copy={dictionary.footer} />
     </div>
   );
 }

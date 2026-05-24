@@ -24,6 +24,8 @@ import { mdxComponents } from "@/app/components/mdxComponents/registry";
 import styles from "../styles/posts.module.css";
 // Assets
 import LeftArrowIcon from "@/assets/icons/LeftArrowIcon";
+import { getI18n } from "../i18n/server";
+import { getDateLocale } from "../i18n/date";
 
 export async function generateStaticParams() {
   return getPublishedPosts().map((post) => ({
@@ -71,6 +73,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Page({ params }: Props) {
+  const { locale, dictionary } = await getI18n();
   const { slug } = await params;
   const post = getPublishedPostBySlug(slug);
 
@@ -78,31 +81,43 @@ export default async function Page({ params }: Props) {
 
   return (
     <article className={styles.post}>
-      <MobileActions slug={post.slug} />
-      <StickyHeader />
+      <MobileActions ariaLabel={dictionary.post.home} slug={post.slug} />
+      <StickyHeader
+        locale={locale}
+        avatarAlt={dictionary.home.avatarAlt}
+        language={dictionary.language}
+      />
       <div className={styles.goback}>
         <NavButton
           className={styles.gobackbutton}
           href="/"
           icon={<LeftArrowIcon />}
-          ariaLabel="Go Back Home"
-          text="Go Back"
+          ariaLabel={dictionary.post.goBackHome}
+          text={dictionary.post.goBack}
         />
       </div>
       <header className={styles.header}>
         <h1>{post.title}</h1>
         <div className={styles.header_details}>
-          <p>{format(new Date(post.publishedAt), "MMMM do, yyyy")}</p>
+          <p>
+            {format(new Date(post.publishedAt), "MMMM do, yyyy", {
+              locale: getDateLocale(locale),
+            })}
+          </p>
           <PostHeaderDetails slug={post.slug} />
         </div>
       </header>
-      <PostIndex headings={post.headings} flatPath={post.slug} />
+      <PostIndex
+        headings={post.headings}
+        flatPath={post.slug}
+        labels={dictionary.post}
+      />
       <MDXRemote
         source={post.content}
         components={mdxComponents}
         options={mdxOptions as any}
       />
-      <Footer />
+      <Footer copy={dictionary.footer} />
     </article>
   );
 }

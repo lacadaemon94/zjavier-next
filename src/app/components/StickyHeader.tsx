@@ -5,6 +5,7 @@ import Image from "next/image";
 // Utils
 // Ui Elements
 import SocialLink from "./SocialLink";
+import LanguageSwitcher from "./LanguageSwitcher";
 // Styles
 import styles from "../styles/stickyheader.module.css";
 // Assets
@@ -14,16 +15,22 @@ import GitHubIcon from "@/assets/icons/GitHubIcon";
 import InstagramIcon from "@/assets/icons/InstagramIcon";
 import TikTokIcon from "@/assets/icons/TikTokIcon";
 import AvatarImage from "../../assets/images/avatar.png";
+import type { Locale } from "../i18n/config";
+import type { Dictionary } from "../i18n/dictionaries";
 
-type Props = {};
+type Props = {
+  locale: Locale;
+  avatarAlt: string;
+  language: Dictionary["language"];
+};
 
-const StickyHeader = (props: Props) => {
+const StickyHeader = ({ locale, avatarAlt, language }: Props) => {
   return (
     <div className={styles.stickyheader}>
       <div className={styles.avatar}>
         <Image
           src={AvatarImage}
-          alt="Pixel Avatar - Javier Flores"
+          alt={avatarAlt}
           width={128}
           height={128}
         />
@@ -64,6 +71,7 @@ const StickyHeader = (props: Props) => {
           ariaLabel="TikTok"
           className={styles.shsociallink}
         /> */}
+        <LanguageSwitcher locale={locale} labels={language} />
       </div>
     </div>
   );

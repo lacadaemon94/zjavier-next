@@ -6,10 +6,13 @@ import SocialLink from "./SocialLink";
 // Styles
 import styles from "../styles/footer.module.css";
 // Assets
+import type { Dictionary } from "../i18n/dictionaries";
 
-type Props = {};
+type Props = {
+  copy: Dictionary["footer"];
+};
 
-const Footer = (props: Props) => {
+const Footer = ({ copy }: Props) => {
   return (
     <div className={styles.footer}>
       <div className={styles.links}>
@@ -45,9 +48,7 @@ const Footer = (props: Props) => {
         />
       </div>
       <div className={styles.disclaimer}>
-        <p>
-          Built with Next.js, TypeScript, Framer Motion, Supabase and Vercel.
-        </p>
+        <p>{copy.builtWith}</p>
       </div>
     </div>
   );

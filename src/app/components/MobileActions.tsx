@@ -16,9 +16,10 @@ import LeftArrowIcon from "@/assets/icons/LeftArrowIcon";
 
 type Props = {
   slug: string;
+  ariaLabel: string;
 };
 
-const MobileActions = ({ slug }: Props) => {
+const MobileActions = ({ slug, ariaLabel }: Props) => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [isLiked, setIsLiked] = useState<boolean>(false);
   const [likes, setLikes] = useState<number>(0);
@@ -43,7 +44,7 @@ const MobileActions = ({ slug }: Props) => {
       <NavButton
         href="/"
         icon={<LeftArrowIcon />}
-        ariaLabel="Home"
+        ariaLabel={ariaLabel}
         className={styles.gobackmobile}
       />
       <div className={styles.likemobile}>
