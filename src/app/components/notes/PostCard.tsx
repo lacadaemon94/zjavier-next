@@ -1,11 +1,10 @@
 // Core
 import React from "react";
 import Link from "next/link";
-import format from "date-fns/format";
 // Types
 import type { PostWithStats } from "@/app/lib/posts/postWithStats";
 import type { Locale } from "@/app/i18n/config";
-import { getDateLocale } from "@/app/i18n/date";
+import { formatLocalizedDate } from "@/app/i18n/date";
 // Styles
 import styles from "../../styles/home.module.css";
 // Ui Elements
@@ -21,21 +20,24 @@ type PostProps = {
 };
 
 export const PostCard = ({ post, locale }: PostProps) => {
+  const languageLabel = post.language === "es" ? "SPA" : "ENG";
+
   return (
     <Link href={`/${post.slug}`} className={styles.postcard}>
       <div className={styles.header}>
         <div className={styles.title}>
           <h3>{post.title}</h3>
-          {/* <div className={styles.mediatags}>
-            <VideoIcon />
-          </div> */}
+          <span
+            className={styles.languageTag}
+            aria-label={`Post language: ${languageLabel}`}
+          >
+            {languageLabel}
+          </span>
         </div>
         <div className={styles.detailswrapper}>
           <DetailPill
             icon={<CalendarDetailIcon />}
-            value={format(new Date(post.publishedAt), "MMM dd", {
-              locale: getDateLocale(locale),
-            })}
+            value={formatLocalizedDate(new Date(post.publishedAt), "MMM dd", locale)}
             className={styles.detailpill}
           />
           <DetailPill

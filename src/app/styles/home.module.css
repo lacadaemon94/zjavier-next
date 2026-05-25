@@ -90,18 +90,39 @@
   display: flex;
   position: relative;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 
   width: 100%;
 
   align-items: flex-start;
-  /* justify-content: space-between; */
+  justify-content: space-between;
+  gap: 0.75rem;
 }
 
 .postcard .header .title h3 {
+  flex: 1 1 min(100%, 32rem);
   font-size: 1.5em;
   font-weight: 600;
   color: var(--foreground-50);
+}
+.postcard .header .title .languageTag {
+  display: flex;
+  position: relative;
+  flex: 0 0 auto;
+  width: fit-content;
+  height: fit-content;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(250, 84, 28, 0.32);
+  border-radius: 999px;
+  padding: 4px 8px;
+  color: var(--foreground-50);
+  background-color: rgba(250, 84, 28, 0.1);
+  font-family: var(--font-museoModerno);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.04em;
 }
 .postcard .detailswrapper {
   display: flex;

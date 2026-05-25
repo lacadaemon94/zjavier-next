@@ -1,0 +1,355 @@
+.aiFork {
+  --fork-bg: #0d0d0d;
+  --fork-panel: rgba(18, 18, 18, 0.92);
+  --fork-panel-soft: rgba(255, 255, 255, 0.035);
+  --fork-line: rgba(250, 84, 28, 0.42);
+  --fork-orange: #fa541c;
+  --fork-orange-soft: rgba(250, 84, 28, 0.14);
+  --fork-text: #f6fbfc;
+  --fork-muted: rgba(246, 251, 252, 0.68);
+  --fork-dim: rgba(246, 251, 252, 0.45);
+
+  display: grid;
+  position: relative;
+  gap: 1.5rem;
+  width: 100%;
+  margin: 2.5rem 0;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  overflow: hidden;
+  border: 1px solid rgba(246, 251, 252, 0.08);
+  border-radius: 1.25rem;
+  color: var(--fork-text);
+  background:
+    linear-gradient(rgba(246, 251, 252, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(246, 251, 252, 0.035) 1px, transparent 1px),
+    radial-gradient(circle at 50% 0%, rgba(250, 84, 28, 0.16), transparent 34rem),
+    var(--fork-bg);
+  background-size:
+    32px 32px,
+    32px 32px,
+    auto,
+    auto;
+}
+
+.aiFork::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.04),
+    transparent 28%,
+    rgba(0, 0, 0, 0.24)
+  );
+}
+
+.aiFork > * {
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  display: grid;
+  max-width: 42rem;
+  margin: 0 auto;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.eyebrow,
+.pathLabel {
+  margin: 0;
+  color: var(--fork-orange);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.header h2,
+.pathHeader h3,
+.leverHeader h3 {
+  margin: 0;
+  color: var(--fork-text);
+  font-family: var(--font-museoModerno);
+  letter-spacing: 0;
+}
+
+.header h2 {
+  font-size: clamp(1.75rem, 5vw, 3rem);
+  line-height: 1;
+}
+
+.header p:last-child {
+  margin: 0;
+  color: var(--fork-muted);
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.5;
+}
+
+.flow {
+  display: flex;
+  justify-content: center;
+  height: 1.5rem;
+}
+
+.flow span,
+.leverHeader span {
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, var(--fork-orange), transparent);
+}
+
+.coreNode {
+  display: grid;
+  width: min(100%, 22rem);
+  margin: 0 auto;
+  gap: 0.35rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--fork-line);
+  border-radius: 1rem;
+  text-align: center;
+  background:
+    radial-gradient(circle at center, rgba(250, 84, 28, 0.18), transparent 70%),
+    rgba(12, 12, 12, 0.88);
+  box-shadow: 0 0 34px rgba(250, 84, 28, 0.12);
+}
+
+.coreNode span {
+  color: var(--fork-text);
+  font-family: var(--font-museoModerno);
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.coreNode small {
+  color: var(--fork-muted);
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
+
+.forkLines {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: min(100%, 36rem);
+  height: 2rem;
+  margin: -0.25rem auto -0.5rem;
+}
+
+.forkLines span {
+  border-top: 1px solid var(--fork-line);
+}
+
+.forkLines span:first-child {
+  border-left: 1px solid var(--fork-line);
+  border-top-left-radius: 1rem;
+}
+
+.forkLines span:last-child {
+  border-right: 1px solid var(--fork-line);
+  border-top-right-radius: 1rem;
+}
+
+.paths {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.pathCard,
+.signalCard,
+.leverCard,
+.takeaway {
+  border: 1px solid rgba(246, 251, 252, 0.08);
+  background: var(--fork-panel);
+}
+
+.pathCard {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.pathHeader {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.pathHeader h3 {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  line-height: 1.05;
+}
+
+.pathHeader > p:last-child {
+  margin: 0;
+  color: var(--fork-muted);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.dependency {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent),
+    rgba(14, 14, 14, 0.94);
+}
+
+.capability {
+  border-color: rgba(250, 84, 28, 0.18);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(250, 84, 28, 0.12), transparent 18rem),
+    rgba(18, 18, 18, 0.94);
+}
+
+.cardList {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.signalCard {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 0.875rem;
+  border-radius: 0.75rem;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.signalCard:hover,
+.leverCard:hover {
+  transform: translateY(-2px);
+  border-color: rgba(250, 84, 28, 0.38);
+  background-color: var(--fork-panel-soft);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.28), 0 0 22px rgba(250, 84, 28, 0.08);
+}
+
+.signalDot {
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-top: 0.45rem;
+  border-radius: 999px;
+  background: var(--fork-dim);
+}
+
+.capability .signalDot,
+.leverHeader span {
+  background: var(--fork-orange);
+  box-shadow: 0 0 18px rgba(250, 84, 28, 0.32);
+}
+
+.signalCard h4,
+.leverCard h4 {
+  margin: 0;
+  color: var(--fork-text);
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.signalCard p,
+.leverCard p {
+  margin: 0.25rem 0 0;
+  color: var(--fork-muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.levers {
+  display: grid;
+  gap: 1rem;
+  margin-top: 0.25rem;
+}
+
+.leverHeader {
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+.leverHeader span {
+  height: 1.75rem;
+}
+
+.leverHeader h3 {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+.leverGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.leverCard {
+  padding: 0.875rem;
+  border-radius: 0.75rem;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.takeaway {
+  display: grid;
+  gap: 0.4rem;
+  max-width: 44rem;
+  margin: 0.25rem auto 0;
+  padding: 1rem 1.25rem;
+  border-color: rgba(250, 84, 28, 0.3);
+  border-radius: 1rem;
+  text-align: center;
+  background:
+    linear-gradient(90deg, rgba(250, 84, 28, 0.12), transparent 32%, rgba(250, 84, 28, 0.1)),
+    rgba(12, 12, 12, 0.94);
+}
+
+.takeaway p {
+  margin: 0;
+  color: var(--fork-text);
+  font-size: clamp(0.98rem, 2vw, 1.1rem);
+  line-height: 1.55;
+}
+
+.takeaway p:last-child {
+  color: var(--fork-muted);
+}
+
+@media only screen and (max-width: 900px) {
+  .paths,
+  .leverGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .forkLines {
+    display: none;
+  }
+
+  .pathCard {
+    padding: 0.875rem;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .aiFork {
+    margin: 2rem 0;
+    border-radius: 1rem;
+  }
+
+  .header {
+    text-align: left;
+  }
+
+  .coreNode,
+  .takeaway {
+    width: 100%;
+  }
+}
