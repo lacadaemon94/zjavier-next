@@ -25,8 +25,8 @@ export const dictionaries = {
     },
     language: {
       label: "Language",
-      english: "ENG",
-      spanish: "SPA",
+      english: "EN",
+      spanish: "ES",
       setEnglish: "Switch static site language to English",
       setSpanish: "Switch static site language to Spanish",
     },
@@ -93,8 +93,8 @@ export const dictionaries = {
     },
     language: {
       label: "Idioma",
-      english: "ENG",
-      spanish: "SPA",
+      english: "EN",
+      spanish: "ES",
       setEnglish: "Cambiar el idioma estatico del sitio a ingles",
       setSpanish: "Cambiar el idioma estatico del sitio a espanol",
     },
