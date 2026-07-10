@@ -82,7 +82,7 @@ const HomeHeader = ({ locale, copy, language }: Props) => {
             />
             <SocialLink
               icon={<WhatsAppIcon />}
-              href="https://api.whatsapp.com/send?phone=50360581739&text=Hola!"
+              href="https://api.whatsapp.com/send?phone=50370533409&text=Hola!"
               ariaLabel="WhatsApp"
             />
             <SocialLink
