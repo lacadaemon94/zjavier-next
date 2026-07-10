@@ -2,6 +2,7 @@
 // Core
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 // Utils
 // Ui Elements
 import Badge from "./Badge";
@@ -35,7 +36,12 @@ type Props = {
 const HomeHeader = ({ locale, copy, language }: Props) => {
   return (
     <div className={styles.homeHeader}>
-      <LanguageSwitcher locale={locale} labels={language} />
+      <div className={styles.topbar}>
+        <Link href="/cv" className={styles.cvlink}>
+          CV
+        </Link>
+        <LanguageSwitcher locale={locale} labels={language} />
+      </div>
       <div className={styles.header}>
         <div className={styles.avatar}>
           <Image
