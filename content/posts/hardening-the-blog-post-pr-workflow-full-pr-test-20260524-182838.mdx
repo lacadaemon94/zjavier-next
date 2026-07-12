@@ -1,0 +1,71 @@
+---
+title: "Hardening the Blog Post PR Workflow Full PR Test"
+category: "Automation"
+excerpt: "A practical refinement of a content automation workflow focusing on draft-first publishing, PR safety, and visual brand-aligned image prompts."
+publishedAt: "2026-05-24"
+description: "This post details the process of strengthening an n8n-driven blog post PR workflow with an emphasis on preview-only mode, validation steps, and maintaining review-first publishing principles."
+status: "draft"
+tags:
+  - "automation"
+  - "n8n"
+  - "content workflow"
+  - "github pr"
+  - "draft-first"
+language: "en"
+coverPrompt: "1. Format/Aspect Ratio: 16:9 blog cover 2. Topic/Context: Technical article titled \"Hardening the Blog Post PR Workflow Full PR Test\" 3. Visual Style: Black/off-white developer-lab aesthetic. Controlled orange accent. Dot-matrix, dither, low-density pixel noise, technical grid, interface cards. 4. Typography: Use MuseoModerno ONLY for the main title or large identity text. Use Chivo ONLY for subtitles, metadata, captions, and small UI labels. Do not use any other font. Keep generated text minimal, large, and readable. 5. Composition: n8n workflow nodes linked to GitHub branch and PR lines, MDX file cards with checklist marks, subtle orange signal dots highlighting validation steps. 6. Mood: precise, minimal, practical, independent, technical but human, built not generated. 7. Avoid: generic AI robot, glowing brain, blue SaaS dashboard, neon cyberpunk, stock photo people, corporate vector illustration, excessive gradients, cluttered dashboards, random futuristic fonts, unreadable generated text, any typography except MuseoModerno and Chivo."
+---
+
+## Introduction
+
+Refining content automation workflows requires more than initial setup; it demands deliberate safety, validation, and a mindset that prioritizes human review. This post outlines a practical test aimed at hardening an n8n-driven blog post PR workflow to ensure draft-first publishing, explicit preview modes, and adherence to a visual brand guideline for image prompts.
+
+## The Problem
+
+Early automation workflows often expose risks: accidental publication, weak validation, and unclear boundaries between machine-generated drafts and final content. Without safeguards, content pipelines can create confusion or workflow friction rather than removing it. The challenge is to keep automation reliable without trading off control or quality.
+
+## The Approach
+
+The main goal in this workflow refinement was to:
+
+- Solidify *draft-first* publishing, enforcing the `status: "draft"` frontmatter on all posts generated.
+- Have n8n create GitHub pull requests that encapsulate generated content, allowing gating by human review.
+- Generate social media content alongside the blog draft but never publish automatically, preserving editorial judgment.
+- Produce image prompts aligned with the black, white, and orange visual brand system, giving creative cues without producing final images upfront.
+
+This approach respects the core principle that automation should remove repeated friction, not replace human judgment.
+
+## Implementation Notes
+
+The system uses an n8n workflow named `Generate Blog Post PR` with a manual trigger interface that collects structured input like topic, language, category, and content pillar. Upon execution, the workflow:
+
+- Creates a markdown MDX draft with all required frontmatter fields respecting naming and language rules.
+- Uses draft status by default to prevent premature publication.
+- Generates social packs for multiple platforms scoped to the specified content pillar and language.
+- Produces image prompts following detailed visual brand specifications, including strict typography rules using MuseoModerno for titles and Chivo for labels.
+- Opens a GitHub pull request on a specific branch with a descriptive commit and PR title reflecting the post.
+- Adds validation steps such as input checks to enforce correct categories and language values before generating content.
+
+Critical design choices included avoiding complex or unreviewed MDX components and restricting the image generation to prompts only during this phase.
+
+## Result
+
+This test established a safer, more robust content automation foundation:
+
+- Authors can trigger content generation confidently, knowing everything starts as a draft requiring manual review.
+- GitHub PRs provide a transparent review and editing checkpoint.
+- Social media assets are ready as draft copies tailored to each platform's voice and format.
+- Image prompts fully adhere to the visual brand system, enabling consistent and recognizable visuals for later media production.
+
+Overall, the workflow removes manual copy-paste and repetitive setup while preserving control, taste, and technical specificity.
+
+## Next Steps
+
+Future improvements may include:
+
+- Introducing optional MDX components for structured callouts or diagrams when detected useful.
+- Transitioning from prompts to fully generated brand-aligned images once the text workflow stabilizes.
+- Adding a review checklist automation or CI step to prevent accidental publication from unreviewed drafts.
+- Implementing scheduled workflows or GitHub Issue triggers to expand automation entry points.
+- Exploring lightweight video concepts for social repurposing without losing the review-first principle.
+
+The steady goal remains: build automation that feels built, not generated; practical, precise, and review-friendly.
