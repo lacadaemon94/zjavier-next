@@ -1,0 +1,77 @@
+---
+title: "Hardening the Blog Post PR Workflow Full PR Test"
+category: "Automation"
+excerpt: "Refining the n8n content automation workflow to enhance draft safety, validation, and preview-only mode while preserving manual review."
+publishedAt: "2026-05-24"
+description: "This post details improvements to a blog post PR workflow using n8n that prioritizes draft-first publishing, GitHub PR creation, and generating social and image assets for review without automatic publication."
+status: "draft"
+tags:
+  - "automation"
+  - "n8n"
+  - "github"
+  - "workflow"
+  - "content-automation"
+language: "en"
+coverPrompt: |
+  1. Format/Aspect Ratio: 16:9 blog cover
+  2. Topic/Context: Technical article titled "Hardening the Blog Post PR Workflow Full PR Test"
+  3. Visual Style: Black/off-white developer-lab aesthetic. Controlled orange accent. Dot-matrix, dither, low-density pixel noise, technical grid, interface cards.
+  4. Typography: Use MuseoModerno ONLY for the main title or large identity text. Use Chivo ONLY for subtitles, metadata, captions, and small UI labels. Do not use any other font. Keep generated text minimal, large, and readable.
+  5. Composition: n8n workflow nodes connected to GitHub PR branch lines, MDX file cards with review/check marks signaling draft status.
+  6. Mood: precise, minimal, practical, independent, technical but human, built not generated.
+  7. Avoid: generic AI robot, glowing brain, blue SaaS dashboard, neon cyberpunk, stock photo people, corporate vector illustration, excessive gradients, cluttered dashboards, random futuristic fonts, unreadable generated text, any typography except MuseoModerno and Chivo.
+---
+
+## Introduction
+
+This post explores a refinement test of an existing n8n blog post PR workflow. The focus is on improving preview-only mode, rigorous input validation, and ensuring that pull requests create safe, draft-only blog content. The goal is to enhance automation without sacrificing the human review and manual publishing steps that keep the process reliable and high quality.
+
+## Why Hardening Matters
+
+Automations that write and submit content carry risks when they act beyond drafts. A key lesson is to always treat generated content as a starting point. This means:
+
+- Creating content with `status: "draft"` so it does not publish right away.
+- Opening GitHub PRs for manual review before publishing.
+- Validating inputs to prevent malformed or vague posts.
+- Generating social and image assets alongside drafts, but without auto-posting.
+
+These constraints help maintain trust and editorial control while reducing repetitive work.
+
+## Workflow Refinements
+
+The key improvements tested here include:
+
+- **Preview-only mode:** The system simulates the entire content generation and PR creation without pushing to the main branch, allowing full review before any public changes.
+- **Input validation:** The trigger now stops and returns clear errors if essential fields like topic, category, or language are missing or invalid.
+- **Draft-first enforcement:** Every blog post starts explicitly as draft to prevent accidental publishing.
+- **Separation of concerns:** The workflow generates the blog draft, social media pack, and image prompts as distinct, reviewable assets in the same PR.
+- **Consistent file naming:** Slugs and filenames follow strict kebab-case and include timestamps for version clarity.
+
+## Implementation Notes
+
+This workflow integrates deeply with the existing Next.js + MDX system for the site. Key technical points:
+
+- Blog drafts are saved to `content/posts/` with strict frontmatter including draft status.
+- Social packs can be optionally generated but remain in draft until reviewed.
+- Image prompts follow the black, white, and orange developer lab aesthetic with no automatic image generation in MVP.
+- Generated content avoids raw HTML or complex JSX, focusing on stable MDX.
+- The PR branch uses a descriptive name aligned with the post slug and timestamp.
+- Automated steps create commits and PRs but do not merge or modify live content until reviewed by Javier.
+
+## Result
+
+The hardened workflow reduces risk and improves feedback loops. Reviewers can safely inspect all generated content in the PR, suggest edits, and control what goes live. Errors or incomplete inputs are caught early, preventing wasted cycles.
+
+Generating social content and image prompts alongside the draft provides a more complete package for review and easier repurposing after publication.
+
+## Next Steps
+
+- Expand validation with schema checks for frontmatter and body content.
+- Explore optional MDX component generation for richer posts.
+- Later phases may add image generation triggered only after editorial approval.
+- Consider monitoring and alerting on PR health and review status to accelerate publishing.
+- Continue refining the balance between automation leverage and manual quality control.
+
+---
+
+The real gain is a workflow that stays boring and safe where it matters, removing repeated friction but preserving human judgment on publishing. This test lays a foundation for further automation without giving up control or specificity.
