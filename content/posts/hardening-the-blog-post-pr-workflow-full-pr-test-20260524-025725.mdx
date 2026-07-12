@@ -1,0 +1,68 @@
+---
+title: "Hardening the Blog Post PR Workflow Full PR Test"
+category: "Automation"
+excerpt: "A practical walkthrough of refining an automated blog post PR workflow with n8n, emphasizing draft-first publishing, validation, and safe PR generation."
+publishedAt: "2026-05-24"
+description: "This post details the steps taken to harden an n8n blog post PR workflow. It covers draft-only publishing, workflow validation, ensuring safe GitHub PR creation, social content generation without automatic posting, and adherence to a consistent visual brand system for image prompts."
+status: "draft"
+tags:
+  - "automation"
+  - "n8n"
+  - "content workflow"
+  - "github pr"
+  - "draft publishing"
+language: "en"
+coverPrompt: |
+  1. Format/Aspect Ratio: 16:9 blog cover
+  2. Topic/Context: Technical article titled "Hardening the Blog Post PR Workflow Full PR Test"
+  3. Visual Style: Black/off-white developer-lab aesthetic. Controlled orange accent. Dot-matrix, dither, low-density pixel noise, technical grid, interface cards.
+  4. Typography: Use MuseoModerno ONLY for the main title or large identity text. Use Chivo ONLY for subtitles, metadata, captions, and small UI labels. Do not use any other font. Keep generated text minimal, large, and readable.
+  5. Composition: Abstract n8n workflow nodes connected to GitHub PR branch lines with review/check marks and small orange signal dots.
+  6. Mood: precise, minimal, practical, independent, technical but human, built not generated.
+  7. Avoid: generic AI robot, glowing brain, blue SaaS dashboard, neon cyberpunk, stock photo people, corporate vector illustration, excessive gradients, cluttered dashboards, random futuristic fonts, unreadable generated text, any typography except MuseoModerno and Chivo.
+---
+
+## Introduction
+
+Automating blog post creation with n8n offers significant leverage, but refining the workflow to prioritize draft safety and manual review is essential. This post walks through hardening an n8n-driven blog post PR system with key focuses on preview-only mode, input validation, and ensuring that generated social content and image prompts follow a controlled brand system without publishing automatically.
+
+## The Problem
+
+Early automation efforts risked premature publishing or content without sufficient human oversight. Without strict draft-first policies and validation, mistakes could slip into live content. Additionally, generating social posts alongside blog drafts introduced complexity around content consistency, platform adaptation, and visual branding. The challenge was to improve the workflow's reliability, maintain clear separation of draft and published states, and align visuals with the established developer-lab aesthetic.
+
+## The Approach
+
+To address these issues, the workflow was updated with:
+
+- Enforced draft status on all generated posts to prevent accidental publishing.
+- Manual GitHub PR creation by n8n to centralize human review and version control.
+- Structured input validation to catch invalid categories, missing required fields, and unsupported languages before generation.
+- Separation of social content generation from automatic posting, preserving deliberate publishing steps.
+- Image prompt generation following strict visual brand rules emphasizing black/off-white palettes with orange accents, dot-matrix textures, and minimalist technical UI elements.
+- Detailed PR templates to assist reviewers in understanding scope and validation points.
+
+## Implementation Notes
+
+The core of the workflow uses n8n's manual trigger input to gather detailed context, including topic, language, category, content pillar, audience, tone, and other preferences. Validation nodes ensure required fields are present and correctly formatted before proceeding.
+
+GitHub API integration automates branch creation, file uploads, and PR opening while ensuring all generated markdown files include `status: "draft"` frontmatter. Social pack generation mirrors the blog content but adapts wording and format for each platform's tone and constraints.
+
+Image prompts adhere closely to the documented brand system. Prompt text explicitly mandates typography rules and visual elements like n8n workflow nodes, GitHub PR branch lines, and subtle orange signal dots to maintain cohesion across all generated assets.
+
+Testing of the preview-only mode confirms no content is published without manual intervention, reducing risk and increasing confidence in automation's role as an assistant rather than an autopilot.
+
+## Result
+
+The hardened blog post PR workflow reliably produces draft content packages with appropriate metadata, social packs tailored for five social platforms, and image prompts that conform to the black/white/orange developer-lab aesthetic.
+
+The system removes manual friction from content creation while preserving human judgment at every critical step. Reviewers can focus on refining tone, accuracy, and examples without worrying about structural errors or premature publishing.
+
+## Next Steps
+
+Looking ahead, integrating optional MDX components to visually enrich complex workflows could be valuable once text outputs stabilize. Adding curated video concept generation may also complement social packs and expand content reach.
+
+Further automation of input validation and scheduled triggers could improve throughput without sacrificing review quality. The visual brand system will remain a key touchstone to ensure all generated assets feel part of a cohesive, handmade technical lab rather than generic AI output.
+
+---
+
+The workflow is a practical example of building automation systems that remove repeated friction while keeping publishing deliberate and review-first. This balance allows leveraging tools like n8n and GitHub APIs effectively without outsourcing responsibility or taste.
