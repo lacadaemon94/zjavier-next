@@ -22,6 +22,9 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: dictionary.cv.metadataTitle,
     description: dictionary.cv.metadataDescription,
+    alternates: {
+      canonical: "/cv",
+    },
   };
 }
 

@@ -3,24 +3,27 @@ import type { Locale } from "./config";
 export const dictionaries = {
   en: {
     metadata: {
-      defaultTitle: "Full Stack Developer",
+      defaultTitle: "AI Product & Automation Engineer | Javier Flores",
       description:
-        "Full Stack Developer from El Salvador, +3 Years of experience as a Full Stack Developer; I really like the entire journey of taking an idea and transforming it into a compelling digital brand.",
+        "AI Product & Automation Engineer building full-stack applications, AI-enabled workflows, automation and business integrations using TypeScript, Next.js, APIs, PostgreSQL and modern AI tooling.",
       keywords: [
-        "ZJAVIER",
-        "Javier",
-        "Flores",
-        "Full",
-        "Stack",
-        "Developer",
-        "ES",
-        "El",
-        "Salvador",
-        "Desarrollador",
-        "Web",
-        "Aplicaciones",
-        "Salvadoreno",
-        "Salvadoran",
+        "Javier Flores",
+        "AI Product Engineer",
+        "AI Automation Engineer",
+        "Full Stack AI Engineer",
+        "Full Stack Developer",
+        "Next.js",
+        "TypeScript",
+        "React",
+        "AI Agents",
+        "Automation",
+        "n8n",
+        "MCP",
+        "API Integration",
+        "PostgreSQL",
+        "Supabase",
+        "El Salvador",
+        "LATAM",
       ],
     },
     language: {
@@ -32,31 +35,31 @@ export const dictionaries = {
     },
     home: {
       avatarAlt: "Pixel Avatar - Javier Flores",
-      title: "Full Stack Developer",
-      titleSuffix: ", with experience in",
+      title: "AI Product & Automation Engineer",
+      titleSuffix: ", building",
       about:
-        "Some of my learning experiences, note-worthy code, tutorials about common development patterns and general opinions about stuff.",
+        "I build practical AI-enabled products, automation workflows and business integrations, then write about the engineering decisions behind them.",
       badges: {
-        webDesign: "Web Design",
-        apiDevelopment: "API Development",
-        databaseDesign: "Database Design",
+        webDesign: "Full-stack Products",
+        apiDevelopment: "AI-enabled Workflows",
+        databaseDesign: "Business Integrations",
       },
     },
     cv: {
       metadataTitle: "CV",
       metadataDescription:
-        "Minimal CV for Javier Flores Ayala, Full Stack Developer and Information Technology Specialist from El Salvador.",
+        "CV for Javier Flores Ayala, an AI Product & Automation Engineer building full-stack applications, AI-enabled workflows and business integrations.",
       pageLabel: "Curriculum Vitae",
       home: "Home",
       print: "Export PDF",
       photoAlt: "Portrait of Javier Flores Ayala",
       name: "Javier Flores Ayala",
-      title: "AI Automation & Full Stack Developer",
+      title: "AI Product & Automation Engineer",
       location: "Nueva San Salvador, La Libertad, El Salvador",
       availability: "AI-enabled workflows, automation systems, web products and full-stack applications.",
       profileTitle: "Profile",
       profile:
-        "AI automation and full-stack developer focused on turning business workflows into practical, production-ready systems. I build web products, internal tools, APIs and automations that connect data, messaging, operations and user-facing experiences. My background in IT infrastructure, QA and data analysis helps me design systems that are not only useful, but maintainable, measurable and reliable.",
+        "AI product and automation engineer focused on turning business workflows into practical, production-ready systems. I build full-stack products, internal tools, APIs and AI-enabled automations that connect data, messaging, operations and customer experiences. My background in IT infrastructure, QA and data analysis helps me make those systems maintainable, measurable and reliable.",
       contactTitle: "Contact",
       contacts: [
         {
@@ -89,10 +92,10 @@ export const dictionaries = {
           location: "San Salvador, El Salvador",
           mode: "Full-time, on-site",
           bullets: [
-            "Maintain network, systems, backups and user-support operations through monitoring, routine checks, maintenance and escalation workflows.",
-            "Support staff and Volunteers with hardware, software, connectivity, printing, scanning and required operational applications.",
-            "Develop, maintain and test IT contingency plans, disaster recovery procedures, access controls and data organization practices.",
-            "Translate business needs into IT requirements and report infrastructure, security and systems needs to senior staff and ISO.",
+            "Turn staff and Volunteer needs into dependable IT services and documented support workflows across hardware, software, connectivity and core operational applications.",
+            "Coordinate monitoring, backups, access controls, maintenance and escalation paths to keep day-to-day operations reliable and secure.",
+            "Develop and test contingency and disaster-recovery procedures that improve readiness and continuity for critical systems.",
+            "Translate operational needs into clear requirements and recommendations for senior staff and the Information Security Officer.",
           ],
         },
         {
@@ -102,9 +105,9 @@ export const dictionaries = {
           location: "Nueva San Salvador, El Salvador",
           mode: "Independent",
           bullets: [
-            "Lead a digital studio focused on branding, web applications, admin systems and automation for brands and entrepreneurs.",
-            "Delivered full-stack products such as El Jardin de los Volcanes, including PWA behavior, an administration site and integrated chat workflows.",
-            "Design and implement AI-assisted workflows, client-facing web products and automation systems using React, Next.js, TypeScript, Supabase, WhatsApp, n8n and related operational tooling.",
+            "Lead product discovery and delivery for web applications, administrative systems, automation and digital brands for entrepreneurs and growing businesses.",
+            "Build AI-enabled workflows and business integrations that connect Next.js, TypeScript, Supabase, WhatsApp, n8n and operational tools.",
+            "Delivered end-to-end products such as El Jardin de los Volcanes, combining a progressive web app, administration experience and integrated chat workflows.",
           ],
         },
         {
@@ -114,9 +117,9 @@ export const dictionaries = {
           location: "El Salvador",
           mode: "Full-time, on-site",
           bullets: [
-            "Supervised institutional technology infrastructure across network, hardware, server, NAS and Active Directory environments.",
-            "Developed and maintained digital security policies, routine audits and contingency plans for critical network and system failures.",
-            "Led internal web tooling, ERP-related digital solutions, staff training and data lifecycle practices for operational reporting.",
+            "Led the roadmap and daily operation of institutional technology across networks, servers, storage, identity and end-user systems.",
+            "Translated internal needs into web tools, ERP-related solutions, reporting workflows and staff training that supported institutional operations.",
+            "Established security policies, routine audits, data-lifecycle practices and contingency plans for critical network and system failures.",
           ],
         },
         {
@@ -125,7 +128,10 @@ export const dictionaries = {
           dates: "Sep 2023 - Jan 2024",
           location: "El Salvador",
           mode: "Full-time, on-site",
-          bullets: [],
+          bullets: [
+            "Built and maintained full-stack web experiences that translated clinic requirements into responsive customer-facing and administrative workflows.",
+            "Worked across interface, application logic, data and deployment to deliver features end to end and keep the product reliable.",
+          ],
         },
         {
           role: "IT Manager",
@@ -134,9 +140,9 @@ export const dictionaries = {
           location: "San Salvador, El Salvador",
           mode: "Full-time",
           bullets: [
-            "Designed, developed and maintained the initial network infrastructure for a call center startup with an initial team of 50 employees.",
-            "Applied CCNA network architecture practices using MikroTik and Cisco switching equipment.",
-            "Administered Windows Server 2012 R2 and Active Directory Domain Services for employee users and workstation access.",
+            "Designed and launched the core IT environment for a call-center startup, supporting its initial team of 50 employees.",
+            "Built the network architecture with MikroTik and Cisco switching equipment using CCNA practices.",
+            "Administered Windows Server 2012 R2 and Active Directory, establishing dependable user, workstation and access operations.",
           ],
         },
         {
@@ -146,9 +152,9 @@ export const dictionaries = {
           location: "San Salvador, El Salvador",
           mode: "Full-time",
           bullets: [
-            "Led a four-person QA team responsible for creative-content quality across social posts, video-editorial policy compliance and brand coherence.",
-            "Supported data processing work for raw operational data produced by accounting, project management and related departments.",
-            "Coordinated quality standards, coaching and team performance across recurring content-delivery workflows.",
+            "Led a four-person QA team responsible for creative-content quality, video editorial compliance and brand consistency.",
+            "Designed recurring review, coaching and delivery workflows that made quality standards clear and repeatable across the team.",
+            "Turned raw data from accounting, project management and related departments into usable inputs for operational work.",
           ],
         },
         {
@@ -158,9 +164,9 @@ export const dictionaries = {
           location: "El Salvador",
           mode: "Full-time",
           bullets: [
-            "Performed QA for a Comwave Canada IT-support account, validating agent compliance with client quality guidelines.",
-            "Analyzed AHT, ART, CSAT, FCR and related performance metrics to identify team and individual improvement areas.",
-            "Used Six Sigma methods including DMADV and DMAIC to develop process improvements, including a service-call cost reduction valued at USD 18,000.",
+            "Owned quality analysis for a Comwave Canada technical-support account, translating client guidelines into actionable feedback for agents.",
+            "Analyzed AHT, ART, CSAT, FCR and related metrics to identify team and individual improvement opportunities.",
+            "Applied Six Sigma DMADV and DMAIC methods to process improvements, including a service-call cost reduction valued at USD 18,000.",
           ],
         },
       ],
@@ -318,24 +324,27 @@ export const dictionaries = {
   },
   es: {
     metadata: {
-      defaultTitle: "Desarrollador Full Stack",
+      defaultTitle: "Ingeniero de Productos con IA y Automatización | Javier Flores",
       description:
-        "Desarrollador Full Stack de El Salvador, con mas de 3 anos de experiencia; me gusta todo el camino de tomar una idea y transformarla en una marca digital convincente.",
+        "Ingeniero de productos con IA y automatización que construye aplicaciones full-stack, flujos con IA, automatizaciones e integraciones de negocio con TypeScript, Next.js, APIs, PostgreSQL y herramientas modernas de IA.",
       keywords: [
-        "ZJAVIER",
-        "Javier",
-        "Flores",
-        "Full",
-        "Stack",
-        "Developer",
-        "ES",
-        "El",
-        "Salvador",
-        "Desarrollador",
-        "Web",
-        "Aplicaciones",
-        "Salvadoreno",
-        "Salvadoran",
+        "Javier Flores",
+        "Ingeniero de Productos con IA",
+        "Ingeniero de Automatización con IA",
+        "Desarrollador Full Stack con IA",
+        "Desarrollador Full Stack",
+        "Next.js",
+        "TypeScript",
+        "React",
+        "Agentes de IA",
+        "Automatización",
+        "n8n",
+        "MCP",
+        "Integración de APIs",
+        "PostgreSQL",
+        "Supabase",
+        "El Salvador",
+        "LATAM",
       ],
     },
     language: {
@@ -347,31 +356,31 @@ export const dictionaries = {
     },
     home: {
       avatarAlt: "Avatar pixelado - Javier Flores",
-      title: "Desarrollador Full Stack",
-      titleSuffix: ", con experiencia en",
+      title: "Ingeniero de Productos con IA y Automatización",
+      titleSuffix: ", construyendo",
       about:
-        "Algunas de mis experiencias de aprendizaje, codigo destacable, tutoriales sobre patrones comunes de desarrollo y opiniones generales sobre varias cosas.",
+        "Construyo productos prácticos con IA, flujos de automatización e integraciones de negocio, y escribo sobre las decisiones de ingeniería detrás de ellos.",
       badges: {
-        webDesign: "Diseno Web",
-        apiDevelopment: "Desarrollo de APIs",
-        databaseDesign: "Diseno de Bases de Datos",
+        webDesign: "Productos Full Stack",
+        apiDevelopment: "Flujos con IA",
+        databaseDesign: "Integraciones de Negocio",
       },
     },
     cv: {
       metadataTitle: "CV",
       metadataDescription:
-        "CV minimalista de Javier Flores Ayala, Desarrollador Full Stack y Especialista en Tecnologia de Informacion de El Salvador.",
+        "CV de Javier Flores Ayala, ingeniero de productos con IA y automatización que construye aplicaciones full-stack, flujos con IA e integraciones de negocio.",
       pageLabel: "Curriculum Vitae",
       home: "Inicio",
       print: "Exportar PDF",
       photoAlt: "Retrato de Javier Flores Ayala",
       name: "Javier Flores Ayala",
-      title: "Desarrollador Full Stack y Automatizacion con IA",
+      title: "Ingeniero de Productos con IA y Automatización",
       location: "Nueva San Salvador, La Libertad, El Salvador",
       availability: "Flujos con IA, sistemas de automatizacion, productos web y aplicaciones full-stack.",
       profileTitle: "Perfil",
       profile:
-        "Desarrollador full-stack enfocado en automatizacion con IA y en convertir flujos de negocio en sistemas practicos listos para produccion. Construyo productos web, herramientas internas, APIs y automatizaciones que conectan datos, mensajeria, operaciones y experiencias para usuarios. Mi experiencia en infraestructura de TI, QA y analisis de datos me ayuda a disenar sistemas utiles, mantenibles, medibles y confiables.",
+        "Ingeniero de productos con IA y automatización enfocado en convertir flujos de negocio en sistemas prácticos listos para producción. Construyo productos full-stack, herramientas internas, APIs y automatizaciones con IA que conectan datos, mensajería, operaciones y experiencias de cliente. Mi experiencia en infraestructura de TI, QA y análisis de datos me ayuda a crear sistemas mantenibles, medibles y confiables.",
       contactTitle: "Contacto",
       contacts: [
         {
@@ -404,10 +413,10 @@ export const dictionaries = {
           location: "San Salvador, El Salvador",
           mode: "Jornada completa, presencial",
           bullets: [
-            "Mantengo operaciones de red, sistemas, respaldos y soporte a usuarios mediante monitoreo, revisiones, mantenimiento y flujos de escalamiento.",
-            "Apoyo a personal y Voluntarios con hardware, software, conectividad, impresion, escaneo y aplicaciones operativas requeridas.",
-            "Desarrollo, mantengo y pruebo planes de contingencia de TI, procedimientos de recuperacion, controles de acceso y practicas de organizacion de datos.",
-            "Traduzco necesidades de negocio en requerimientos de TI y comunico necesidades de infraestructura, seguridad y sistemas a senior staff e ISO.",
+            "Convierto las necesidades del personal y los Voluntarios en servicios de TI confiables y flujos de soporte documentados para hardware, software, conectividad y aplicaciones operativas.",
+            "Coordino monitoreo, respaldos, controles de acceso, mantenimiento y rutas de escalamiento para mantener operaciones diarias seguras y confiables.",
+            "Desarrollo y pruebo procedimientos de contingencia y recuperación ante desastres que mejoran la preparación y continuidad de sistemas críticos.",
+            "Traduzco necesidades operativas en requerimientos y recomendaciones claras para el personal directivo y el Oficial de Seguridad de la Información.",
           ],
         },
         {
@@ -417,9 +426,9 @@ export const dictionaries = {
           location: "Nueva San Salvador, El Salvador",
           mode: "Autonomo",
           bullets: [
-            "Dirijo un estudio digital enfocado en branding, aplicaciones web, sistemas administrativos y automatizacion para marcas y emprendedores.",
-            "He entregado productos full-stack como El Jardin de los Volcanes, incluyendo comportamiento PWA, sitio de administracion y flujos de chat integrados.",
-            "Diseno e implemento flujos asistidos por IA, productos web para clientes y sistemas de automatizacion usando React, Next.js, TypeScript, Supabase, WhatsApp, n8n y herramientas operativas relacionadas.",
+            "Dirijo el descubrimiento y la entrega de productos web, sistemas administrativos, automatización y marcas digitales para emprendedores y empresas en crecimiento.",
+            "Construyo flujos con IA e integraciones de negocio que conectan Next.js, TypeScript, Supabase, WhatsApp, n8n y herramientas operativas.",
+            "Entregué productos de extremo a extremo como El Jardín de los Volcanes, combinando una aplicación web progresiva, una experiencia administrativa y flujos de chat integrados.",
           ],
         },
         {
@@ -429,9 +438,9 @@ export const dictionaries = {
           location: "El Salvador",
           mode: "Jornada completa, presencial",
           bullets: [
-            "Supervise infraestructura tecnologica institucional en entornos de red, hardware, servidores, NAS y Active Directory.",
-            "Desarrolle y mantuve politicas de seguridad digital, auditorias rutinarias y planes de contingencia para fallas criticas de red y sistemas.",
-            "Lidere herramientas web internas, soluciones digitales relacionadas a ERP, capacitacion de personal y practicas de ciclo de vida de datos para reporteria operativa.",
+            "Lideré la hoja de ruta y la operación diaria de la tecnología institucional en redes, servidores, almacenamiento, identidad y sistemas de usuario final.",
+            "Convertí necesidades internas en herramientas web, soluciones relacionadas con ERP, flujos de reportes y capacitación para apoyar las operaciones institucionales.",
+            "Establecí políticas de seguridad, auditorías periódicas, prácticas de ciclo de vida de datos y planes de contingencia para fallas críticas de red y sistemas.",
           ],
         },
         {
@@ -440,7 +449,10 @@ export const dictionaries = {
           dates: "sept. 2023 - ene. 2024",
           location: "El Salvador",
           mode: "Jornada completa, presencial",
-          bullets: [],
+          bullets: [
+            "Construí y mantuve experiencias web full-stack que convirtieron los requerimientos de la clínica en flujos responsivos para clientes y administración.",
+            "Trabajé en interfaz, lógica de aplicación, datos y despliegue para entregar funcionalidades de extremo a extremo y mantener un producto confiable.",
+          ],
         },
         {
           role: "IT Manager",
@@ -449,9 +461,9 @@ export const dictionaries = {
           location: "San Salvador, El Salvador",
           mode: "Jornada completa",
           bullets: [
-            "Disene, desarrolle y mantuve la infraestructura de red inicial para una startup de call center con un equipo inicial de 50 empleados.",
-            "Aplique practicas de arquitectura de red CCNA usando equipos MikroTik y switches Cisco.",
-            "Administre Windows Server 2012 R2 y Active Directory Domain Services para usuarios de empleados y acceso a estaciones de trabajo.",
+            "Diseñé y lancé el entorno central de TI para una startup de call center, dando soporte a su equipo inicial de 50 empleados.",
+            "Construí la arquitectura de red con equipos MikroTik y switches Cisco aplicando prácticas CCNA.",
+            "Administré Windows Server 2012 R2 y Active Directory, estableciendo operaciones confiables de usuarios, estaciones de trabajo y accesos.",
           ],
         },
         {
@@ -461,9 +473,9 @@ export const dictionaries = {
           location: "San Salvador, El Salvador",
           mode: "Jornada completa",
           bullets: [
-            "Lidere un equipo de QA de cuatro personas responsable de calidad de contenido creativo en publicaciones sociales, cumplimiento editorial de video y coherencia de marca.",
-            "Apoye procesamiento de datos operativos producidos por contabilidad, project management y departamentos relacionados.",
-            "Coordine estandares de calidad, coaching y rendimiento del equipo en flujos recurrentes de entrega de contenido.",
+            "Lideré un equipo de QA de cuatro personas responsable de la calidad del contenido creativo, el cumplimiento editorial de video y la consistencia de marca.",
+            "Diseñé flujos recurrentes de revisión, coaching y entrega que hicieron los estándares de calidad claros y repetibles para el equipo.",
+            "Convertí datos sin procesar de contabilidad, gestión de proyectos y áreas relacionadas en insumos útiles para el trabajo operativo.",
           ],
         },
         {
@@ -473,9 +485,9 @@ export const dictionaries = {
           location: "El Salvador",
           mode: "Jornada completa",
           bullets: [
-            "Realice QA para una cuenta de soporte tecnico de Comwave Canada, validando cumplimiento de agentes con lineamientos de calidad del cliente.",
-            "Analice AHT, ART, CSAT, FCR y metricas relacionadas para identificar areas de mejora del equipo e individuos.",
-            "Use metodos Six Sigma como DMADV y DMAIC para desarrollar mejoras de proceso, incluyendo una reduccion de costos de visitas tecnicas valorada en USD 18,000.",
+            "Gestioné el análisis de calidad para una cuenta de soporte técnico de Comwave Canada, convirtiendo lineamientos del cliente en retroalimentación accionable para los agentes.",
+            "Analicé AHT, ART, CSAT, FCR y métricas relacionadas para identificar oportunidades de mejora individuales y de equipo.",
+            "Apliqué métodos Six Sigma DMADV y DMAIC a mejoras de proceso, incluida una reducción de costos de visitas técnicas valorada en USD 18,000.",
           ],
         },
       ],
