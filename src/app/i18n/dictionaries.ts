@@ -92,10 +92,10 @@ export const dictionaries = {
           location: "San Salvador, El Salvador",
           mode: "Full-time, on-site",
           bullets: [
-            "Turn staff and Volunteer needs into dependable IT services and documented support workflows across hardware, software, connectivity and core operational applications.",
-            "Coordinate monitoring, backups, access controls, maintenance and escalation paths to keep day-to-day operations reliable and secure.",
-            "Develop and test contingency and disaster-recovery procedures that improve readiness and continuity for critical systems.",
-            "Translate operational needs into clear requirements and recommendations for senior staff and the Information Security Officer.",
+            "Design and deliver internal operational applications and automated workflows using Power Platform, Microsoft 365 and related enterprise services, covering requirements, data models, UX, business rules and production support.",
+            "Translate operational needs into digital systems for approvals, service requests, reporting, asset management, fleet operations and other administrative processes.",
+            "Support enterprise identity, endpoints, networking, infrastructure and security while developing contingency and disaster-recovery procedures for critical systems.",
+            "Partner with leadership and end users to define technical requirements, document solutions, train users and drive adoption.",
           ],
         },
         {
@@ -129,8 +129,9 @@ export const dictionaries = {
           location: "El Salvador",
           mode: "Full-time, on-site",
           bullets: [
-            "Built and maintained full-stack web experiences that translated clinic requirements into responsive customer-facing and administrative workflows.",
-            "Worked across interface, application logic, data and deployment to deliver features end to end and keep the product reliable.",
+            "Contributed to a custom internal ERP platform supporting clinic operations across payments, appointments, physicians, medical assistants, HR and administrative workflows.",
+            "Built frontend functionality using React and TypeScript and integrated PHP-based APIs with Supabase/PostgreSQL across application and data layers.",
+            "Translated operational requirements into maintainable full-stack features within a confidential healthcare environment under NDA.",
           ],
         },
         {
@@ -413,10 +414,10 @@ export const dictionaries = {
           location: "San Salvador, El Salvador",
           mode: "Jornada completa, presencial",
           bullets: [
-            "Convierto las necesidades del personal y los Voluntarios en servicios de TI confiables y flujos de soporte documentados para hardware, software, conectividad y aplicaciones operativas.",
-            "Coordino monitoreo, respaldos, controles de acceso, mantenimiento y rutas de escalamiento para mantener operaciones diarias seguras y confiables.",
-            "Desarrollo y pruebo procedimientos de contingencia y recuperación ante desastres que mejoran la preparación y continuidad de sistemas críticos.",
-            "Traduzco necesidades operativas en requerimientos y recomendaciones claras para el personal directivo y el Oficial de Seguridad de la Información.",
+            "Diseño y entrego aplicaciones operativas internas y flujos automatizados mediante Power Platform, Microsoft 365 y servicios empresariales relacionados, abarcando requerimientos, modelos de datos, UX, reglas de negocio y soporte en producción.",
+            "Traduzco necesidades operativas en sistemas digitales para aprobaciones, solicitudes de servicio, reportes, gestión de activos, operaciones de flota y otros procesos administrativos.",
+            "Doy soporte a identidad empresarial, endpoints, redes, infraestructura y seguridad, mientras desarrollo procedimientos de contingencia y recuperación ante desastres para sistemas críticos.",
+            "Colaboro con líderes y usuarios finales para definir requerimientos técnicos, documentar soluciones, capacitar usuarios e impulsar la adopción.",
           ],
         },
         {
@@ -450,8 +451,9 @@ export const dictionaries = {
           location: "El Salvador",
           mode: "Jornada completa, presencial",
           bullets: [
-            "Construí y mantuve experiencias web full-stack que convirtieron los requerimientos de la clínica en flujos responsivos para clientes y administración.",
-            "Trabajé en interfaz, lógica de aplicación, datos y despliegue para entregar funcionalidades de extremo a extremo y mantener un producto confiable.",
+            "Contribuí a una plataforma ERP interna personalizada que respaldaba las operaciones de la clínica en pagos, citas, médicos, asistentes médicos, recursos humanos y flujos administrativos.",
+            "Desarrollé funcionalidad frontend con React y TypeScript e integré APIs basadas en PHP con Supabase/PostgreSQL en las capas de aplicación y datos.",
+            "Convertí requerimientos operativos en funcionalidades full-stack mantenibles dentro de un entorno confidencial de atención médica bajo acuerdo de confidencialidad (NDA).",
           ],
         },
         {
