@@ -1,0 +1,147 @@
+---
+title: "OwlCam: cómo liberamos una cámara barata de Temu y construimos nuestro propio sistema en 24 horas"
+category: "Build Log"
+excerpt: "Mi papá compró una cámara de seguridad baratísima en Temu, pero sus funciones útiles estaban detrás de la suscripción de Sulink. En vez de pagar mes a mes, aplicamos ingeniería inversa a su protocolo, la aislamos en OpenWrt y construimos OwlCam: Go, WireGuard, WebRTC, IA con tope de $5 y app en Flutter."
+publishedAt: "2026-11-22"
+description: "Caso real paso a paso de cómo hicimos ingeniería inversa a una cámara SZSINOCAM TY-Q2 de Temu sin flashear firmware, bloqueamos sus fugas en texto plano, montamos un puente en Go sobre OpenWrt + VPS con WebRTC e IA con Gemini, y compilamos una app familiar en Flutter en un solo fin de semana."
+status: "published"
+language: "es"
+contentPillar: "Full-stack builds"
+featured: true
+tags:
+  - "owlcam"
+  - "iot"
+  - "ingeniería inversa"
+  - "openwrt"
+  - "go"
+  - "flutter"
+  - "webrtc"
+  - "gemini"
+  - "ia"
+coverPrompt: "Obsidian architectural axonometric blueprint of a dual-lens security camera with concentric radio waves redirecting away from a dim cloud toward a local router/server node along a glowing signal-orange line."
+socialSummary: "Mi papá compró una cámara de doble lente en Temu. Buena para el precio, pero amarrada a suscripciones de Sulink. En ~24 horas decodificamos su protocolo, la desconectamos de su nube y armamos OwlCam: servidor propio, LAN Fast-Path en OpenWrt, detección IA con tope de $5 y app en Flutter."
+---
+
+<PostCoverImage
+  src="/assets/images/zjavier_owlcam_112226.jpg"
+  alt="Plano axonométrico de OwlCam mostrando una cámara de doble lente redirigida de la nube externa hacia un servidor local"
+  caption="Arquitectura OwlCam: cortar el cordón con la nube de fábrica y devolver el control completo a la red local."
+/>
+
+Todo empezó con una escena súper común en cualquier casa de Latinoamérica: mi papá compró una cámara de seguridad Wi-Fi en Temu.
+
+Seamos honestos: el precio era ridículamente bajo, y cuando la conectamos (una **SZSINOCAM TY-Q2** de 5V por USB con doble lente, uno fijo y uno motorizado PTZ), la calidad de video era bastante aceptable para lo que costó.
+
+El truco apareció diez minutos después, al configurar la app oficial (**Sulink**). Si querías lo que de verdad hace útil a una cámara de seguridad —grabaciones en la nube, historial de eventos y detección inteligente de personas— había que pagar una suscripción mensual por cámara.
+
+Ahí nació la pregunta que disparó todo el proyecto:
+
+**¿Podemos instalarle un sistema operativo propio, o construir nuestra propia solución desde cero, sin suscripciones y con control total sobre la privacidad?**
+
+Lo que empezó el viernes por la noche como una prueba rápida terminó, unas **24 horas después**, convertido en **OwlCam**: un sistema completo en producción con puente en Go corriendo dentro del router OpenWrt, túnel WireGuard hacia un VPS, streaming WebRTC de bajísima latencia, análisis con Gemini Vision protegido por un tope duro de `$5/mes`, y una app nativa en Flutter (`v1.5.3`) instalada en los teléfonos de mi familia.
+
+Este es el desglose honesto de cómo lo hicimos, qué funcionó, qué nos sorprendió (incluyendo una fuga de privacidad bastante incómoda) y por qué hacerlo con IA hoy cambia por completo la escala de lo que una sola persona puede construir en un fin de semana.
+
+## Paso 1: Entender el hardware antes de tocar el firmware
+
+La primera tentación al hackear una cámara china barata es abrirla, buscar pines UART e intentar flashear un firmware alternativo como OpenIPC o Thingino.
+
+El problema es que flashear a ciegas una cámara basada en SoC **Allwinner V821B** es la forma más rápida de convertirla en un pisapapeles. Así que aplicamos la regla de oro antes de tocar hardware: **escanear primero qué expone la cámara en la red local.**
+
+Los resultados nos dieron un mapa muy claro de sus capacidades y límites:
+
+- **Sin ONVIF y sin panel web local:** Ningún estándar abierto respondía en los 65,535 puertos TCP ni en los protocolos UDP típicos de cámaras IP (PPCS, TUTK, XMeye, CamHi, V380).
+- **Un RTSP abierto, pero incompleto:** Sí encontramos un flujo RTSP en 1080p sin contraseña en el puerto `554`, pero **solo entregaba el primer lente**. Nada del segundo lente, nada de cambio HD/SD, nada de mover el motor PTZ, ni micrófono, ni parlante, ni luz LED, ni sirena.
+- **Seguimiento de movimiento muy errático de fábrica:** El auto-tracking integrado del chip `V821B` no hace seguimiento real de objetos; simplemente persigue cambios bruscos de píxeles. Basta con que el motor gire un poco para que cambie la exposición y la cámara empiece a dar vueltas sola.
+
+En resumen: por fuera la cámara parecía una caja cerrada. Todo el control real vivía en la conversación entre la cámara y los servidores de Sulink.
+
+## Paso 2: Ingeniería inversa en tres capturas (y una sorpresa incómoda)
+
+En lugar de desarmar la cámara, aprovechamos que la red de casa corre sobre un router **Xiaomi Mi Router AX3000T con OpenWrt**. Instalamos `tcpdump-mini` directamente en el router y grabamos tres capturas `.pcap` cortas:
+
+1. **12 segundos en reposo** para ver a qué servidores llamaba.
+2. **55 segundos interactivos** mientras yo tocaba cada botón de la app Sulink (doble lente, HD/SD, PTZ, LED, sirena, hablar por parlante, rotación 180°, visión nocturna).
+3. **50 segundos de arranque en frío** (desenchufar y volver a conectar el USB) para capturar el handshake completo.
+
+El resultado fue doble jackpot.
+
+**Primero:** el protocolo de control y video **no estaba cifrado**. La TY-Q2 se comunica por UDP puerto `10000` usando **KCP** (un protocolo de transporte confiable sobre UDP, completamente open-source) cargando tramas binarias del clásico formato **`MO_O` / `MO_V`** con una cabecera fija de 55 bytes. Cada botón de la app tenía un opcode limpio: `0x000E` para el motor PTZ, `0x001E` con payloads JSON (`transdata`) para el LED, sirena, flip y visión nocturna, y `MO_V` para los cuatro canales de video H.264 (Lente 1 y Lente 2 en 1080p HD y 360p SD) más audio bidireccional G.711 A-law.
+
+**Segundo —el hallazgo de privacidad:** en la captura de arranque vimos que, cada vez que se enciende, la cámara ignora el DNS del router (usa DNS chinos fijos) y envía su configuración —**incluyendo el nombre y la contraseña del Wi-Fi de casa en texto plano**— por HTTP puerto `80` hacia servidores externos.
+
+Ahí cambió por completo la estrategia: **no necesitábamos flashear ningún OS personalizado.**
+
+Con unas pocas reglas de `dnsmasq` y firewall (`fw4`) en OpenWrt logramos tres cosas de golpe:
+1. Interceptar sus consultas DNS fijas y resolver los dominios de su nube hacia nuestra propia red.
+2. Redirigir su tráfico de arranque HTTP `:80` y su canal KCP `:10000` hacia nuestro servidor **OwlCam**.
+3. **Bloquear por completo el acceso a internet (WAN) de la cámara.**
+
+La TY-Q2 cree que nuestro servidor es la nube de Sulink. Nosotros tenemos 100% de control sobre ambos lentes, motor, audio y LED, y ni un solo paquete de la cámara vuelve a salir de casa sin pasar por nuestra infraestructura.
+
+<OwlCamInterceptMap />
+
+## Paso 3: Del prototipo en Python al puente en Go y el LAN Fast-Path
+
+Hacer que algo funcione en una laptop es la parte fácil. Hacer que funcione **fluido, sin cortes y con latencia mínima** corriendo en un VPS humilde de **1 solo vCPU** (que además ya comparte recursos con otros servicios como n8n) es donde empieza la ingeniería de verdad.
+
+Nuestra primera versión corrió completa en Python dentro de Docker en el VPS, conectada al router de casa mediante un túnel **WireGuard**, usando **MediaMTX** para convertir RTSP a **WebRTC (WHEP)** y **Caddy** para HTTPS automático.
+
+Funcionó a la primera... pero al probarla en teléfonos aparecieron los problemas reales de red: tirones en el video, desconexiones de WebRTC en datos móviles y consumo alto de CPU en el servidor.
+
+Así fue como atacamos cada cuello de botella uno por uno:
+
+- **Adiós fragmentación en WireGuard:** La cámara enviaba paquetes KCP de ~1400 bytes que se partían en dos dentro del túnel. Ajustar el MTU a `1440` y afinar las ventanas de KCP eliminó de raíz gran parte de los cortes.
+- **Reescritura del hot-path en Go (`owlcam-bridge`):** Sacamos todo el procesamiento pesado de paquetes (KCP, decodificador `MO_O`/`MO_V`, servidor RTSP interno y audio G.711) de Python y lo reescribimos como un **binario en Go sin dependencias externas**.
+- **Pre-roll circular de 5 segundos en RAM:** Dentro del puente en Go metimos un ring buffer acotado en memoria (~2.5 MB) que guarda continuamente los últimos segundos de H.264 empezando en un keyframe IDR limpio. Cuando se dispara una alerta, el clip de video incluye lo que pasó **5 segundos antes del movimiento**, sin recodificar (`-c copy`).
+- **LAN Fast-Path directo en el router OpenWrt:** Compilamos el binario de Go y MediaMTX para ARM64 y los pusimos a correr **directamente dentro del Xiaomi AX3000T**. Ahora, cuando estás en el Wi-Fi de casa, el video viaja Cámara → Router → Teléfono en **menos de 3 milisegundos** y usa **0 Mbps de subida a internet**. Cuando sales en 4G/5G, el VPS pide el stream por WireGuard bajo demanda y lo entrega vía **coturn (STUN/TURN/TURNS)** para atravesar cualquier NAT celular.
+- **OpenWrt SQM (CAKE) + DSCP `AF41`:** Activamos colas CAKE en la salida a internet del router y marcamos el tráfico de WireGuard con prioridad `AF41`. Así el streaming remoto nunca genera *bufferbloat* ni arruina el ping de videojuegos o Netflix en casa.
+- **Pequeños detalles que se sienten enormes:** Quitamos el audio duplicado del Lente 2 (ahora es solo video), arreglamos una condición de carrera HTTP en el PTZ (antes un toque corto podía llegar después del `stop` y dejar el motor girando hasta el tope; lo resolvimos con pulsos temporizados del lado del servidor), y agregamos **Smart Fullscreen HD** (en vista dividida ambos lentes corren en 360p SD ligerísimo; al tocar un lente en pantalla completa, se pausa el otro y sube el activo a 1080p HD).
+
+<OwlCamDualPathTopology />
+
+## Paso 4: Visión con IA bilingüe y tope duro de `$5/mes`
+
+La gran excusa de las apps de cámaras para cobrar suscripciones es la "IA en la nube". En la práctica, montar detección inteligente propia resultó muchísimo más limpio y barato de lo que parece.
+
+En lugar de correr modelos pesados 24/7 quemando CPU, diseñamos un **worker guiado por eventos** en el servidor:
+
+1. Cuando llega una alarma de movimiento, toma **un solo snapshot JPEG** (~60 KB).
+2. Antes de llamar a la API, revisa en **Supabase** cuánto se ha gastado en el mes actual.
+3. Si está dentro del presupuesto, envía el fotograma a **Gemini Vision (`gemini-2.5-flash-lite`)** pidiendo un JSON estricto con detección de personas, nivel de alerta (`none`, `low`, `medium`, `high`), etiquetas y resumen **en inglés y español en una sola llamada**.
+4. **Filtro inteligente de almacenamiento:** Si la IA responde que solo fue una sombra o cambio de luz (`alert_level: "none"`), OwlCam **no sube un MP4 pesado**. Solo guarda clips de video completos cuando realmente hay una persona o actividad relevante, y purga automáticamente clips con más de 14 días para vivir cómodo dentro del Free Tier de Supabase.
+5. **Tope duro mensual (`$5.00 USD`):** Al 80% del presupuesto aparece un aviso en la app; al 100% el worker corta las llamadas a Gemini automáticamente hasta el mes siguiente, manteniendo el video en vivo intacto y evitando cualquier susto en la tarjeta.
+
+<OwlCamAiPipeline />
+
+## Paso 5: La app familiar en Flutter (`v1.0.0` → `v1.5.3`)
+
+Como este proyecto era para mi papá, mi mamá y para mí, no tenía sentido terminar con un dashboard técnico feo al que nadie quisiera entrar.
+
+Diseñamos y compilamos una app dedicada en **Flutter para Android** (APK instalable directo en los teléfonos de la familia, con actualizaciones limpias sobre el mismo paquete):
+
+- **Identidad propia:** Trazamos el logo vectorial de OwlCam en SVG (cobalto profundo `#020887` sobre blanco cálido `#FFFFFA`), icono adaptativo para Android y transiciones táctiles suaves.
+- **Bilingüe de punta a punta (`EN | ES`):** No solo la interfaz cambia instantáneamente entre inglés y español; los resúmenes y etiquetas de cada evento de IA ya vienen traducidos desde la base de datos.
+- **Vista en vivo inteligente:** Detección automática en `450 ms` para elegir LAN Fast-Path o ruta remota, doble lente en vivo, pantalla completa en 1080p con **pad PTZ superpuesto**, audio de dos vías (*push-to-talk*), control de luz LED, sirena, visión nocturna e inversión de imagen.
+- **Historial y presupuesto transparente:** Pestaña de eventos con miniaturas y reproducción de clips MP4 con pre-roll (asegurados con autenticación y políticas RLS privadas en Supabase) y monitor en vivo del presupuesto mensual de IA.
+
+## Lo más loco de todo: 24 horas y el factor Gemini Neo
+
+Si miro hacia atrás todo lo que tocó cruzar en este proyecto, normalmente habría sido un proyecto personal de varias semanas —o uno de esos repos que se quedan al 40% en el cementerio de ideas—:
+
+- Análisis de paquetes binarios `.pcap`, KCP y emulación de nube HTTP.
+- Firewall `fw4`, `dnsmasq`, SQM CAKE y `nftables` en OpenWrt.
+- Cross-compilación de un puente de video en Go para ARM64 con buffer circular H.264.
+- Infraestructura Docker, WireGuard, MediaMTX WebRTC y `coturn` en un VPS compartido.
+- Esquema SQL, Storage privado y políticas RLS en Supabase + worker de Gemini Vision.
+- Seis iteraciones completas de una app en Flutter hasta llegar a `owlcam-v1.5.3.apk`.
+
+Todo eso pasó **del viernes en la noche al sábado en la tarde**.
+
+Y aquí quiero ser muy directo sobre una herramienta que hizo una diferencia brutal en este sprint: construir todo esto asistido por IA con **Antigravity** y usando el modelo **Gemini Neo**.
+
+Más allá de la velocidad, lo que realmente me convenció de **Gemini Neo** es su **relación costo-rendimiento** para sesiones largas de ingeniería real. Cuando estás saltando sin pausa entre hex dumps de `tcpdump`, código concurrente en Go, reglas de firewall en OpenWrt, políticas de Supabase y widgets en Flutter, necesitas un modelo que mantenga contexto técnico afilado sin quemarte la cuota en media hora. Si estás armando proyectos full-stack o de automatización con agentes de código, vale muchísimo la pena probarlo.
+
+> La verdadera ventaja de trabajar así con IA no es dejar de pensar: es que la fricción entre *"qué molesto que esta cámara cobre suscripción"* y *"ya tengo mi propio sistema privado corriendo en casa"* se redujo de un mes a un fin de semana.
+
+Al final, una cámara barata de Temu que venía pensada para atraparte en un pago mensual terminó convertida en uno de los proyectos más entretenidos, rápidos y útiles que he construido en casa —y sin pagar un solo centavo de suscripción en la nube—.

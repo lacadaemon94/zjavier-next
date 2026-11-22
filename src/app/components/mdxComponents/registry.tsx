@@ -12,6 +12,9 @@ import {
 import { RiemannPrimeStaircase } from "./generated/RiemannPrimeStaircase";
 import { RiemannCriticalLineMap } from "./generated/RiemannCriticalLineMap";
 import { RiemannProofArchitecture } from "./generated/RiemannProofArchitecture";
+import { OwlCamInterceptMap } from "./generated/OwlCamInterceptMap";
+import { OwlCamDualPathTopology } from "./generated/OwlCamDualPathTopology";
+import { OwlCamAiPipeline } from "./generated/OwlCamAiPipeline";
 
 type MdxUiLabels = {
   copyCode?: string;
@@ -41,6 +44,9 @@ export function createMdxComponents(
     RiemannPrimeStaircase,
     RiemannCriticalLineMap,
     RiemannProofArchitecture,
+    OwlCamInterceptMap,
+    OwlCamDualPathTopology,
+    OwlCamAiPipeline,
     FullCode: (props: FullCodeProps) => (
       <FullCode selectFileLabel={selectFileLabel} {...props} />
     ),

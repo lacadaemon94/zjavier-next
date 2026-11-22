@@ -247,6 +247,19 @@
   animation: bpPulse 2.4s ease-out infinite;
 }
 
+.flowForward {
+  animation: bpFlow 1.2s linear infinite;
+}
+
+@keyframes bpFlow {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
 @keyframes bpPulse {
   0% {
     opacity: 0.7;
