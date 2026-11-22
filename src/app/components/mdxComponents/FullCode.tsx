@@ -8,55 +8,68 @@ import Button from "../Button";
 
 export type FullCodeProps = {
   children: React.ReactNode;
+  selectFileLabel?: string;
 };
 
-export const FullCode = ({ children }: FullCodeProps) => {
-  const [blocks, setBlocks] = useState<number>(0);
+type CodeElementProps = {
+  "data-rehype-pretty-code-figure"?: string;
+  "data-rehype-pretty-code-fragment"?: string;
+  "data-rehype-pretty-code-title"?: string;
+  children?: React.ReactNode;
+};
 
-  let titles: string[] = [];
+function extractCodeTitle(children: React.ReactNode): string | null {
+  for (const node of Children.toArray(children)) {
+    if (!isValidElement<CodeElementProps>(node)) continue;
+    if (typeof node.props["data-rehype-pretty-code-title"] !== "undefined") {
+      const rawTitle = String(node.props.children ?? "").trim();
+      if (!rawTitle) return null;
+      const segments = rawTitle.split("/");
+      return segments[segments.length - 1] || rawTitle;
+    }
+  }
+  return null;
+}
+
+export const FullCode = ({
+  children,
+  selectFileLabel = "Select a File:",
+}: FullCodeProps) => {
+  const [blocks, setBlocks] = useState<number>(0);
 
   if (Children.count(children) === 0) {
     return null;
   }
 
-  const block = Children.map(children, (child, index) => {
-    if (!isValidElement(child)) return null;
+  const codeFigures: Array<{ title: string; element: React.ReactElement }> = [];
 
-    const props = child.props as any;
+  Children.forEach(children, (child) => {
+    if (!isValidElement<CodeElementProps>(child)) return;
 
-    if (typeof props["data-rehype-pretty-code-fragment"] === "undefined") {
-      return null;
-    }
+    const isPrettyCode =
+      typeof child.props["data-rehype-pretty-code-figure"] !== "undefined" ||
+      typeof child.props["data-rehype-pretty-code-fragment"] !== "undefined";
 
-    if (
-      typeof props.children?.[0]?.props?.[
-      "data-rehype-pretty-code-title"
-      ] !== "undefined"
-    ) {
-      let title = props.children[0].props.children.split("/");
-      titles.push(title[title.length - 1]);
-    }
+    if (!isPrettyCode) return;
 
-    return (
-      <div
-        key={index}
-        className={styles.codeblock}
-        data-isvisible={index === blocks ? "true" : "false"}
-      >
-        {child}
-      </div>
-    );
+    const title =
+      extractCodeTitle(child.props.children) ?? `File ${codeFigures.length + 1}`;
+    codeFigures.push({ title, element: child });
   });
+
+  if (codeFigures.length === 0) {
+    return null;
+  }
 
   return (
     <div className={styles.fullcode}>
       <div className={styles.sideheader}>
-        <h4 className={styles.title}>Select a File:</h4>
+        <h4 className={styles.title}>{selectFileLabel}</h4>
         <div className={styles.pillswrapper}>
-          {titles.map((title, index) => (
+          {codeFigures.map(({ title }, index) => (
             <Button
               type="button"
-              key={index}
+              key={`${title}-${index}`}
               className={styles.codepill}
               onClick={() => setBlocks(index)}
               active={index === blocks ? "true" : "false"}
@@ -66,7 +79,17 @@ export const FullCode = ({ children }: FullCodeProps) => {
           ))}
         </div>
       </div>
-      <div className={styles.codewrapper}>{block}</div>
+      <div className={styles.codewrapper}>
+        {codeFigures.map(({ title, element }, index) => (
+          <div
+            key={`${title}-${index}`}
+            className={styles.codeblock}
+            data-isvisible={index === blocks ? "true" : "false"}
+          >
+            {element}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

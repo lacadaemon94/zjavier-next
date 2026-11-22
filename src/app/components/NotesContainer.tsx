@@ -3,9 +3,14 @@
 import React from "react";
 // Utils
 import { useDropdownState } from "../utils/useDropDownState";
-import useFilteredAndSortedPosts from "../utils/useFilteredAndSortedPosts";
-import { FILTER_CATEGORIES as categories } from "../constants/postCategories";
-import { sortings } from "../utils/useFilteredAndSortedPosts";
+import useFilteredAndSortedPosts, {
+  sortings,
+  type LanguageFilter,
+} from "../utils/useFilteredAndSortedPosts";
+import {
+  FILTER_CATEGORIES as categories,
+  type PostCategory,
+} from "../constants/postCategories";
 // Ui Elements
 import { Posts } from "./notes/Posts";
 import DropDown from "./DropDown/DropDown";
@@ -32,6 +37,17 @@ type Props = {
   copy: Dictionary["notes"];
 };
 
+function getCategoryIcon(category: PostCategory) {
+  switch (category) {
+    case "Tutorial":
+      return <TutorialIcon />;
+    case "Opinion":
+      return <OpinionIcon />;
+    default:
+      return <NoteIcon />;
+  }
+}
+
 const NotesContainer = ({ posts, locale, copy }: Props) => {
   const {
     isOpen: isFilterOpen,
@@ -47,11 +63,22 @@ const NotesContainer = ({ posts, locale, copy }: Props) => {
 
   const {
     filteredAndSortedPosts,
+    availableCategories,
+    availableLanguages,
     handleFilter,
+    handleLanguageFilter,
     handleSort,
+    resetFilters,
     selectedCategory,
+    selectedLanguage,
     sortType,
   } = useFilteredAndSortedPosts(posts);
+
+  const languageOptions: Array<{ value: LanguageFilter; label: string }> = [
+    { value: "all", label: copy.allLanguages },
+    { value: "en", label: copy.englishPosts },
+    { value: "es", label: copy.spanishPosts },
+  ];
 
   return (
     <div className={styles.notescontainer}>
@@ -70,27 +97,19 @@ const NotesContainer = ({ posts, locale, copy }: Props) => {
             action={() => handleFilter(categories.ALL)}
             isActive={selectedCategory === categories.ALL}
           />
-          <DropDownOption
-            icon={<TutorialIcon />}
-            text={copy.tutorials}
-            ariaLabel={copy.showTutorials}
-            action={() => handleFilter(categories.TUTORIAL)}
-            isActive={selectedCategory === categories.TUTORIAL}
-          />
-          <DropDownOption
-            icon={<OpinionIcon />}
-            text={copy.opinions}
-            ariaLabel={copy.showOpinions}
-            action={() => handleFilter(categories.OPINION)}
-            isActive={selectedCategory === categories.OPINION}
-          />
-          <DropDownOption
-            icon={<NoteIcon />}
-            text={copy.notes}
-            ariaLabel={copy.showNotes}
-            action={() => handleFilter(categories.NOTE)}
-            isActive={selectedCategory === categories.NOTE}
-          />
+          {availableCategories.map((category) => {
+            const label = copy.categories[category] ?? category;
+            return (
+              <DropDownOption
+                key={category}
+                icon={getCategoryIcon(category)}
+                text={label}
+                ariaLabel={`${copy.filter}: ${label}`}
+                action={() => handleFilter(category)}
+                isActive={selectedCategory === category}
+              />
+            );
+          })}
         </DropDown>
         <DropDown
           icon={<SortIcon />}
@@ -121,8 +140,40 @@ const NotesContainer = ({ posts, locale, copy }: Props) => {
             isActive={sortType === sortings.VIEWS}
           />
         </DropDown>
+        {availableLanguages.length > 1 && (
+          <div
+            className={styles.languageFilter}
+            role="group"
+            aria-label={copy.languageFilter}
+          >
+            {languageOptions.map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                onClick={() => handleLanguageFilter(option.value)}
+                data-isactive={selectedLanguage === option.value}
+                aria-pressed={selectedLanguage === option.value}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
-      <Posts locale={locale} posts={filteredAndSortedPosts} />
+      {filteredAndSortedPosts.length > 0 ? (
+        <Posts locale={locale} posts={filteredAndSortedPosts} />
+      ) : (
+        <div className={styles.emptyState}>
+          <p>{copy.emptyState}</p>
+          <button
+            type="button"
+            className={styles.resetButton}
+            onClick={resetFilters}
+          >
+            {copy.resetFilters}
+          </button>
+        </div>
+      )}
     </div>
   );
 };

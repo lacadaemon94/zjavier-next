@@ -1,6 +1,8 @@
 import type { PostLanguage } from "@/app/lib/posts/types";
+import type { Locale } from "@/app/i18n/config";
 import { AsideImage } from "./AsideImage";
 import { BlurImage } from "./BlurImage";
+import { CodeBlock, type CodeBlockProps } from "./CodeBlock";
 import { FullCode, type FullCodeProps } from "./FullCode";
 import { PostCoverImage } from "./PostCoverImage";
 import {
@@ -8,7 +10,24 @@ import {
   type AIForkDiagramProps,
 } from "./generated/AIForkDiagram";
 
-export function createMdxComponents(language: PostLanguage = "es") {
+type MdxUiLabels = {
+  copyCode?: string;
+  copiedCode?: string;
+  selectFile?: string;
+};
+
+export function createMdxComponents(
+  language: PostLanguage = "es",
+  uiLocale: Locale = language,
+  labels: MdxUiLabels = {},
+) {
+  const copyLabel = labels.copyCode ?? (uiLocale === "es" ? "Copiar" : "Copy");
+  const copiedLabel =
+    labels.copiedCode ?? (uiLocale === "es" ? "Copiado" : "Copied");
+  const selectFileLabel =
+    labels.selectFile ??
+    (uiLocale === "es" ? "Selecciona un archivo:" : "Select a File:");
+
   return {
     BlurImage,
     AsideImage,
@@ -16,7 +35,16 @@ export function createMdxComponents(language: PostLanguage = "es") {
     AIForkDiagram: (props: AIForkDiagramProps) => (
       <AIForkDiagram locale={language} {...props} />
     ),
-    FullCode: (props: FullCodeProps) => <FullCode {...props} />,
+    FullCode: (props: FullCodeProps) => (
+      <FullCode selectFileLabel={selectFileLabel} {...props} />
+    ),
+    pre: (props: CodeBlockProps) => (
+      <CodeBlock
+        copyLabel={copyLabel}
+        copiedLabel={copiedLabel}
+        {...props}
+      />
+    ),
   };
 }
 

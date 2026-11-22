@@ -1,9 +1,12 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import type { PostWithStats } from "@/app/lib/posts/postWithStats";
+import type { PostLanguage } from "@/app/lib/posts/types";
 import { fetchLikesAndViews } from "./fetchLikesAndViews";
 import {
   FILTER_CATEGORIES as categories,
+  POST_CATEGORIES,
   type FilterCategory as Category,
+  type PostCategory,
 } from "../constants/postCategories";
 
 export const sortings = {
@@ -13,6 +16,7 @@ export const sortings = {
 } as const;
 
 export type SortType = (typeof sortings)[keyof typeof sortings];
+export type LanguageFilter = "all" | PostLanguage;
 
 type StatsMap = Record<string, { likes: number; views: number }>;
 
@@ -20,6 +24,8 @@ const useFilteredAndSortedPosts = (posts: PostWithStats[]) => {
   const [selectedCategory, setSelectedCategory] = useState<Category>(
     categories.ALL,
   );
+  const [selectedLanguage, setSelectedLanguage] =
+    useState<LanguageFilter>("all");
   const [sortType, setSortType] = useState<SortType>(sortings.DATE);
   const [statsBySlug, setStatsBySlug] = useState<StatsMap>({});
 
@@ -47,6 +53,16 @@ const useFilteredAndSortedPosts = (posts: PostWithStats[]) => {
     };
   }, []);
 
+  const availableCategories = useMemo<PostCategory[]>(() => {
+    const present = new Set(posts.map((post) => post.category));
+    return POST_CATEGORIES.filter((category) => present.has(category));
+  }, [posts]);
+
+  const availableLanguages = useMemo<PostLanguage[]>(() => {
+    const present = new Set(posts.map((post) => post.language));
+    return (["en", "es"] as const).filter((lang) => present.has(lang));
+  }, [posts]);
+
   const filteredAndSortedPosts = useMemo(() => {
     const mergedPosts: PostWithStats[] = posts.map((post) => {
       const stats = statsBySlug[post.slug];
@@ -58,10 +74,15 @@ const useFilteredAndSortedPosts = (posts: PostWithStats[]) => {
       };
     });
 
-    const filteredPosts =
-      selectedCategory === categories.ALL
-        ? mergedPosts
-        : mergedPosts.filter((post) => post.category === selectedCategory);
+    const filteredPosts = mergedPosts.filter((post) => {
+      const matchesCategory =
+        selectedCategory === categories.ALL ||
+        post.category === selectedCategory;
+      const matchesLanguage =
+        selectedLanguage === "all" || post.language === selectedLanguage;
+
+      return matchesCategory && matchesLanguage;
+    });
 
     return [...filteredPosts].sort((a, b) => {
       if (sortType === sortings.LIKES) {
@@ -76,21 +97,35 @@ const useFilteredAndSortedPosts = (posts: PostWithStats[]) => {
         new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
       );
     });
-  }, [posts, statsBySlug, selectedCategory, sortType]);
+  }, [posts, statsBySlug, selectedCategory, selectedLanguage, sortType]);
 
   const handleFilter = useCallback((category: Category) => {
     setSelectedCategory(category);
+  }, []);
+
+  const handleLanguageFilter = useCallback((language: LanguageFilter) => {
+    setSelectedLanguage(language);
   }, []);
 
   const handleSort = useCallback((type: SortType) => {
     setSortType(type);
   }, []);
 
+  const resetFilters = useCallback(() => {
+    setSelectedCategory(categories.ALL);
+    setSelectedLanguage("all");
+  }, []);
+
   return {
     filteredAndSortedPosts,
+    availableCategories,
+    availableLanguages,
     handleFilter,
+    handleLanguageFilter,
     handleSort,
+    resetFilters,
     selectedCategory,
+    selectedLanguage,
     sortType,
   };
 };

@@ -30,10 +30,24 @@
   line-height: 1;
   background: transparent;
   cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.18s var(--ease-spring);
 }
 
 .switcher button:hover,
 .switcher button[data-isactive="true"] {
   color: var(--foreground-50);
   background-color: var(--background-800);
+}
+
+.switcher button:active {
+  transform: scale(0.92);
+  transition-duration: 0.1s;
+}
+
+.switcher button:focus-visible {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
 }

@@ -50,6 +50,7 @@
 
     padding: 6px 8px;
 
+    border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 10px;
 
     align-items: center;
@@ -62,14 +63,27 @@
     font-size: 0.875em;
     font-weight: 400;
 
-    transition: background-color 0.3s ease-out;
+    transition:
+        transform 0.2s var(--ease-spring),
+        background-color 0.2s ease,
+        border-color 0.2s ease;
 }
 .pillswrapper .codepill:hover {
+    transform: translateY(-1px);
+    border-color: rgba(250, 84, 28, 0.42);
     background-color: var(--background-900);
 }
+.pillswrapper .codepill:active {
+    transform: scale(0.95);
+    transition-duration: 0.1s;
+}
+.pillswrapper .codepill:focus-visible {
+    outline: 2px solid var(--primary-500);
+    outline-offset: 2px;
+}
 .pillswrapper .codepill[data-isactive="true"] {
-    background-color: var(--background-900);
-    outline: 2px solid var(--background-400);
+    border-color: rgba(250, 84, 28, 0.72);
+    background-color: rgba(250, 84, 28, 0.14);
 }
 .fullcode .codewrapper .codeblock[data-isvisible="false"] {
     display: none;

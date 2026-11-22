@@ -40,13 +40,92 @@
   display: flex;
   position: relative;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 
   width: 100%;
 
   align-items: center;
 
-  gap: 1rem;
+  gap: 0.75rem;
+}
+.languageFilter {
+  display: flex;
+  align-items: center;
+  height: 2rem;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid rgb(87 87 87 / 50%);
+  border-radius: 0.75rem;
+  background-color: var(--background-950);
+}
+.languageFilter button {
+  display: flex;
+  height: 1.5rem;
+  padding: 0 0.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  color: var(--foreground-300);
+  font-family: var(--font-museoModerno);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1;
+  background: transparent;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.18s var(--ease-spring);
+}
+.languageFilter button:hover,
+.languageFilter button[data-isactive="true"] {
+  color: var(--foreground-50);
+  background-color: var(--background-800);
+}
+.languageFilter button:active {
+  transform: scale(0.93);
+  transition-duration: 0.1s;
+}
+.languageFilter button:focus-visible,
+.resetButton:focus-visible {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
+}
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgb(87 87 87 / 35%);
+  background-color: var(--background-950);
+  color: var(--foreground-300);
+  font-size: 0.9375rem;
+  animation: cardEnter 0.35s var(--ease-out-expo) both;
+}
+.resetButton {
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(250, 84, 28, 0.4);
+  background-color: rgba(250, 84, 28, 0.12);
+  color: var(--foreground-50);
+  font-family: var(--font-museoModerno);
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition:
+    transform 0.2s var(--ease-spring),
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+.resetButton:hover {
+  transform: translateY(-1px);
+  border-color: rgba(250, 84, 28, 0.65);
+  background-color: rgba(250, 84, 28, 0.22);
+}
+.resetButton:active {
+  transform: translateY(0) scale(0.95);
+  transition-duration: 0.1s;
 }
 .postswrapper {
   display: flex;
@@ -66,14 +145,56 @@
   flex-wrap: nowrap;
   width: 100%;
   height: fit-content;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 1.5rem;
-  -webkit-border-radius: 1.5rem;
-  -moz-border-radius: 1.5rem;
-  -ms-border-radius: 1.5rem;
-  -o-border-radius: 1.5rem;
   padding: 1.5rem;
   align-items: flex-start;
   background-color: var(--background-950);
+  animation: cardEnter 0.45s var(--ease-out-expo) both;
+  transition:
+    transform 0.28s var(--ease-out-expo),
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.3s var(--ease-out-expo);
+}
+.postcard:nth-child(2) {
+  animation-delay: 40ms;
+}
+.postcard:nth-child(3) {
+  animation-delay: 80ms;
+}
+.postcard:nth-child(4) {
+  animation-delay: 120ms;
+}
+.postcard:nth-child(5) {
+  animation-delay: 160ms;
+}
+.postcard:nth-child(n + 6) {
+  animation-delay: 200ms;
+}
+.postcard:hover {
+  transform: translateY(-3px);
+  border-color: rgba(250, 84, 28, 0.36);
+  background-color: #222222;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.38), 0 0 0 1px rgba(250, 84, 28, 0.08);
+}
+.postcard:active {
+  transform: translateY(-1px) scale(0.992);
+  transition-duration: 0.1s;
+}
+.postcard:focus-visible {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
+}
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .postcard .header {
   display: flex;
@@ -123,6 +244,15 @@
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.04em;
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    transform 0.25s var(--ease-spring);
+}
+.postcard:hover .languageTag {
+  border-color: rgba(250, 84, 28, 0.62);
+  background-color: rgba(250, 84, 28, 0.18);
+  transform: scale(1.04);
 }
 .postcard .detailswrapper {
   display: flex;

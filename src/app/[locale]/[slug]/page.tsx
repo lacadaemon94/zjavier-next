@@ -33,6 +33,7 @@ export async function generateStaticParams() {
 
 const prettyCodeOptions = {
   theme: "material-theme-darker",
+  keepBackground: false,
   tokensMap: {
     fn: "entity.name.function",
     objKey: "meta.object-literal.key",
@@ -146,7 +147,11 @@ export default async function Page({ params }: Props) {
         <PostIndex headings={post.headings} labels={dictionary.post} />
         <MDXRemote
           source={post.content}
-          components={createMdxComponents(post.language)}
+          components={createMdxComponents(
+            post.language,
+            locale,
+            dictionary.post,
+          )}
           options={mdxOptions as any}
         />
         <Footer copy={dictionary.footer} />

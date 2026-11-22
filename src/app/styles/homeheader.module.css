@@ -33,14 +33,26 @@
   font-weight: 700;
   line-height: 1;
   transition:
+    transform 0.22s var(--ease-spring),
     color 0.2s ease,
     background-color 0.2s ease,
-    border-color 0.2s ease;
+    border-color 0.2s ease,
+    box-shadow 0.24s var(--ease-out-expo);
 }
 .cvlink:hover {
+  transform: translateY(-1px);
   border-color: rgba(250, 84, 28, 0.54);
   color: var(--foreground-50);
   background-color: var(--background-800);
+  box-shadow: 0 4px 14px rgba(250, 84, 28, 0.16);
+}
+.cvlink:active {
+  transform: translateY(0) scale(0.95);
+  transition-duration: 0.1s;
+}
+.cvlink:focus-visible {
+  outline: 2px solid var(--primary-500);
+  outline-offset: 2px;
 }
 .header {
   display: flex;
@@ -66,22 +78,26 @@
   align-items: center;
   justify-content: center;
   border-radius: 1.75rem;
-  -webkit-border-radius: 1.75rem;
-  -moz-border-radius: 1.75rem;
-  -ms-border-radius: 1.75rem;
-  -o-border-radius: 1.75rem;
   border: 1px solid var(--primary-500);
   padding: 3px;
+  overflow: hidden;
+  transition:
+    box-shadow 0.35s var(--ease-out-expo),
+    border-color 0.25s ease;
+}
+.avatar:hover {
+  box-shadow: 0 0 22px rgba(250, 84, 28, 0.26);
 }
 .avatar img {
   width: 100%;
+  height: 100%;
   object-fit: cover;
   overflow: hidden;
   border-radius: 1.5rem;
-  -webkit-border-radius: 1.5rem;
-  -moz-border-radius: 1.5rem;
-  -ms-border-radius: 1.5rem;
-  -o-border-radius: 1.5rem;
+  transition: transform 0.45s var(--ease-out-expo);
+}
+.avatar:hover img {
+  transform: scale(1.05);
 }
 .nameandtitle {
   display: flex;
