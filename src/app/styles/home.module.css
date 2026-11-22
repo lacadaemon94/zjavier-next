@@ -54,17 +54,18 @@
   height: 2rem;
   gap: 2px;
   padding: 2px;
-  border: 1px solid rgb(87 87 87 / 50%);
-  border-radius: 0.75rem;
-  background-color: var(--background-950);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background-color: var(--surface-card);
+  box-shadow: var(--inner-highlight);
 }
 .languageFilter button {
   display: flex;
   height: 1.5rem;
-  padding: 0 0.5rem;
+  padding: 0 0.55rem;
   align-items: center;
   justify-content: center;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-xs);
   color: var(--foreground-300);
   font-family: var(--font-museoModerno);
   font-size: 0.6875rem;
@@ -78,8 +79,8 @@
 }
 .languageFilter button:hover,
 .languageFilter button[data-isactive="true"] {
-  color: var(--foreground-50);
-  background-color: var(--background-800);
+  color: #f6fbfc;
+  background-color: rgba(255, 255, 255, 0.09);
 }
 .languageFilter button:active {
   transform: scale(0.93);
@@ -97,9 +98,10 @@
   gap: 0.75rem;
   width: 100%;
   padding: 1.5rem;
-  border-radius: 1.5rem;
-  border: 1px solid rgb(87 87 87 / 35%);
-  background-color: var(--background-950);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-subtle);
+  background-color: var(--surface-card);
+  box-shadow: var(--inner-highlight);
   color: var(--foreground-300);
   font-size: 0.9375rem;
   animation: cardEnter 0.35s var(--ease-out-expo) both;
@@ -145,11 +147,12 @@
   flex-wrap: nowrap;
   width: 100%;
   height: fit-content;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 1.5rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
   padding: 1.5rem;
   align-items: flex-start;
-  background-color: var(--background-950);
+  background-color: var(--surface-card);
+  box-shadow: var(--inner-highlight);
   animation: cardEnter 0.45s var(--ease-out-expo) both;
   transition:
     transform 0.28s var(--ease-out-expo),
@@ -174,9 +177,12 @@
 }
 .postcard:hover {
   transform: translateY(-3px);
-  border-color: rgba(250, 84, 28, 0.36);
-  background-color: #222222;
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.38), 0 0 0 1px rgba(250, 84, 28, 0.08);
+  border-color: rgba(250, 84, 28, 0.38);
+  background-color: var(--surface-elevated);
+  box-shadow:
+    var(--inner-highlight),
+    0 16px 36px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(250, 84, 28, 0.08);
 }
 .postcard:active {
   transform: translateY(-1px) scale(0.992);
@@ -222,9 +228,11 @@
 
 .postcard .header .title h3 {
   flex: 1 1 min(100%, 32rem);
-  font-size: 1.5em;
+  font-size: 1.375rem;
   font-weight: 600;
-  color: var(--foreground-50);
+  line-height: 1.28;
+  letter-spacing: -0.015em;
+  color: #f6fbfc;
 }
 .postcard .header .title .languageTag {
   display: flex;
@@ -275,29 +283,31 @@
   height: fit-content;
   align-items: center;
   justify-content: flex-start;
-  border-radius: 0.5rem;
-  -webkit-border-radius: 0.5rem;
-  -moz-border-radius: 0.5rem;
-  -ms-border-radius: 0.5rem;
-  -o-border-radius: 0.5rem;
-  padding: 6px;
-  background-color: var(--background-900);
-  gap: 0.5rem;
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-pill);
+  padding: 5px 10px;
+  background-color: rgba(255, 255, 255, 0.045);
+  gap: 0.4rem;
 }
 .postcard .detailswrapper .detailpill span {
-  font-size: 0.875em;
+  font-size: 0.8125rem;
   line-height: 0;
-  color: var(--foreground-50);
+  color: var(--foreground-300);
 }
 .postcard .detailswrapper .detailpill p {
-  font-size: 0.875em;
-  font-weight: 200;
-  color: var(--foreground-50);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--foreground-200);
 }
 .postcard .excerpt {
-  margin-top: 0.75rem;
+  margin-top: 0.85rem;
   width: 100%;
-  font-size: 0.875em;
+  font-size: 0.9375rem;
   font-weight: 300;
-  color: var(--foreground-50);
+  line-height: 1.62;
+  color: var(--foreground-300);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

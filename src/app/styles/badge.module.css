@@ -7,9 +7,10 @@
   height: 2rem;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0.75rem;
-  background: linear-gradient(226deg, #434343 0%, #000 71.68%);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background-color: var(--surface-card);
+  box-shadow: var(--inner-highlight);
   cursor: default;
   transition:
     transform 0.24s var(--ease-spring),
@@ -48,15 +49,16 @@
   flex-wrap: nowrap;
   width: fit-content;
   max-width: 192px;
-  background-color: var(--background-900);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+  background-color: rgba(20, 20, 20, 0.94);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--inner-highlight), 0 10px 24px rgba(0, 0, 0, 0.52);
   align-items: center;
   justify-content: center;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-xs);
   z-index: 2;
   bottom: 128%;
-  padding: 4px 8px;
+  padding: 5px 9px;
   pointer-events: none;
   opacity: 0;
   transform: translateY(10px) scale(0.84);
@@ -78,11 +80,12 @@
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: var(--background-900) transparent transparent transparent;
+  border-color: rgba(20, 20, 20, 0.94) transparent transparent transparent;
   border-radius: 2px;
 }
 .tooltip p {
-  font-size: 1em;
-  font-weight: 200;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--foreground-100);
   white-space: nowrap;
 }

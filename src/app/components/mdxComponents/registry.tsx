@@ -9,6 +9,9 @@ import {
   AIForkDiagram,
   type AIForkDiagramProps,
 } from "./generated/AIForkDiagram";
+import { RiemannPrimeStaircase } from "./generated/RiemannPrimeStaircase";
+import { RiemannCriticalLineMap } from "./generated/RiemannCriticalLineMap";
+import { RiemannProofArchitecture } from "./generated/RiemannProofArchitecture";
 
 type MdxUiLabels = {
   copyCode?: string;
@@ -35,6 +38,9 @@ export function createMdxComponents(
     AIForkDiagram: (props: AIForkDiagramProps) => (
       <AIForkDiagram locale={language} {...props} />
     ),
+    RiemannPrimeStaircase,
+    RiemannCriticalLineMap,
+    RiemannProofArchitecture,
     FullCode: (props: FullCodeProps) => (
       <FullCode selectFileLabel={selectFileLabel} {...props} />
     ),

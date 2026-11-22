@@ -14,9 +14,10 @@
   height: 100%;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 0.75rem;
-  background-color: var(--background-900);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background-color: var(--surface-card);
+  box-shadow: var(--inner-highlight);
   cursor: pointer;
   transition:
     transform 0.22s var(--ease-spring),
@@ -27,12 +28,12 @@
 .trigger:hover {
   transform: translateY(-1px);
   border-color: rgba(250, 84, 28, 0.42);
-  background-color: var(--background-800);
+  background-color: var(--surface-elevated);
 }
 .trigger[aria-expanded="true"] {
   border-color: rgba(250, 84, 28, 0.65);
-  background-color: var(--background-800);
-  box-shadow: 0 0 12px rgba(250, 84, 28, 0.16);
+  background-color: var(--surface-elevated);
+  box-shadow: var(--inner-highlight), 0 0 12px rgba(250, 84, 28, 0.16);
 }
 .trigger:active {
   transform: scale(0.92);
@@ -68,10 +69,13 @@
   max-width: 20rem;
   gap: 4px;
   align-items: flex-start;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0.75rem;
-  background-color: var(--background-900);
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background-color: rgba(20, 20, 20, 0.92);
+  backdrop-filter: blur(14px) saturate(140%);
+  box-shadow:
+    var(--inner-highlight),
+    0 18px 40px rgba(0, 0, 0, 0.62);
   top: 120%;
   left: 0;
   padding: 0.5rem;

@@ -7,9 +7,10 @@
   height: 2rem;
   align-items: center;
   justify-content: center;
-  background-color: var(--background-900);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 0.75rem;
+  background-color: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--inner-highlight);
   transition:
     transform 0.24s var(--ease-spring),
     border-color 0.2s ease,
@@ -19,8 +20,11 @@
 .sociallink:hover {
   transform: translateY(-2px);
   border-color: rgba(250, 84, 28, 0.45);
-  background-color: var(--background-800);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35), 0 0 12px rgba(250, 84, 28, 0.14);
+  background-color: var(--surface-elevated);
+  box-shadow:
+    var(--inner-highlight),
+    0 8px 18px rgba(0, 0, 0, 0.42),
+    0 0 12px rgba(250, 84, 28, 0.14);
 }
 .sociallink:active {
   transform: translateY(0) scale(0.94);

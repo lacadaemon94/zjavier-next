@@ -10,9 +10,10 @@
   justify-content: center;
   gap: 2px;
   padding: 2px;
-  border: 1px solid rgb(87 87 87 / 50%);
-  border-radius: 0.75rem;
-  background-color: var(--background-950);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background-color: var(--surface-card);
+  box-shadow: var(--inner-highlight);
 }
 
 .switcher button {
@@ -22,7 +23,7 @@
   height: 1.5rem;
   align-items: center;
   justify-content: center;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-xs);
   color: var(--foreground-300);
   font-family: var(--font-museoModerno);
   font-size: 0.6875rem;
@@ -38,8 +39,8 @@
 
 .switcher button:hover,
 .switcher button[data-isactive="true"] {
-  color: var(--foreground-50);
-  background-color: var(--background-800);
+  color: #f6fbfc;
+  background-color: rgba(255, 255, 255, 0.09);
 }
 
 .switcher button:active {

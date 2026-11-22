@@ -1,0 +1,445 @@
+.plate {
+  --bp-bg: #0c0d0f;
+  --bp-panel: rgba(20, 22, 26, 0.88);
+  --bp-panel-soft: rgba(255, 255, 255, 0.03);
+  --bp-grid: rgba(237, 237, 230, 0.045);
+  --bp-grid-major: rgba(237, 237, 230, 0.09);
+  --bp-ink: #edede6;
+  --bp-muted: rgba(237, 237, 230, 0.66);
+  --bp-dim: rgba(237, 237, 230, 0.36);
+  --bp-line: rgba(237, 237, 230, 0.14);
+  --bp-orange: #fa541c;
+  --bp-orange-soft: rgba(250, 84, 28, 0.14);
+  --bp-teal: #58a69e;
+  --bp-ochre: #d8b878;
+  --bp-indigo: #7c8ce0;
+
+  display: grid;
+  position: relative;
+  width: 100%;
+  margin: 2.25rem 0;
+  border: 1px solid var(--bp-line);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  color: var(--bp-ink);
+  background:
+    linear-gradient(var(--bp-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bp-grid) 1px, transparent 1px),
+    radial-gradient(
+      ellipse 70% 50% at 50% 0%,
+      rgba(250, 84, 28, 0.08),
+      transparent 70%
+    ),
+    var(--bp-bg);
+  background-size:
+    24px 24px,
+    24px 24px,
+    auto,
+    auto;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 20px 44px rgba(0, 0, 0, 0.42);
+}
+
+/* Architectural Drafting Top Title Block */
+.titleBlock {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) auto;
+  border-bottom: 1px solid var(--bp-line);
+  background: rgba(12, 13, 15, 0.82);
+  font-size: 0.72rem;
+}
+
+.titleCell,
+.metaCell,
+.swatchCell {
+  padding: 0.8rem 1rem;
+}
+
+.titleCell {
+  display: grid;
+  gap: 0.2rem;
+  border-right: 1px solid var(--bp-line);
+}
+
+.sheetCode {
+  margin: 0;
+  color: var(--bp-orange);
+  font-family: var(--font-museoModerno);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.plateTitle {
+  margin: 0;
+  color: #f6fbfc;
+  font-family: var(--font-museoModerno);
+  font-size: clamp(1.05rem, 2.1vw, 1.3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.plateSubtitle {
+  margin: 0.1rem 0 0;
+  color: var(--bp-muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.metaCell {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-content: center;
+  gap: 0.25rem 0.75rem;
+  border-right: 1px solid var(--bp-line);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.67rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.metaKey {
+  color: var(--bp-dim);
+}
+
+.metaVal {
+  color: var(--bp-ink);
+}
+
+.swatchCell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.swatches {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.swatch {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.compass {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--bp-dim);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+}
+
+.compassRing {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--bp-line);
+  color: var(--bp-ink);
+  font-size: 0.65rem;
+}
+
+/* Interactive Control Bar */
+.controlsBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--bp-line);
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.controlHint {
+  margin: 0;
+  color: var(--bp-muted);
+  font-size: 0.78rem;
+}
+
+.segmented {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  padding: 3px;
+  border: 1px solid var(--bp-line);
+  border-radius: 0.65rem;
+  background: rgba(12, 13, 15, 0.85);
+}
+
+.segButton {
+  padding: 0.35rem 0.7rem;
+  border-radius: 0.45rem;
+  color: var(--bp-muted);
+  font-family: var(--font-museoModerno);
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.1;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.18s var(--ease-spring);
+}
+
+.segButton:hover {
+  color: var(--bp-ink);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.segButton:active {
+  transform: scale(0.95);
+}
+
+.segButton[data-active="true"] {
+  color: #f6fbfc;
+  background: rgba(250, 84, 28, 0.22);
+  box-shadow: inset 0 0 0 1px rgba(250, 84, 28, 0.52);
+}
+
+.segButton:focus-visible {
+  outline: 2px solid var(--bp-orange);
+  outline-offset: 2px;
+}
+
+/* Main SVG Drawing Canvas */
+.canvasWrap {
+  position: relative;
+  padding: 1rem 1rem 0.5rem;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.interactiveNode {
+  cursor: pointer;
+  transition:
+    opacity 0.22s ease,
+    transform 0.24s var(--ease-spring);
+}
+
+.interactiveLayer {
+  cursor: pointer;
+  transition:
+    opacity 0.24s ease,
+    transform 0.28s var(--ease-out-expo);
+}
+
+.pulseRing {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bpPulse 2.4s ease-out infinite;
+}
+
+@keyframes bpPulse {
+  0% {
+    opacity: 0.7;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.9);
+  }
+}
+
+/* Annotation Readout Panel */
+.readout {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.75rem 1rem;
+  align-items: start;
+  margin: 0.25rem 1rem 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(250, 84, 28, 0.26);
+  border-radius: 0.85rem;
+  background:
+    linear-gradient(90deg, rgba(250, 84, 28, 0.09), transparent 45%),
+    var(--bp-panel);
+}
+
+.readoutTag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.55rem;
+  border: 1px solid rgba(250, 84, 28, 0.42);
+  border-radius: 999px;
+  color: #ffc8b0;
+  background: rgba(250, 84, 28, 0.14);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.readoutBody {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.readoutBody h4 {
+  margin: 0;
+  color: #f6fbfc;
+  font-family: var(--font-museoModerno);
+  font-size: 0.94rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.readoutBody p {
+  margin: 0;
+  color: var(--bp-muted);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.readoutMetrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.3rem;
+}
+
+.metricChip {
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--bp-line);
+  border-radius: 0.4rem;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--bp-ink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.68rem;
+}
+
+/* Bottom Architectural Legend & Spec Bar */
+.legendBar {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) auto minmax(0, 0.85fr);
+  border-top: 1px solid var(--bp-line);
+  background: rgba(12, 13, 15, 0.86);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.03em;
+}
+
+.legendSection,
+.scaleSection,
+.specSection {
+  padding: 0.7rem 1rem;
+}
+
+.legendSection {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  border-right: 1px solid var(--bp-line);
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--bp-muted);
+}
+
+.legendLine {
+  width: 1rem;
+  height: 2px;
+  border-radius: 999px;
+}
+
+.legendDot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+}
+
+.scaleSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  border-right: 1px solid var(--bp-line);
+  color: var(--bp-dim);
+  text-transform: uppercase;
+}
+
+.scaleBar {
+  display: grid;
+  grid-template-columns: repeat(4, 14px);
+  height: 4px;
+  border: 1px solid var(--bp-dim);
+}
+
+.scaleBar span:nth-child(odd) {
+  background: var(--bp-dim);
+}
+
+.specSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 0.15rem;
+  color: var(--bp-dim);
+  text-transform: uppercase;
+  text-align: right;
+}
+
+.specSection strong {
+  color: var(--bp-ink);
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 720px) {
+  .titleBlock {
+    grid-template-columns: 1fr;
+  }
+
+  .titleCell,
+  .metaCell {
+    border-right: 0;
+    border-bottom: 1px solid var(--bp-line);
+  }
+
+  .swatchCell {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .readout {
+    grid-template-columns: 1fr;
+  }
+
+  .legendBar {
+    grid-template-columns: 1fr;
+  }
+
+  .legendSection,
+  .scaleSection {
+    border-right: 0;
+    border-bottom: 1px solid var(--bp-line);
+  }
+
+  .specSection {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
