@@ -5,21 +5,19 @@ import React from "react";
 import styles from "../../styles/home.module.css";
 import { PostCard } from "./PostCard";
 import type { Locale } from "@/app/i18n/config";
-// Icons
-// Ui Elements
+import type { PostWithStats } from "@/app/lib/posts/postWithStats";
+
 type Props = {
-  posts: any[];
+  posts: PostWithStats[];
   locale: Locale;
 };
 
 export const Posts = ({ posts, locale }: Props) => {
-  // const postsProjects = posts.map((post) => post.project);
-
   return (
     <div className={styles.postswrapper}>
       {posts &&
-        posts.map((post, index) => (
-          <PostCard key={index} locale={locale} post={post} />
+        posts.map((post) => (
+          <PostCard key={post.slug} locale={locale} post={post} />
         ))}
     </div>
   );

@@ -1,4 +1,3 @@
-"use client";
 // Core
 import React from "react";
 import Image from "next/image";
@@ -33,6 +32,7 @@ const StickyHeader = ({ locale, avatarAlt, language }: Props) => {
           alt={avatarAlt}
           width={128}
           height={128}
+          sizes="32px"
         />
       </div>
       <div className={styles.linkswrapper}>

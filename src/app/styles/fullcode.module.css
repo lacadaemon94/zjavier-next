@@ -7,20 +7,21 @@
     display: grid;
     position: absolute;
 
-    width: 17.75rem;
+    width: clamp(11rem, 16vw, 17.75rem);
     
     grid-column: 1;
 
     gap: 1rem;
     
-    left: 0;
+    left: 1.5rem;
     margin-top: 0;
 }
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1180px) {
     .fullcode .sideheader {
         display: flex;
         flex-direction: column;
         position: relative;
+        left: 0;
         margin-bottom: 2rem;
         width: 100%;
     }

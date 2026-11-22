@@ -84,6 +84,7 @@ export const dictionaries = {
         },
       ],
       experienceTitle: "Experience",
+      currentBadge: "CURRENT",
       experience: [
         {
           role: "Information Technology Specialist",
@@ -320,7 +321,7 @@ export const dictionaries = {
     },
     footer: {
       builtWith:
-        "Built with Next.js, TypeScript, Framer Motion, Supabase and Vercel.",
+        "Built with Next.js, TypeScript, Supabase and Vercel.",
     },
   },
   es: {
@@ -406,6 +407,7 @@ export const dictionaries = {
         },
       ],
       experienceTitle: "Experiencia",
+      currentBadge: "ACTUAL",
       experience: [
         {
           role: "Information Technology Specialist",
@@ -642,7 +644,7 @@ export const dictionaries = {
     },
     footer: {
       builtWith:
-        "Construido con Next.js, TypeScript, Framer Motion, Supabase y Vercel.",
+        "Construido con Next.js, TypeScript, Supabase y Vercel.",
     },
   },
 } as const;

@@ -1,10 +1,6 @@
 "use client";
 // Core
 import React, { forwardRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-// Utils
-// Ui Elements
-// Assets
 // Styles
 import styles from "../../styles/dropdown.module.css";
 
@@ -21,44 +17,31 @@ export type DropDownProps = {
 const DropDown = forwardRef<HTMLDivElement, DropDownProps>(
   ({ icon, text, title, ariaLabel, children, isOpen, toggleDropdown }, ref) => {
     return (
-      <div
-        ref={ref}
-        className={styles.dropdown}
-        title={title}
-        aria-label={ariaLabel}
-        onClick={toggleDropdown}
-      >
-        {icon && <span>{icon}</span>}
-        {text && <p>{text}</p>}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              className={styles.optionscontainer}
-              initial={{
-                opacity: 0,
-                y: -16,
-                filter: "blur(3px)",
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                filter: "blur(0px)",
-                transition: { type: "spring", duration: 0.5 },
-              }}
-              exit={{
-                y: -10,
-                opacity: 0,
-                filter: "blur(5px)",
-                transition: { type: "spring", duration: 0.5 },
-              }}
-            >
-              {children}
-            </motion.div>
-          )}
-        </AnimatePresence>
+      <div ref={ref} className={styles.dropdown}>
+        <button
+          type="button"
+          className={styles.trigger}
+          title={title}
+          aria-label={ariaLabel}
+          aria-expanded={isOpen}
+          aria-haspopup="menu"
+          onClick={toggleDropdown}
+        >
+          {icon && <span aria-hidden="true">{icon}</span>}
+          {text && <p>{text}</p>}
+        </button>
+        <div
+          className={styles.optionscontainer}
+          role="menu"
+          data-open={isOpen ? "true" : "false"}
+          aria-hidden={!isOpen}
+          onClick={toggleDropdown}
+        >
+          {children}
+        </div>
       </div>
     );
-  }
+  },
 );
 
 DropDown.displayName = "DropDown";

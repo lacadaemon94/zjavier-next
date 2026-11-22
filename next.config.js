@@ -1,30 +1,25 @@
 /** @type {import('next').NextConfig} */
 
-const corsHeaders = [
-  {
-    key: "Access-Control-Allow-Origin",
-    value: "*", // Allow requests from any origin
-  },
-  {
-    key: "Access-Control-Allow-Methods",
-    value: "GET,POST,PUT,DELETE,OPTIONS",
-  },
-  {
-    key: "Access-Control-Allow-Headers",
-    value: "Content-Type, Authorization, x-zjavier-origin",
-  },
-  {
-    key: "Access-Control-Allow-Credentials",
-    value: "true",
-  },
-];
+const isDev = process.env.NODE_ENV === "development";
+
+const contentSecurityPolicy = [
+  "default-src 'self'",
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob:",
+  "font-src 'self'",
+  "connect-src 'self' https://qewssannnzhfqxuxcjat.supabase.co",
+  "manifest-src 'self'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'none'",
+].join("; ");
 
 async function headers() {
   return [
     {
       source: "/(.*)",
       headers: [
-        ...corsHeaders,
         {
           key: "X-Content-Type-Options",
           value: "nosniff",
@@ -32,10 +27,6 @@ async function headers() {
         {
           key: "X-Frame-Options",
           value: "DENY",
-        },
-        {
-          key: "X-XSS-Protection",
-          value: "1; mode=block",
         },
         {
           key: "Referrer-Policy",
@@ -47,8 +38,7 @@ async function headers() {
         },
         {
           key: "Content-Security-Policy",
-          value:
-            "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://www.gstatic.com; img-src 'self' https://translate.google.com https://translate.googleapis.com https://www.google.com https://fonts.gstatic.com https://www.gstatic.com data:; connect-src 'self' https://translate.googleapis.com https://qewssannnzhfqxuxcjat.supabase.co; manifest-src 'self'; script-src-elem 'self' 'unsafe-inline' https://translate.google.com https://translate.googleapis.com https://translate-pa.googleapis.com;",
+          value: contentSecurityPolicy,
         },
       ],
     },
@@ -56,6 +46,9 @@ async function headers() {
 }
 
 const nextConfig = {
+  images: {
+    formats: ["image/avif", "image/webp"],
+  },
   async headers() {
     return headers();
   },

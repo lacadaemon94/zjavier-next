@@ -34,9 +34,10 @@
   transition: opacity 0.35s ease;
 }
 
-.cover[data-loaded="true"] .imageFrame::before {
+.cover[data-loaded="true"] .imageFrame::before,
+.cover[data-priority="true"] .imageFrame::before {
   opacity: 0;
-  animation-play-state: paused;
+  animation: none;
 }
 
 .imageFrame img {
@@ -52,7 +53,8 @@
     transform 0.55s ease;
 }
 
-.cover[data-loaded="true"] .imageFrame img {
+.cover[data-loaded="true"] .imageFrame img,
+.cover[data-priority="true"] .imageFrame img {
   opacity: 1;
   filter: blur(0) saturate(1);
   transform: scale(1);

@@ -24,16 +24,18 @@ const DropDownOption = ({
   isActive,
 }: DropDownOption) => {
   return (
-    <div
+    <button
+      type="button"
+      role="menuitem"
       className={styles.ddoption}
       title={title}
       aria-label={ariaLabel}
       onClick={action}
       data-isactive={isActive}
     >
-      {icon && <span>{icon}</span>}
+      {icon && <span aria-hidden="true">{icon}</span>}
       {text && <p>{text}</p>}
-    </div>
+    </button>
   );
 };
 

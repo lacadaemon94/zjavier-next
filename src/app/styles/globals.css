@@ -58,7 +58,6 @@
 
 * {
   font-style: normal;
-  scroll-behavior: smooth;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -66,10 +65,18 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-  text-rendering: optimizeLegibility;
-  text-shadow: rgba(0, 0, 0, 0.01) 0 0 1px;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 ::-webkit-scrollbar {
@@ -126,6 +133,12 @@ a {
 
   cursor: pointer;
   background-color: unset;
+}
+
+@keyframes zj-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 input,

@@ -1,7 +1,11 @@
-import { format, isThisYear } from "date-fns"
-
 export const formatDate = (date: string) => {
-  const _date = new Date(date)
+  const parsed = new Date(date);
+  const isCurrentYear = parsed.getUTCFullYear() === new Date().getUTCFullYear();
 
-  return isThisYear(_date) ? format(_date, "MMM d") : format(_date, "MMM d, y")
-}
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    ...(isCurrentYear ? {} : { year: "numeric" }),
+    timeZone: "UTC",
+  }).format(parsed);
+};

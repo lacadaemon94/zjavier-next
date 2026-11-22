@@ -1,21 +1,24 @@
 // Home
-// Core
 import React from "react";
 import type { Metadata } from "next";
-import { getPublishedPosts } from "./lib/posts/getPosts";
-import type { PostWithStats } from "./lib/posts/postWithStats";
-import { getI18n } from "./i18n/server";
-// Utils
-// Ui Elements
-import HomeHeader from "./components/HomeHeader";
-import NotesContainer from "./components/NotesContainer";
-import Footer from "./components/Footer";
-// Assets
-// Styles
-import styles from "./styles/home.module.css";
+import { notFound } from "next/navigation";
+import { getPublishedPosts } from "@/app/lib/posts/getPosts";
+import type { PostWithStats } from "@/app/lib/posts/postWithStats";
+import { isLocale } from "@/app/i18n/config";
+import { getDictionary } from "@/app/i18n/dictionaries";
+import HomeHeader from "@/app/components/HomeHeader";
+import NotesContainer from "@/app/components/NotesContainer";
+import Footer from "@/app/components/Footer";
+import styles from "@/app/styles/home.module.css";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const { locale, dictionary } = await getI18n();
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
+  const dictionary = getDictionary(locale);
   const title = dictionary.metadata.defaultTitle;
   const description = dictionary.metadata.description;
 
@@ -48,8 +51,11 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function Page() {
-  const { locale, dictionary } = await getI18n();
+export default async function Page({ params }: Props) {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
+  const dictionary = getDictionary(locale);
+
   const posts: PostWithStats[] = getPublishedPosts().map((post) => ({
     ...post,
     likes: 0,

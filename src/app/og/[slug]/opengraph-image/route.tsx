@@ -2,17 +2,12 @@ import { notFound } from "next/navigation";
 import {
   getPublishedPostBySlug,
   getPublishedPosts,
-} from "../lib/posts/getPosts";
-import {
-  openGraphContentType,
-  renderPostOpenGraphImage,
-  wideOpenGraphSize,
-} from "../lib/posts/openGraphImage";
+} from "@/app/lib/posts/getPosts";
+import { renderPostOpenGraphImage } from "@/app/lib/posts/openGraphImage";
 
 export const runtime = "nodejs";
-export const contentType = openGraphContentType;
-export const alt = "Javier Notes";
-export const size = wideOpenGraphSize;
+export const dynamic = "force-static";
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   return getPublishedPosts().map((post) => ({
@@ -20,11 +15,10 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function OpenGraph({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export async function GET(
+  _request: Request,
+  { params }: { params: Promise<{ slug: string }> },
+) {
   const { slug } = await params;
   const post = getPublishedPostBySlug(slug);
 

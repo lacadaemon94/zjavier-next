@@ -17,7 +17,6 @@ type Heading = {
 
 type Props = {
   headings: Heading[];
-  flatPath: string;
   labels: Dictionary["post"];
 };
 
@@ -45,7 +44,7 @@ function groupHeadings(headings: Heading[]): HeadingGroup[] {
   }, []);
 }
 
-export const PostIndex = ({ headings, flatPath, labels }: Props) => {
+export const PostIndex = ({ headings, labels }: Props) => {
   const headingGroups = groupHeadings(headings);
 
   return (
@@ -77,7 +76,7 @@ export const PostIndex = ({ headings, flatPath, labels }: Props) => {
 
         <div className={styles.actions}>
           <div className={styles.reactions}>
-            <LikeButton flatPath={flatPath} />
+            <LikeButton />
           </div>
 
           <Button type="button" className={styles.totop} onClick={scrollToTop}>

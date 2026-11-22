@@ -1,4 +1,3 @@
-"use client";
 // Core
 import React from "react";
 import Image from "next/image";
@@ -49,6 +48,8 @@ const HomeHeader = ({ locale, copy, language }: Props) => {
             alt={copy.avatarAlt}
             width={256}
             height={256}
+            sizes="92px"
+            priority
           />
         </div>
         <div className={styles.nameandtitle}>

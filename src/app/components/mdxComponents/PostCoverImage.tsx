@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import styles from "../../styles/postcoverimage.module.css";
 
@@ -18,14 +18,26 @@ export function PostCoverImage({
   src,
   alt,
   caption,
-  priority = false,
+  priority = true,
 }: Props) {
-  const [isLoaded, setLoaded] = useState(false);
+  const imgRef = useRef<HTMLImageElement | null>(null);
+  const [isLoaded, setLoaded] = useState(priority);
+
+  useEffect(() => {
+    if (imgRef.current?.complete) {
+      setLoaded(true);
+    }
+  }, [src]);
 
   return (
-    <figure className={styles.cover} data-loaded={isLoaded}>
+    <figure
+      className={styles.cover}
+      data-loaded={isLoaded}
+      data-priority={priority}
+    >
       <div className={styles.imageFrame}>
         <Image
+          ref={imgRef}
           src={src}
           alt={alt}
           width={1672}
@@ -35,7 +47,7 @@ export function PostCoverImage({
           blurDataURL={blurDataURL}
           priority={priority}
           loading={priority ? "eager" : "lazy"}
-          decoding="async"
+          decoding={priority ? "sync" : "async"}
           onLoad={() => setLoaded(true)}
         />
       </div>

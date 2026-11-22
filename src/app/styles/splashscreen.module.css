@@ -1,17 +1,31 @@
 .splashscreen {
-    display: flex;
-    position: absolute;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    background-color: var(--bg-splashcreen);
-
-    align-items: center;
-    justify-content: center;
-    z-index: 5;
+  display: flex;
+  position: fixed;
+  inset: 0;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  background-color: var(--bg-splashcreen);
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.3s ease-out;
 }
+
+.splashscreen[data-fading="true"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .splashscreen img {
-    object-fit: cover;
+  width: min(512px, 80vw);
+  height: auto;
+  object-fit: contain;
+}
+
+@media (prefers-reduced-motion: reduce), print {
+  .splashscreen {
+    display: none !important;
+  }
 }

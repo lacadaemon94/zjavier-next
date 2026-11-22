@@ -2,12 +2,13 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import LanguageSwitcher from "../components/LanguageSwitcher";
-import Footer from "../components/Footer";
-import { getI18n } from "../i18n/server";
-import type { Dictionary } from "../i18n/dictionaries";
+import { notFound } from "next/navigation";
+import LanguageSwitcher from "@/app/components/LanguageSwitcher";
+import Footer from "@/app/components/Footer";
+import { isLocale } from "@/app/i18n/config";
+import { getDictionary, type Dictionary } from "@/app/i18n/dictionaries";
 import PrintButton from "./PrintButton";
-import styles from "../styles/cv.module.css";
+import styles from "@/app/styles/cv.module.css";
 
 type CvCopy = Dictionary["cv"];
 type Experience = CvCopy["experience"][number];
@@ -16,8 +17,14 @@ type SelectedWork = CvCopy["selectedWork"][number];
 type Education = CvCopy["education"][number];
 type Certification = CvCopy["certifications"][number];
 
-export async function generateMetadata(): Promise<Metadata> {
-  const { dictionary } = await getI18n();
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
+  const dictionary = getDictionary(locale);
 
   return {
     title: dictionary.cv.metadataTitle,
@@ -32,30 +39,41 @@ const SectionTitle = ({ children }: { children: React.ReactNode }) => (
   <h2 className={styles.sectionTitle}>{children}</h2>
 );
 
-const ExperienceItem = ({ item }: { item: Experience }) => {
-  const isCurrent = item.dates.toLowerCase().includes("present")
-    || item.dates.toLowerCase().includes("actualidad");
+const ExperienceItem = ({
+  item,
+  currentLabel,
+}: {
+  item: Experience;
+  currentLabel: string;
+}) => {
+  const isCurrent =
+    item.dates.toLowerCase().includes("present") ||
+    item.dates.toLowerCase().includes("actualidad");
 
   return (
-  <article className={styles.experienceItem} data-iscurrent={isCurrent}>
-    <div className={styles.itemHeader}>
-      <div>
-        <h3>{item.role}</h3>
-        <p>{item.company}</p>
+    <article
+      className={styles.experienceItem}
+      data-iscurrent={isCurrent}
+      data-current-label={isCurrent ? currentLabel : undefined}
+    >
+      <div className={styles.itemHeader}>
+        <div>
+          <h3>{item.role}</h3>
+          <p>{item.company}</p>
+        </div>
+        <span>{item.dates}</span>
       </div>
-      <span>{item.dates}</span>
-    </div>
-    <p className={styles.meta}>
-      {item.location} / {item.mode}
-    </p>
-    {item.bullets.length > 0 && (
-      <ul className={styles.bullets}>
-        {item.bullets.map((bullet) => (
-          <li key={bullet}>{bullet}</li>
-        ))}
-      </ul>
-    )}
-  </article>
+      <p className={styles.meta}>
+        {item.location} / {item.mode}
+      </p>
+      {item.bullets.length > 0 && (
+        <ul className={styles.bullets}>
+          {item.bullets.map((bullet) => (
+            <li key={bullet}>{bullet}</li>
+          ))}
+        </ul>
+      )}
+    </article>
   );
 };
 
@@ -98,8 +116,10 @@ const CertificationItem = ({ item }: { item: Certification }) => (
   </article>
 );
 
-export default async function CvPage() {
-  const { locale, dictionary } = await getI18n();
+export default async function CvPage({ params }: Props) {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
+  const dictionary = getDictionary(locale);
   const copy = dictionary.cv;
 
   return (
@@ -121,6 +141,7 @@ export default async function CvPage() {
             alt={copy.photoAlt}
             width={720}
             height={900}
+            sizes="(max-width: 520px) 48vw, (max-width: 760px) 96px, 176px"
             priority
           />
         </div>
@@ -154,6 +175,7 @@ export default async function CvPage() {
               <ExperienceItem
                 key={`${item.company}-${item.dates}`}
                 item={item}
+                currentLabel={copy.currentBadge}
               />
             ))}
           </div>

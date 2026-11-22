@@ -19,7 +19,7 @@ const Footer = ({ copy }: Props) => {
         <SocialLink
           text="X"
           ariaLabel="X Social"
-          href="https://x.com/zjavier94"
+          href="https://x.com/zj_javier94"
           className={styles.footerlink}
         />
         <SocialLink

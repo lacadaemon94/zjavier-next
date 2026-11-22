@@ -251,7 +251,7 @@
 }
 
 .experienceItem[data-iscurrent="true"]::before {
-  content: "CURRENT";
+  content: attr(data-current-label);
   display: flex;
   width: fit-content;
   margin-bottom: 0.75rem;

@@ -1,11 +1,9 @@
 "use client";
 // Core
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-// Utils
-import { fetchLikes, saveLike } from "../utils/likesUtil";
+import React, { useState } from "react";
+// Context
+import { usePostStats } from "./PostStatsProvider";
 // Ui Elements
-import { LikeButton } from "./mdxComponents/LikeButton";
 import NavButton from "./NavButton";
 // Styles
 import styles from "../styles/posts.module.css";
@@ -15,29 +13,12 @@ import LikeFilledIcon from "@/assets/icons/LikeFilledIcon";
 import LeftArrowIcon from "@/assets/icons/LeftArrowIcon";
 
 type Props = {
-  slug: string;
   ariaLabel: string;
 };
 
-const MobileActions = ({ slug, ariaLabel }: Props) => {
+const MobileActions = ({ ariaLabel }: Props) => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
-  const [isLiked, setIsLiked] = useState<boolean>(false);
-  const [likes, setLikes] = useState<number>(0);
-
-  useEffect(() => {
-    const getLikesAndSet = async () => {
-      const getLikes = await fetchLikes(slug);
-      setLikes(getLikes);
-    };
-
-    getLikesAndSet();
-  }, [slug]);
-
-  const newLike = async () => {
-    const newLikes = await saveLike(slug);
-    setLikes(newLikes);
-    setIsLiked(true);
-  };
+  const { isLiked, isLiking, handleLike } = usePostStats();
 
   return (
     <div className={styles.mobileactionswrapper}>
@@ -48,64 +29,21 @@ const MobileActions = ({ slug, ariaLabel }: Props) => {
         className={styles.gobackmobile}
       />
       <div className={styles.likemobile}>
-        <motion.button
-          layout
+        <button
+          type="button"
           className={styles.likemobilebutton}
-          onClick={newLike}
-          onHoverStart={() => setIsHovered(true)}
-          onHoverEnd={() => setIsHovered(false)}
+          onClick={handleLike}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
           data-hover={isHovered ? "true" : "false"}
           data-liked={isLiked ? "true" : "false"}
-          disabled={isLiked}
+          disabled={isLiked || isLiking}
+          aria-label="Like post"
         >
-          <AnimatePresence mode="popLayout">
-            {isLiked ? (
-              <motion.div
-                key={"liked"}
-                layout
-                initial={{
-                  opacity: 0.25,
-                  scale: 1.5,
-                }}
-                animate={{
-                  opacity: 1,
-                  scale: 1,
-                }}
-                exit={{
-                  opacity: 0,
-                  scale: 0.75,
-                }}
-                transition={{
-                  type: "spring",
-                }}
-              >
-                <LikeFilledIcon />
-              </motion.div>
-            ) : (
-              <motion.div
-                key={"like"}
-                layout
-                initial={{
-                  opacity: 0.25,
-                  scale: 1.15,
-                }}
-                animate={{
-                  opacity: 1,
-                  scale: 1,
-                }}
-                exit={{
-                  opacity: 0,
-                  scale: 0.75,
-                }}
-                transition={{
-                  type: "spring",
-                }}
-              >
-                <LikeIcon />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.button>
+          <div key={isLiked ? "liked" : "like"} className={styles.likeIconPop}>
+            {isLiked ? <LikeFilledIcon /> : <LikeIcon />}
+          </div>
+        </button>
       </div>
     </div>
   );

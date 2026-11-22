@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo, useCallback } from "react";
 
 /**
  * Custom hook to manage the state and behavior of a dropdown component.
@@ -7,34 +7,38 @@ import React, { useState, useEffect, useRef, useMemo } from "react";
  */
 export const useDropdownState = (initialState: boolean = false) => {
   const [isOpen, setIsOpen] = useState<boolean>(initialState);
-
-  // Ref to the dropdown element
   const ref = useRef<HTMLDivElement>(null);
 
-  const closeDropdown = () => setIsOpen(false);
+  const closeDropdown = useCallback(() => setIsOpen(false), []);
 
-  const toggleDropdown = () => setIsOpen((prev) => !prev);
+  const toggleDropdown = useCallback(() => setIsOpen((prev) => !prev), []);
 
   useEffect(() => {
+    if (!isOpen) return;
+
     const handleClickOutside = (event: MouseEvent) => {
-      // Check if the click was outside the dropdown element
       if (ref.current && !ref.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
     };
 
-    // Add the event listener to detect clicks outside the dropdown
-    document.addEventListener("mousedown", handleClickOutside);
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
 
-    // Cleanup the event listener on component unmount
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [isOpen]);
 
-  // Return the state, ref, and functions to manage the dropdown
   return useMemo(
     () => ({ isOpen, closeDropdown, toggleDropdown, ref }),
-    [isOpen, ref],
+    [isOpen, closeDropdown, toggleDropdown],
   );
 };

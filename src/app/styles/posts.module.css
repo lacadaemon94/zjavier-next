@@ -1,7 +1,10 @@
 /* Post General Styles */
 .post {
   display: grid;
-  grid-template-columns: 17.75rem 40.5rem 17.75rem;
+  grid-template-columns:
+    minmax(11rem, 17.75rem)
+    minmax(0, 40.5rem)
+    minmax(11rem, 17.75rem);
   max-width: 80rem;
   position: relative;
   column-gap: 2rem;
@@ -9,8 +12,9 @@
 
   margin: auto;
   padding-top: 5.75rem;
+  padding-inline: 1.5rem;
 }
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1180px) {
   .post {
     display: flex;
     flex-direction: column;
@@ -44,7 +48,7 @@
 
   transition: opacity 0.3s ease-out;
 }
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1180px) {
   .post .index {
     display: none;
   }
@@ -129,15 +133,15 @@
 .post .header {
   display: grid;
 
-  width: 60.25rem;
+  width: 100%;
+  max-width: 60.25rem;
 
-  grid-column-start: 2;
-  grid-column-end: 3;
+  grid-column: 2 / 4;
 
   gap: 1rem;
   padding-bottom: 2rem;
 }
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1180px) {
   .post .header {
     width: 100%;
   }
@@ -342,7 +346,7 @@
   top: 2.5rem;
   z-index: 0;
 }
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1180px) {
   .goback {
     position: relative;
     top: unset;
@@ -367,21 +371,13 @@
   justify-content: center;
   background-color: var(--background-950);
   border-radius: 0.5rem;
-  -webkit-border-radius: 0.5rem;
-  -moz-border-radius: 0.5rem;
-  -ms-border-radius: 0.5rem;
-  -o-border-radius: 0.5rem;
   font-size: 1.5em;
   color: var(--foreground-50);
   line-height: 0;
-  transition: font-size 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
-  -webkit-transition: font-size 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
-  -moz-transition: font-size 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
-  -ms-transition: font-size 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
-  -o-transition: font-size 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 .goback .gobackbutton:hover span {
-  font-size: 1.875em;
+  transform: scale(1.15);
 }
 .goback .gobackbutton p {
   font-size: 1em;
@@ -438,7 +434,7 @@
   -o-transition: opacity 0.3s ease-out;
   z-index: 5;
 }
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1180px) {
   .mobileactionswrapper {
     display: flex;
   }
@@ -454,10 +450,6 @@
   justify-content: center;
   background-color: var(--background-950);
   border-radius: 0.75rem;
-  -webkit-border-radius: 0.75rem;
-  -moz-border-radius: 0.75rem;
-  -ms-border-radius: 0.75rem;
-  -o-border-radius: 0.75rem;
   box-shadow: 0px 26px 7px 0px rgba(135, 135, 135, 0),
     0px 17px 7px 0px rgba(135, 135, 135, 0.02),
     0px 9px 6px 0px rgba(135, 135, 135, 0.06),
@@ -468,14 +460,12 @@
   font-size: 1.5em;
   color: var(--foreground-300);
   line-height: 0;
-  transition: font-size, color 0.3s ease-out;
-  -webkit-transition: font-size, color 0.3s ease-out;
-  -moz-transition: font-size, color 0.3s ease-out;
-  -ms-transition: font-size, color 0.3s ease-out;
-  -o-transition: font-size, color 0.3s ease-out;
+  transition:
+    transform 0.3s ease-out,
+    color 0.3s ease-out;
 }
 .mobileactionswrapper .gobackmobile:hover span {
-  font-size: 2em;
+  transform: scale(1.2);
   color: var(--foreground-50);
 }
 .mobileactionswrapper .likemobile {
@@ -500,12 +490,7 @@
   justify-content: center;
   background-color: var(--background-950);
   scale: 1;
-  filter: blur(0);
   border-radius: 0.75rem;
-  -webkit-border-radius: 0.75rem;
-  -moz-border-radius: 0.75rem;
-  -ms-border-radius: 0.75rem;
-  -o-border-radius: 0.75rem;
   box-shadow: 0px 26px 7px 0px rgba(135, 135, 135, 0),
     0px 17px 7px 0px rgba(135, 135, 135, 0.02),
     0px 9px 6px 0px rgba(135, 135, 135, 0.06),
@@ -515,7 +500,6 @@
 .likemobilebutton[data-hover="true"] {
   border-radius: 10px;
   scale: 1.12;
-  filter: blur(0.3px);
 }
 .likemobilebutton div {
   display: flex;
@@ -539,4 +523,17 @@
 }
 .likemobilebutton[data-liked="true"] div svg {
   color: var(--foreground-50);
+}
+.likeIconPop {
+  animation: mobileLikePop 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes mobileLikePop {
+  from {
+    opacity: 0.35;
+    transform: scale(1.35);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

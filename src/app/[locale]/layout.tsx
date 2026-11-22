@@ -1,15 +1,11 @@
-// Root Layout
-import { SessionProvider } from "./utils/SessionProvider";
-import { getI18n } from "./i18n/server";
-
-// Global Styles
-import "./styles/globals.css";
-
-// Global Assets
+import React from "react";
+import { notFound } from "next/navigation";
 import { Outfit, MuseoModerno } from "next/font/google";
 import type { Metadata } from "next";
-
-// Global Elements
+import { LOCALES, isLocale } from "@/app/i18n/config";
+import { getDictionary } from "@/app/i18n/dictionaries";
+import { SplashScreen } from "@/app/components/SplashScreen/SplashScreen";
+import "@/app/styles/globals.css";
 
 const outfit = Outfit({
   subsets: ["latin-ext"],
@@ -23,8 +19,25 @@ const museoModerno = MuseoModerno({
   variable: "--font-museoModerno",
 });
 
-export async function generateMetadata(): Promise<Metadata> {
-  const { dictionary } = await getI18n();
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return LOCALES.map((locale) => ({ locale }));
+}
+
+type LayoutProps = {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
+  const dictionary = getDictionary(locale);
 
   return {
     title: {
@@ -60,17 +73,15 @@ export const viewport = {
   ],
 };
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const { locale } = await getI18n();
+export default async function LocaleLayout({ children, params }: LayoutProps) {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
 
   return (
     <html lang={locale}>
       <body className={`${outfit.variable} ${museoModerno.variable}`}>
-        <SessionProvider>{children}</SessionProvider>
+        <SplashScreen />
+        {children}
       </body>
     </html>
   );

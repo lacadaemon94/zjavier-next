@@ -19,8 +19,20 @@ export const squareOpenGraphSize = {
 
 type OpenGraphVariant = "wide" | "square";
 
-async function loadFont(fileName: string) {
-  return fs.readFile(path.join(process.cwd(), "public", fileName));
+const assetCache = new Map<string, Promise<Buffer>>();
+
+function loadPublicAsset(fileName: string) {
+  let cached = assetCache.get(fileName);
+  if (!cached) {
+    cached = fs.readFile(path.join(process.cwd(), "public", fileName));
+    assetCache.set(fileName, cached);
+  }
+  return cached;
+}
+
+async function loadPublicImageDataUrl(fileName: string, mimeType = "image/png") {
+  const buffer = await loadPublicAsset(fileName);
+  return `data:${mimeType};base64,${buffer.toString("base64")}`;
 }
 
 function getPostLanguageLabel(post: Post) {
@@ -49,9 +61,11 @@ export async function renderPostOpenGraphImage(
 ) {
   const size = variant === "square" ? squareOpenGraphSize : wideOpenGraphSize;
   const isSquare = variant === "square";
-  const [boldFont, thinFont] = await Promise.all([
-    loadFont("MuseoModerno-Bold.ttf"),
-    loadFont("MuseoModerno-Thin.ttf"),
+  const [boldFont, thinFont, bgImageSrc, iconImageSrc] = await Promise.all([
+    loadPublicAsset("MuseoModerno-Bold.ttf"),
+    loadPublicAsset("MuseoModerno-Thin.ttf"),
+    loadPublicImageDataUrl("OG_BG.png"),
+    loadPublicImageDataUrl("OG_Icon.png"),
   ]);
   const copy = getVariantCopy(post);
   const visibleTags = post.tags.slice(0, isSquare ? 4 : 3);
@@ -71,7 +85,7 @@ export async function renderPostOpenGraphImage(
         }}
       >
         <img
-          src="https://zjavier.com/OG_BG.png"
+          src={bgImageSrc}
           alt=""
           width={size.width}
           height={size.height}
@@ -138,7 +152,7 @@ export async function renderPostOpenGraphImage(
               }}
             >
               <img
-                src="https://zjavier.com/OG_Icon.png"
+                src={iconImageSrc}
                 alt=""
                 width={isSquare ? 92 : 76}
                 height={isSquare ? 92 : 76}

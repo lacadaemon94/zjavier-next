@@ -10,7 +10,7 @@
     
     grid-column: 1;
 }
-@media only screen and (max-width: 1440px) {
+@media only screen and (max-width: 1180px) {
     .sideimage {
         display: none;
     }
@@ -20,8 +20,9 @@
     position: relative;
     flex-direction: column;
     flex-wrap: nowrap;
-    width: 17.5rem;
-    height: 12.5rem;
+    width: 100%;
+    max-width: 17.5rem;
+    aspect-ratio: 280 / 150;
 }
 .blurimage img {
     position: relative;
